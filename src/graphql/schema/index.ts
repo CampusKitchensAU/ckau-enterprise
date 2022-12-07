@@ -4,11 +4,17 @@ import { makeExecutableSchema } from "@graphql-tools/schema";
 import resolvers from "./resolvers";
 import path from "path";
 
+const typeDefs = /* GraphQL */ `
+  type Query {
+    greetings: String
+  }
+`;
 export const schema = makeExecutableSchema({
-  typeDefs: mergeTypeDefs(
-    loadFilesSync(path.join(process.cwd(), "./**/*.graphql"), {
-      recursive: true,
-    })
-  ),
+  typeDefs,
+  // typeDefs: mergeTypeDefs(
+  //   loadFilesSync(path.join(process.cwd(), "./**/*.graphql"), {
+  //     recursive: true,
+  //   })
+  // ),
   resolvers,
 });
