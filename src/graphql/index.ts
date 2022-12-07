@@ -1,18 +1,14 @@
-import { createSchema } from "graphql-yoga";
-import type { NextApiRequest, NextApiResponse } from "next";
+import { loadFilesSync } from "@graphql-tools/load-files";
+import { mergeTypeDefs } from "@graphql-tools/merge";
+import { makeExecutableSchema } from "@graphql-tools/schema";
+import resolvers from "../graphql/resolvers";
 
-const schema = createSchema<{ req: NextApiRequest; res: NextApiResponse }>({
-  /* GraphQL */
-  typeDefs: `
-      type Query {
-        greetings: String
-      }
-    `,
-  resolvers: {
-    Query: {
-      greetings: () => "This is the 'greetings' field of the root 'Query' type",
-    },
-  },
+export const schema = makeExecutableSchema({
+  typeDefs: mergeTypeDefs(
+    loadFilesSync("src/graphql/schema/**/*.graphql", { recursive: true })
+  ),
+  // resolvers: mergeResolvers(
+  // loadFilesSync("src/graphql/resolvers/**/*.ts", { recursive: true })
+  // ),
+  resolvers,
 });
-
-export default schema;
