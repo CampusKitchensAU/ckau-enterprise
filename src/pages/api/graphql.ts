@@ -4,7 +4,7 @@ import { schema } from "../../graphql/schema";
 import { startServerAndCreateNextHandler } from "@as-integrations/next";
 
 // Docs: https://vercel.com/docs/concepts/functions/serverless-functions
-const server = new ApolloServer({ schema, introspection: true });
+const server = new ApolloServer({ schema });
 
 export default startServerAndCreateNextHandler(server);
 
