@@ -1,12 +1,11 @@
-/* eslint-disable no-restricted-syntax */
-import {
+import type {
   ApolloServer,
   BaseContext,
   ContextFunction,
-  HeaderMap,
 } from "@apollo/server";
+import { HeaderMap } from "@apollo/server";
 import type { WithRequired } from "@apollo/utils.withrequired";
-import { NextApiHandler } from "next";
+import type { NextApiHandler } from "next";
 import { parse } from "url";
 
 interface Options<Context extends BaseContext> {
