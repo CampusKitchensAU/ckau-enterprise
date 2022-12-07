@@ -1,8 +1,26 @@
 import { type NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+
+const getData = async () => {
+  const res = await fetch("/api/graphql", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ query: `query{greetings}` }),
+  });
+  const data = await res.json();
+  console.log(data);
+  return data;
+};
 
 const Home: NextPage = () => {
+  const [data, setData] = useState(null);
+  useEffect(() => {
+    getData().then((data) => setData(data));
+  }, []);
   return (
     <>
       <Head>
@@ -41,6 +59,7 @@ const Home: NextPage = () => {
           </div>
         </div>
       </main>
+      <div>GraphQL example query: {JSON.stringify(data)}</div>
     </>
   );
 };

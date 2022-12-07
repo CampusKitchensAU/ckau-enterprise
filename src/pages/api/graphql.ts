@@ -1,7 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import { ApolloServer } from "@apollo/server";
 import { schema } from "../../graphql/schema";
-import { startServerAndCreateNextHandler } from "../../graphql/handler";
+import { startServerAndCreateNextHandler } from "@as-integrations/next";
 
 // Docs: https://vercel.com/docs/concepts/functions/serverless-functions
 const server = new ApolloServer({ schema, introspection: true });
