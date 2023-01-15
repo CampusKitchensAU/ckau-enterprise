@@ -14,13 +14,18 @@
     "@graphql-tools/load-files": "^6.6.1",
     "@graphql-tools/merge": "^8.3.12",
     "@graphql-tools/schema": "^9.0.10",
+    "@tanstack/react-query": "^4.22.0",
+    "@trpc/client": "^10.9.0",
+    "@trpc/next": "^10.9.0",
+    "@trpc/react-query": "^10.9.0",
+    "@trpc/server": "^10.9.0",
     "graphql": "^16.6.0",
     "lodash": "^4.17.21",
     "next": "13.0.2",
     "next-auth": "4.17.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "zod": "^3.18.0"
+    "zod": "^3.20.2"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.191",
