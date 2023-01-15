@@ -1,4 +1,4 @@
-const defaultTheme = require('tailwindcss/defaultTheme')
+const defaultTheme = require("tailwindcss/defaultTheme");
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -6,11 +6,11 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        'sans': ['Lato', ...defaultTheme.fontFamily.sans],
+        sans: ["Lato", ...defaultTheme.fontFamily.sans],
       },
       colors: {
         primary: {
-          contrast : "#FFFFFF",
+          contrast: "#FFFFFF",
           100: "#D2DBE7",
           200: "#A4B7CE",
           300: "#496E9C",
@@ -22,7 +22,7 @@ module.exports = {
           900: "#010A13",
         },
         secondary: {
-          contrast : "#000000",
+          contrast: "#000000",
           100: "#FBC69D",
           200: "#FBC093",
           300: "#F68026",
@@ -49,8 +49,8 @@ module.exports = {
           deliveryBlue: "#407BFF",
           packageGreen: "#92E3A9",
           pickupYellow: "#FFC100",
-        }
-      }
+        },
+      },
     },
   },
   plugins: [],
