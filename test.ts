@@ -1,2 +1,2 @@
-let module = 'test';
-export default module
+let module = "test";
+export default module;
