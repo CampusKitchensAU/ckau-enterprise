@@ -1,0 +1,65 @@
+table users {
+   id int [PK]
+   role_id int [ref: - roles.id]
+   name string
+   email string
+   phone varchar(10)
+   year int
+   major string
+   birthday date
+   shift_id int [ref: - shifts.id]
+   experience int
+   completed_shifts int
+   sl_of_week int
+   username string [ref: - logins.username]
+}
+
+table shifts {
+  id int [PK]
+  name string
+  type int
+  location string
+  slots int
+  day_of_week day
+  start_time datetime
+  description string
+  primary_contact string
+  primar_phone varchar(10)
+  user_id int [ref: < users.id]
+}
+
+table roles {
+  id int [PK]
+  role string
+}
+
+table availabilities {
+  id int [PK]
+  user_id int [ref: > users.id]
+  day day
+  start_time datetime
+  end_time datetime
+}
+
+table logins {
+  username string [PK]
+  password string
+}
+
+table shift_logs {
+  id int [PK]
+  description string
+  type int
+  shift_id int [ref: > shifts.id]
+  user_id int [ref: > users.id]
+}
+
+enum day {
+  Sunday
+  Monday
+  Tuesday
+  Wednesday
+  Thursday
+  Friday
+  Saturday
+}
