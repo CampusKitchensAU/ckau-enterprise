@@ -1,4 +1,5 @@
 import { type AppType } from "next/app";
+import { trpc } from "../utils/trpc";
 import { type Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
 
@@ -15,4 +16,4 @@ const MyApp: AppType<{ session: Session | null }> = ({
   );
 };
 
-export default MyApp;
+export default trpc.withTRPC(MyApp);
