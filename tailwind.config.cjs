@@ -49,6 +49,7 @@ module.exports = {
           deliveryBlue: "#407BFF",
           packageGreen: "#92E3A9",
           pickupYellow: "#FFC100",
+          divider: "#e0e0e0",
         },
         text: {
           primary: "#000000",

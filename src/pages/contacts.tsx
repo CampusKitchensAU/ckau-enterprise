@@ -18,6 +18,24 @@ const Contacts: NextPage = () => {
           subtitle="Executive Team | Shift Leaders | Advisors"
         />
       </div>
+      <div id="content" className="px-16">
+        <div id="contact-data-grid" className="w-full rounded-[20px] bg-white">
+          <div
+            id="filter-tabs"
+            className="h-12 rounded-t-[20px] bg-surface-main"
+          ></div>
+          <div
+            id="filters"
+            className="h-[72px] border-t border-solid border-alt-divider"
+          ></div>
+          <div id="columns" className="h-10 bg-surface-main"></div>
+          <div id="rows" className=""></div>
+          <div
+            id="list-footer"
+            className="h-12 rounded-b-[20px] border-t border-solid border-alt-divider"
+          ></div>
+        </div>
+      </div>
     </>
   );
 };
