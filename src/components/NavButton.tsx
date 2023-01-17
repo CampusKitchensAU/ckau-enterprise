@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Dispatch, SetStateAction } from "react";
 import { useState } from "react";
+import NavTooltip from "./NavTooltip";
 
 const NavButton = ({
   title,
@@ -26,13 +27,15 @@ const NavButton = ({
         onClick={() => callback(index)}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
+        data-tooltip-target="tooltip"
       >
         <div
-          className={`h-10 w-12 rounded-lg ${
+          className={`group relative h-10 w-12 rounded-lg ${
             selected || isHovered ? "bg-primary-900" : "bg-inherit"
           } px-3 py-2`}
         >
           <Link href={path}>{icon}</Link>
+          <NavTooltip title={title} />
         </div>
       </nav>
     </>

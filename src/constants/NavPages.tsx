@@ -13,12 +13,12 @@ const NavPages: NavPage[] = [
     icon: <MdHome fontSize={24} />,
   },
   {
-    title: "Organization Shifts",
+    title: "Shifts",
     path: "/shifts",
     icon: <MdAssignment fontSize={24} />,
   },
   {
-    title: "Organization Contacts",
+    title: "Contacts",
     path: "/contacts",
     icon: <MdPerson fontSize={24} />,
   },
