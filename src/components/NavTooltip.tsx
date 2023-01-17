@@ -1,6 +1,5 @@
 const NavTooltip = ({ title }: { title: string }) => {
   return (
-    <>
       <div
         id="tooltip"
         role="tooltip"
@@ -13,7 +12,6 @@ const NavTooltip = ({ title }: { title: string }) => {
       >
         {title}
       </div>
-    </>
   );
 };
 
