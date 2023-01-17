@@ -50,6 +50,11 @@ module.exports = {
           packageGreen: "#92E3A9",
           pickupYellow: "#FFC100",
         },
+        text: {
+          primary: "#000000",
+          secondary: "#626466",
+          contrast: "#FFFFFF",
+        },
       },
     },
   },
