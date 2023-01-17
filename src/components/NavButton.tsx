@@ -21,24 +21,23 @@ const NavButton = ({
   const [isHovered, setIsHovered] = useState<boolean>(false);
 
   return (
-    <>
+    <Link href={path}>
       <nav
         className="flex h-14 w-full cursor-pointer items-center justify-center"
         onClick={() => callback(index)}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
-        data-tooltip-target="tooltip"
       >
         <div
           className={`group relative h-10 w-12 rounded-lg ${
             selected || isHovered ? "bg-primary-900" : "bg-inherit"
           } px-3 py-2`}
         >
-          <Link href={path}>{icon}</Link>
+          {icon}
           <NavTooltip title={title} />
         </div>
       </nav>
-    </>
+    </Link>
   );
 };
 
