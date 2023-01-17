@@ -13,7 +13,10 @@ const Contacts: NextPage = () => {
         />
       </Head>
       <div>
-        <PageHeader title="Organization Contacts" subtitle="Executive Team | Shift Leaders | Advisors"/>
+        <PageHeader
+          title="Organization Contacts"
+          subtitle="Executive Team | Shift Leaders | Advisors"
+        />
       </div>
     </>
   );

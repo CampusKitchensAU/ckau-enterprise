@@ -13,7 +13,10 @@ const Shifts: NextPage = () => {
         />
       </Head>
       <div>
-        <PageHeader title="Organization Shifts" subtitle="Pickups | Packaging | Delivery"/>
+        <PageHeader
+          title="Organization Shifts"
+          subtitle="Pickups | Packaging | Delivery"
+        />
       </div>
     </>
   );
