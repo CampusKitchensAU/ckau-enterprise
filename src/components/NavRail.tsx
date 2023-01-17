@@ -7,7 +7,7 @@ const NavRail = () => {
 
   return (
     <div className="flex w-[80px] flex-col rounded-r-[20px] bg-primary-500 pt-8 text-center text-primary-contrast">
-      <h1 className="text-base font-bold h-16">CKAU</h1>
+      <h1 className="h-16 text-base font-bold">CKAU</h1>
       {NavPages.map((page, index) => (
         <NavButton
           key={index}

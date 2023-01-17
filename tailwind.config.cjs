@@ -51,10 +51,10 @@ module.exports = {
           pickupYellow: "#FFC100",
         },
         text: {
-          primary:"#000000",
-          secondary:"#626466",
-          contrast:"#FFFFFF"
-        }
+          primary: "#000000",
+          secondary: "#626466",
+          contrast: "#FFFFFF",
+        },
       },
     },
   },
