@@ -1,12 +1,14 @@
 import { useState } from "react";
+import { MdArrowUpward } from "react-icons/md";
 import FilterTabs from "../constants/contacts/FilterTabs";
 import Roles from "../constants/contacts/Roles";
-import SearchFilter from "./SearchFilter";
+import Search from "./Search";
 import Select from "./Select";
 import Tab from "./Tab";
 
 const ContactList = () => {
   const [selectedTab, setSelectedTab] = useState<number>(0);
+  const [alphabeticalOrder, setAlphabeticalOrder] = useState<boolean>(true);
 
   return (
     <div id="contact-list-wrapper">
@@ -33,10 +35,29 @@ const ContactList = () => {
             <Select title="Roles" options={Roles} />
           </div>
           <div className="col-span-9">
-            <SearchFilter />
+            <Search />
           </div>
         </div>
-        <div id="columns" className="h-10 bg-surface-main"></div>
+        <div
+          id="columns"
+          className="flex h-10 items-center gap-4 bg-surface-main p-4 font-medium text-text-secondary"
+        >
+          <div
+            className="flex w-[208px] items-center gap-1 text-primary-900"
+            onClick={() => setAlphabeticalOrder(!alphabeticalOrder)}
+          >
+            <div>Name</div>
+            <MdArrowUpward
+              fontSize={16}
+              className={`text-text-secondary ${
+                !alphabeticalOrder && "rotate-180"
+              } mt-[2px] transition-all`}
+            />
+          </div>
+          <div className="w-[144px]">Role</div>
+          <div className="w-[240px]">Position</div>
+          <div className="min-w-[304px] grow">Shift</div>
+        </div>
         <div id="rows" className=""></div>
         <div
           id="list-footer"

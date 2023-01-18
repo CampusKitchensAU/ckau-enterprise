@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { MdSearch } from "react-icons/md";
 
-const SearchFilter = () => {
+const Search = () => {
   const inputEl = useRef<HTMLInputElement>(null);
   const [isFocused, setIsFocused] = useState<boolean>(false);
   const [value, setValue] = useState<string>("");
@@ -32,4 +32,4 @@ const SearchFilter = () => {
   );
 };
 
-export default SearchFilter;
+export default Search;

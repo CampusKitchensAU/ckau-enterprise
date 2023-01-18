@@ -9,7 +9,7 @@ const Select = ({ title, options }: { title: string; options: string[] }) => {
     <div className="relative w-full">
       <label
         htmlFor="select-wrapper"
-        className="absolute -top-[10px] left-5 z-[1] inline-block bg-white px-1 text-sm font-medium"
+        className="absolute -top-[10px] left-5 z-[1] inline-block bg-white px-1 text-sm font-medium text-primary-900"
       >
         {title}
       </label>
@@ -30,7 +30,9 @@ const Select = ({ title, options }: { title: string; options: string[] }) => {
       <div
         className={`absolute right-0 z-10 h-auto w-full origin-top-right rounded-md 
         border border-gray-300 bg-white opacity-0 shadow-md transition-all 
-        duration-75 ${isFocused && "mt-1 opacity-100 duration-300"}`}
+        duration-75 ${
+          isFocused ? "visible mt-1 opacity-100 duration-300" : "invisible"
+        }`}
       >
         <div className="py-1">
           {options.map((option, index) => (
