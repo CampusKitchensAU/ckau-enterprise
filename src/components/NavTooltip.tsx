@@ -3,7 +3,7 @@ const NavTooltip = ({ title }: { title: string }) => {
     <div
       id="tooltip"
       role="tooltip"
-      className="s absolute top-1 -right-6 hidden 
+      className="absolute top-1 -right-6 hidden 
             translate-x-full rounded-lg bg-gray-700 px-2 py-1 text-center text-sm
             text-white before:absolute before:top-1/2 
             before:right-[100%]  before:-translate-y-1/2 before:border-8 
