@@ -54,18 +54,3 @@ const Select = ({ title, options }: { title: string; options: string[] }) => {
 };
 
 export default Select;
-
-{
-  /* <div id="select-wrapper" className=" w-full">
-      <select
-        id="select"
-        className="h-10 w-full font-medium text-primary-900 rounded-md border-2 border-gray-300 px-2"
-      >
-        {options.map((option, index) => (
-          <option key={index} value={option}>
-            {option}
-          </option>
-        ))}
-      </select>
-    </div> */
-}
