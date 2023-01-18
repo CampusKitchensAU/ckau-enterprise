@@ -1,6 +1,8 @@
 import { useState } from "react";
 import FilterTabs from "../constants/contacts/FilterTabs";
+import Roles from "../constants/contacts/Roles";
 import SearchFilter from "./SearchFilter";
+import Select from "./Select";
 import Tab from "./Tab";
 
 const ContactList = () => {
@@ -25,9 +27,14 @@ const ContactList = () => {
         </div>
         <div
           id="filters"
-          className="p-4 border-t border-solid border-alt-divider"
+          className="grid grid-cols-12 gap-4 border-t border-solid border-alt-divider p-4"
         >
-          <SearchFilter />
+          <div className="col-span-3">
+            <Select title="Roles" options={Roles} />
+          </div>
+          <div className="col-span-9">
+            <SearchFilter />
+          </div>
         </div>
         <div id="columns" className="h-10 bg-surface-main"></div>
         <div id="rows" className=""></div>

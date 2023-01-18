@@ -9,7 +9,7 @@ const SearchFilter = () => {
   return (
     <div
       id="search-filter-wrapper"
-      className={`flex h-10 w-full items-center gap-2 rounded-md border-2 px-4 ${
+      className={`flex h-10 w-full items-center gap-2 rounded-md border-2 px-2 transition-all duration-200 ${
         isFocused
           ? "border-primary-500 text-primary-500"
           : "border-gray-300 text-text-secondary hover:border-gray-400"
