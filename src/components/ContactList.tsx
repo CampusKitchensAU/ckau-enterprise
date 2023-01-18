@@ -44,8 +44,8 @@ const ContactList = () => {
           id="columns"
           className="flex h-10 items-center gap-4 bg-surface-main p-4 font-medium text-text-secondary"
         >
-          <div
-            className="flex w-[240px] items-center gap-1 text-primary-900"
+          <button
+            className="flex w-[240px] cursor-pointer items-center gap-1 text-primary-900"
             onClick={() => setAlphabeticalOrder(!alphabeticalOrder)}
           >
             <div>Name</div>
@@ -55,7 +55,7 @@ const ContactList = () => {
                 !alphabeticalOrder && "rotate-180"
               } mt-[2px] transition-all`}
             />
-          </div>
+          </button>
           <div className="w-[240px]">Role</div>
           <div className="w-[240px]">Position</div>
           <div className="min-w-[304px] grow">Shift</div>
