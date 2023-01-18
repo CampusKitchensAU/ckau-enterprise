@@ -2,6 +2,7 @@ import { useState } from "react";
 import { MdArrowUpward } from "react-icons/md";
 import FilterTabs from "../constants/contacts/FilterTabs";
 import Roles from "../constants/contacts/Roles";
+import ContactRow from "./ContactRow";
 import Search from "./Search";
 import Select from "./Select";
 import Tab from "./Tab";
@@ -12,7 +13,7 @@ const ContactList = () => {
 
   return (
     <div id="contact-list-wrapper">
-      <div id="contact-list" className="w-full rounded-[20px] bg-white">
+      <div id="contact-list" className="shadow w-full rounded-[20px] bg-white">
         <div
           id="filter-tabs"
           className="flex h-12 items-end gap-4 rounded-t-[20px] bg-surface-main px-4"
@@ -43,7 +44,7 @@ const ContactList = () => {
           className="flex h-10 items-center gap-4 bg-surface-main p-4 font-medium text-text-secondary"
         >
           <div
-            className="flex w-[208px] items-center gap-1 text-primary-900"
+            className="flex w-[240px] items-center gap-1 text-primary-900"
             onClick={() => setAlphabeticalOrder(!alphabeticalOrder)}
           >
             <div>Name</div>
@@ -54,11 +55,18 @@ const ContactList = () => {
               } mt-[2px] transition-all`}
             />
           </div>
-          <div className="w-[144px]">Role</div>
+          <div className="w-[240px]">Role</div>
           <div className="w-[240px]">Position</div>
           <div className="min-w-[304px] grow">Shift</div>
         </div>
-        <div id="rows" className=""></div>
+        <div id="rows" className="h-auto">
+          <ContactRow
+            name="Trevor Aupperle"
+            role="Executive Team"
+            position="VP of Technology"
+            shiftName="New Birth Ministry (PL)"
+          />
+        </div>
         <div
           id="list-footer"
           className="h-12 rounded-b-[20px] border-t border-solid border-alt-divider"

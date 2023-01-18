@@ -4,7 +4,6 @@ import ContactList from "../components/ContactList";
 import PageHeader from "../components/PageHeader";
 
 const Contacts: NextPage = () => {
-
   return (
     <>
       <Head>
@@ -14,14 +13,14 @@ const Contacts: NextPage = () => {
           content="Enterprise application for The Campus Kitchen at Auburn University"
         />
       </Head>
-      <div>
+      <div className="flex flex-col gap-6">
         <PageHeader
           title="Organization Contacts"
           subtitle="Executive Team | Shift Leaders | Advisors"
         />
-      </div>
-      <div id="content" className="px-16">
-        <ContactList/>
+        <div id="content" className="px-16">
+          <ContactList />
+        </div>
       </div>
     </>
   );
