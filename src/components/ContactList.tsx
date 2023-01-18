@@ -6,6 +6,7 @@ import ContactRow from "./ContactRow";
 import Search from "./Search";
 import Select from "./Select";
 import Tab from "./Tab";
+import TableFooter from "./TableFooter";
 
 const ContactList = () => {
   const [selectedTab, setSelectedTab] = useState<number>(0);
@@ -13,7 +14,7 @@ const ContactList = () => {
 
   return (
     <div id="contact-list-wrapper">
-      <div id="contact-list" className="shadow w-full rounded-[20px] bg-white">
+      <div id="contact-list" className="w-full rounded-[20px] bg-white shadow">
         <div
           id="filter-tabs"
           className="flex h-12 items-end gap-4 rounded-t-[20px] bg-surface-main px-4"
@@ -69,8 +70,10 @@ const ContactList = () => {
         </div>
         <div
           id="list-footer"
-          className="h-12 rounded-b-[20px] border-t border-solid border-alt-divider"
-        ></div>
+          className="h-auto rounded-b-[20px] border-t border-solid border-alt-divider"
+        >
+          <TableFooter amount={55} />
+        </div>
       </div>
     </div>
   );
