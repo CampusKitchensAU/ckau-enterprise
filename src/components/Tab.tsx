@@ -17,7 +17,7 @@ const Tab = ({
   return (
     <button
       id="tab-wrapper"
-      className={`transition-all duration-200 h-full cursor-pointer items-start border-b-2 px-3 font-semibold ${
+      className={`h-full cursor-pointer items-start border-b-2 px-3 font-semibold transition-all duration-200 ${
         selected
           ? "border-solid border-primary-500 text-primary-900"
           : "text-text-secondary"

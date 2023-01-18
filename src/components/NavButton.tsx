@@ -29,7 +29,7 @@ const NavButton = ({
         onMouseLeave={() => setIsHovered(false)}
       >
         <div
-          className={`transition-all duration-200 group relative h-10 w-12 rounded-lg ${
+          className={`group relative h-10 w-12 rounded-lg transition-all duration-200 ${
             selected || isHovered ? "bg-primary-900" : "bg-inherit"
           } px-3 py-2`}
         >
