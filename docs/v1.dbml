@@ -1,20 +1,27 @@
-table users {
+table user {
    id int [PK]
-   role_id int [ref: - roles.id]
    name string
    email string
    phone varchar(10)
    year int
    major string
    birthday date
-   shift_id int [ref: - shifts.id]
    experience int
    completed_shifts int
    sl_of_week int
-   username string [ref: - logins.username]
+   role_id int [ref: - role.id]
+   username string
+   password string
+   picture image
 }
 
-table shifts {
+table user_shift_mapping {
+  id int [PK]
+  user_id int [ref: < user.id]
+  shift_id int [ref: - shift.id]
+}
+
+table shift {
   id int [PK]
   name string
   type int
@@ -25,33 +32,26 @@ table shifts {
   description string
   primary_contact string
   primar_phone varchar(10)
-  user_id int [ref: < users.id]
 }
 
-table roles {
+table role {
   id int [PK]
-  role string
+  name string
 }
 
 table availabilities {
   id int [PK]
-  user_id int [ref: > users.id]
+  user_id int [ref: > user.id]
   day day
   start_time datetime
   end_time datetime
 }
 
-table logins {
-  username string [PK]
-  password string
-}
-
-table shift_logs {
+table shift_log {
   id int [PK]
   description string
   type int
-  shift_id int [ref: > shifts.id]
-  user_id int [ref: > users.id]
+  shift_id int [ref: > shift.id]
 }
 
 enum day {
