@@ -1,5 +1,6 @@
 import { MdMoreVert } from "react-icons/md";
 
+//TODO: These should come from database
 type Role = "Executive Team" | "Shift Leader" | "Advisor";
 type Position =
   | "President"

@@ -46,7 +46,7 @@ const ContactList = () => {
         >
           <button
             className="flex w-[240px] cursor-pointer items-center gap-1 text-primary-900"
-            onClick={() => setAlphabeticalOrder(!alphabeticalOrder)}
+            onClick={() => setAlphabeticalOrder((old) => !old)}
           >
             <div>Name</div>
             <MdArrowUpward
