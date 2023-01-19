@@ -1,6 +1,5 @@
 import Head from "next/head";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { useState } from "react";
 import { MdArrowBack } from "react-icons/md";
 import PageHeader from "../../components/PageHeader";
@@ -10,7 +9,6 @@ import Tab from "../../components/Tab";
 import PersonTabs from "../../constants/contacts/PersonTabs";
 
 const ContactPerson = () => {
-  const router = useRouter();
   const [selectedTab, setSelectedTab] = useState<number>(0);
 
   return (
