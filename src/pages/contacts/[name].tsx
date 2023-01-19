@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { MdArrowBack } from "react-icons/md";
 import PageHeader from "../../components/PageHeader";
+import PersonInfo from "../../components/PersonInfo";
 import RoleChip from "../../components/RoleChip";
 import Tab from "../../components/Tab";
 import PersonTabs from "../../constants/contacts/PersonTabs";
@@ -60,6 +61,13 @@ const ContactPerson = () => {
                 callback={setSelectedTab}
               />
             ))}
+          </div>
+
+          <div id="person-info" className="grid w-full grid-cols-12 gap-6">
+            <PersonInfo
+              //@ts-ignore - Fix this later
+              tab={PersonTabs[selectedTab]?.title}
+            />
           </div>
         </div>
       </div>
