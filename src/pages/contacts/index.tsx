@@ -1,7 +1,7 @@
 import { type NextPage } from "next";
 import Head from "next/head";
-import ContactList from "../components/ContactList";
-import PageHeader from "../components/PageHeader";
+import ContactList from "../../components/ContactList";
+import PageHeader from "../../components/PageHeader";
 
 const Contacts: NextPage = () => {
   return (
