@@ -1,6 +1,4 @@
 //TODO: fix this when we get db data
-type PersonTab = "Details" | "Availability";
-
 const personalFields = [
   { title: "Email", value: "tza0038@auburn.edu" },
   { title: "Phone", value: "+1 (330) 635-4055" },
@@ -16,9 +14,9 @@ const organizationFields = [
   { title: "Shift Leader of the Week", value: "2 times" },
 ];
 
-const PersonInfo = ({ tab }: { tab: PersonTab }) => {
+const PersonInfo = ({ tab }: { tab: number }) => {
   switch (tab) {
-    case "Details":
+    case 0:
       return (
         <>
           <div className="col-span-6 rounded-lg shadow">
@@ -33,8 +31,8 @@ const PersonInfo = ({ tab }: { tab: PersonTab }) => {
                   "border-b-[1px] border-solid border-alt-divider"
                 }`}
               >
-                <div className="col-span-2">{field.title}</div>
-                <div className="col-span-10 text-text-secondary">
+                <div className="col-span-3">{field.title}</div>
+                <div className="col-span-9 text-text-secondary">
                   {field.value}
                 </div>
               </div>
@@ -49,8 +47,8 @@ const PersonInfo = ({ tab }: { tab: PersonTab }) => {
                 key={index}
                 className={`grid w-full grid-cols-12 border-b-[1px] border-solid border-alt-divider px-8 py-4`}
               >
-                <div className="col-span-4">{field.title}</div>
-                <div className="col-span-8 text-text-secondary">
+                <div className="col-span-5">{field.title}</div>
+                <div className="col-span-7 text-text-secondary">
                   {field.value}
                 </div>
               </div>
@@ -58,8 +56,10 @@ const PersonInfo = ({ tab }: { tab: PersonTab }) => {
           </div>
         </>
       );
-    case "Availability":
+    case 1:
       return <div></div>;
+    default:
+      return <div>Error</div>;
   }
 };
 

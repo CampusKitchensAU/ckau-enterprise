@@ -62,10 +62,7 @@ const ContactPerson = () => {
           </div>
 
           <div id="person-info" className="grid w-full grid-cols-12 gap-6">
-            <PersonInfo
-              //@ts-ignore - Fix this later
-              tab={PersonTabs[selectedTab]?.title}
-            />
+            <PersonInfo tab={selectedTab} />
           </div>
         </div>
       </div>
