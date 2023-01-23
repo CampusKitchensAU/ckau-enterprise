@@ -8,6 +8,7 @@ import PageHeader from "../components/PageHeader";
 import TrendLineGraph from "../components/TrendLineGraph";
 import { trpc } from "../utils/trpc";
 import IconStat from "../components/IconStat";
+import Stat from "../components/Stat";
 
 const tempTrendData = [
   { week: "Nov 11", pounds: 1200 },
@@ -34,6 +35,24 @@ const tempMainData = [
     value: 14302,
     trend: -254,
     icon: <FaTruck fontSize={32} />,
+  },
+];
+
+const tempOtherData = [
+  {
+    name: "Shifts Completed",
+    value: 630,
+    trend: 20,
+  },
+  {
+    name: "Partners",
+    value: 20,
+    trend: 0,
+  },
+  {
+    name: "Total Volunteers",
+    value: 228,
+    trend: 4,
   },
 ];
 
@@ -83,6 +102,13 @@ const Home: NextPage = () => {
             ))}
             <div className="col-span-7">
               <TrendLineGraph data={tempTrendData} />
+            </div>
+            <div className="col-span-5 grid grid-cols-6 gap-2">
+              {tempOtherData.map((stat, index) => (
+                <div key={index} className="col-span-3">
+                  <Stat data={stat} />
+                </div>
+              ))}
             </div>
           </div>
         </div>
