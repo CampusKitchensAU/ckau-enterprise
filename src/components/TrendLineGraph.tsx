@@ -10,16 +10,20 @@ import {
   YAxis,
 } from "recharts";
 
-const TrendLineGraph = ({ data }: { data: any }) => {
+type trendData = { week: string; pounds: number };
+
+const TrendLineGraph = ({ data }: { data: trendData[] }) => {
   const [trend, setTrend] = useState(<MdTrendingFlat fontSize={24} />);
 
   useEffect(() => {
-    const count = data[data.length - 1].pounds - data[0].pounds;
-    if (count == 0)
-      setTrend(<MdTrendingFlat fontSize={24} className="text-gray-500" />);
-    else if (count > 0)
-      setTrend(<MdTrendingUp fontSize={24} className="text-green-600" />);
-    else setTrend(<MdTrendingDown fontSize={24} className="text-red-600" />);
+    if (data && data.length != 0) {
+      const count = data[data.length - 1].pounds - data[0].pounds;
+      if (count == 0)
+        setTrend(<MdTrendingFlat fontSize={24} className="text-gray-500" />);
+      else if (count > 0)
+        setTrend(<MdTrendingUp fontSize={24} className="text-green-600" />);
+      else setTrend(<MdTrendingDown fontSize={24} className="text-red-600" />);
+    }
   }, [data]);
 
   return (
