@@ -2,7 +2,15 @@ import { type NextPage } from "next";
 import Head from "next/head";
 import { useEffect, useState } from "react";
 import PageHeader from "../components/PageHeader";
+import TrendLineGraph from "../components/TrendLineGraph";
 import { trpc } from "../utils/trpc";
+
+const tempTrendData = [
+  { week: "Nov 11", pounds: 1200 },
+  { week: "Nov 18", pounds: 1054.58 },
+  { week: "Nov 25", pounds: 0 },
+  { week: "Dec 02", pounds: 603.35 },
+];
 
 const getData = async () => {
   const res = await fetch("/api/graphql", {
@@ -38,12 +46,17 @@ const Home: NextPage = () => {
           title={"Good morning, Trevor!"}
           subtitle={"VP of Technology"}
         />
-
-        <div>{hello.data?.greeting}</div>
-        <div>GraphQL example query: {JSON.stringify(data)}</div>
+        <div className="w-[600px]">
+          <TrendLineGraph data={tempTrendData} />
+        </div>
       </div>
     </>
   );
 };
 
 export default Home;
+
+{
+  /* <div>{hello.data?.greeting}</div>
+<div>GraphQL example query: {JSON.stringify(data)}</div> */
+}
