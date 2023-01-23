@@ -6,11 +6,11 @@ import { FaTruck, FaWeight } from "react-icons/fa";
 import { ImSpoonKnife } from "react-icons/im";
 import PageHeader from "../components/PageHeader";
 import TrendLineGraph from "../components/TrendLineGraph";
-import { trpc } from "../utils/trpc";
 import IconStat from "../components/IconStat";
 import Stat from "../components/Stat";
 import AvatarStat from "../components/AvatarStat";
 
+//TODO: Get all of this data from db
 const tempTrendData = [
   { week: "Nov 11", pounds: 1200 },
   { week: "Nov 18", pounds: 1054.58 },
@@ -63,24 +63,16 @@ const tempAvatarData = {
   frame: "this week",
 };
 
-const getData = async () => {
-  const res = await fetch("/api/graphql", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ query: `query{greetings}` }),
-  });
-  const data = await res.json();
-  return data;
-};
-
 const Home: NextPage = () => {
-  const [data, setData] = useState(null);
-  const hello = trpc.hello.useQuery({ text: "from trpc" });
+  const [greeting, setGreeting] = useState<string>("Good morning");
+
   useEffect(() => {
-    getData().then((data) => setData(data));
+    const time = new Date();
+    if (time.getHours() < 12) setGreeting("Good morning");
+    else if (time.getHours() < 18) setGreeting("Good afternoon");
+    else setGreeting("Good evening");
   }, []);
+
   return (
     <>
       <Head>
@@ -95,7 +87,7 @@ const Home: NextPage = () => {
         <div className="flex grow flex-col gap-6">
           <PageHeader
             //TODO: Add a way to get the user's name and position
-            title={"Good morning, Trevor!"}
+            title={greeting + ", Trevor!"}
             subtitle={"VP of Technology"}
           />
           <h3 className="w-full border-b-2 border-solid border-primary-900 text-xl font-semibold text-primary-900">
@@ -145,8 +137,3 @@ const Home: NextPage = () => {
 };
 
 export default Home;
-
-{
-  /* <div>{hello.data?.greeting}</div>
-<div>GraphQL example query: {JSON.stringify(data)}</div> */
-}
