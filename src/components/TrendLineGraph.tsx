@@ -16,13 +16,19 @@ const TrendLineGraph = ({ data }: { data: trendData[] }) => {
   const [trend, setTrend] = useState(<MdTrendingFlat fontSize={24} />);
 
   useEffect(() => {
-    if (data && data.length != 0) {
-      const count = data[data.length - 1].pounds - data[0].pounds;
-      if (count == 0)
-        setTrend(<MdTrendingFlat fontSize={24} className="text-gray-500" />);
-      else if (count > 0)
-        setTrend(<MdTrendingUp fontSize={24} className="text-green-600" />);
-      else setTrend(<MdTrendingDown fontSize={24} className="text-red-600" />);
+    if (data && data.length > 1) {
+      if (
+        data[data.length - 1] !== undefined &&
+        data[data.length - 1]?.pounds !== undefined
+      ) {
+        const count = data[data.length - 1]?.pounds;
+        if (count == 0)
+          setTrend(<MdTrendingFlat fontSize={24} className="text-gray-500" />);
+        else if (count != undefined && count > 0)
+          setTrend(<MdTrendingUp fontSize={24} className="text-green-600" />);
+        else
+          setTrend(<MdTrendingDown fontSize={24} className="text-red-600" />);
+      }
     }
   }, [data]);
 
