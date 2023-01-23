@@ -9,6 +9,7 @@ import TrendLineGraph from "../components/TrendLineGraph";
 import { trpc } from "../utils/trpc";
 import IconStat from "../components/IconStat";
 import Stat from "../components/Stat";
+import AvatarStat from "../components/AvatarStat";
 
 const tempTrendData = [
   { week: "Nov 11", pounds: 1200 },
@@ -55,6 +56,12 @@ const tempOtherData = [
     trend: 4,
   },
 ];
+
+const tempAvatarData = {
+  name: "Most Shifts",
+  avatar: <div className="h-10 w-10 rounded-full bg-primary-500"></div>,
+  frame: "this week",
+};
 
 const getData = async () => {
   const res = await fetch("/api/graphql", {
@@ -109,6 +116,9 @@ const Home: NextPage = () => {
                   <Stat data={stat} />
                 </div>
               ))}
+              <div className="col-span-3">
+                <AvatarStat data={tempAvatarData} />
+              </div>
             </div>
           </div>
         </div>
