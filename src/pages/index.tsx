@@ -2,15 +2,39 @@ import { type NextPage } from "next";
 import Head from "next/head";
 import { useEffect, useState } from "react";
 import { MdCalendarToday, MdNotificationsNone } from "react-icons/md";
+import { FaTruck, FaWeight } from "react-icons/fa";
+import { ImSpoonKnife } from "react-icons/im";
 import PageHeader from "../components/PageHeader";
 import TrendLineGraph from "../components/TrendLineGraph";
 import { trpc } from "../utils/trpc";
+import IconStat from "../components/IconStat";
 
 const tempTrendData = [
   { week: "Nov 11", pounds: 1200 },
   { week: "Nov 18", pounds: 1054.58 },
   { week: "Nov 25", pounds: 0 },
   { week: "Dec 02", pounds: 603.35 },
+];
+
+const tempMainData = [
+  {
+    name: "Total Pounds Recovered",
+    value: 14302,
+    trend: 254,
+    icon: <FaWeight fontSize={32} />,
+  },
+  {
+    name: "Total Meals Packaged",
+    value: 11700,
+    trend: 120,
+    icon: <ImSpoonKnife fontSize={32} />,
+  },
+  {
+    name: "Total Pounds Recovered",
+    value: 14302,
+    trend: -254,
+    icon: <FaTruck fontSize={32} />,
+  },
 ];
 
 const getData = async () => {
@@ -51,7 +75,12 @@ const Home: NextPage = () => {
           <h3 className="w-full border-b-2 border-solid border-primary-900 text-xl font-semibold text-primary-900">
             Organization Statistics
           </h3>
-          <div className="grid grid-cols-12">
+          <div className="grid grid-cols-12 gap-2">
+            {tempMainData.map((stat, index) => (
+              <div key={index} className="col-span-4">
+                <IconStat data={stat} />
+              </div>
+            ))}
             <div className="col-span-7">
               <TrendLineGraph data={tempTrendData} />
             </div>
