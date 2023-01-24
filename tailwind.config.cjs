@@ -14,8 +14,8 @@ module.exports = {
         "delivery-logo": "url('/svg/Delivery-Logo.svg')",
       },
       gridTemplateColumns: {
-        '16': 'repeat(16, minmax(0, 1fr))',
-        '25': 'repeat(25, minmax(0, 1fr))'
+        16: "repeat(16, minmax(0, 1fr))",
+        25: "repeat(25, minmax(0, 1fr))",
       },
       colors: {
         primary: {
