@@ -8,6 +8,15 @@ module.exports = {
       fontFamily: {
         sans: ["Lato", ...defaultTheme.fontFamily.sans],
       },
+      backgroundImage: {
+        "pickup-logo": "url('/svg/Pickup-Logo.svg')",
+        "package-logo": "url('/svg/Package-Logo.svg')",
+        "delivery-logo": "url('/svg/Delivery-Logo.svg')",
+      },
+      gridTemplateColumns: {
+        '16': 'repeat(16, minmax(0, 1fr))',
+        '25': 'repeat(25, minmax(0, 1fr))'
+      },
       colors: {
         primary: {
           contrast: "#FFFFFF",
