@@ -6,6 +6,7 @@ import SortOptions from "../constants/shifts/SortOptions";
 import Search from "./Search";
 import Select from "./Select";
 import ShiftGridView from "./ShiftGridView";
+import ShiftListView from "./ShiftListView";
 import Tab from "./Tab";
 
 const tempShiftData = [
@@ -83,14 +84,9 @@ const ShiftsList = () => {
             <Select title="Sort By" options={SortOptions} />
           </div>
         </div>
+        {!gridView && <ShiftListView data={tempShiftData} />}
       </div>
-      <div>
-        {gridView ? (
-          <ShiftGridView data={tempShiftData} />
-        ) : (
-          <div>list view</div>
-        )}
-      </div>
+      <div>{gridView && <ShiftGridView data={tempShiftData} />}</div>
     </div>
   );
 };
