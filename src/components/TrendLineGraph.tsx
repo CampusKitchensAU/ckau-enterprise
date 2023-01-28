@@ -12,25 +12,25 @@ import {
 
 type trendData = { week: string; pounds: number };
 
-const TrendLineGraph = ({ data }: { data: trendData[] }) => {
+const TrendLineGraph = ({
+  data,
+  prevVal,
+  curVal,
+}: {
+  data: trendData[];
+  prevVal?: number;
+  curVal?: number;
+}) => {
   const [trend, setTrend] = useState(<MdTrendingFlat fontSize={24} />);
 
   useEffect(() => {
-    if (data && data.length > 1) {
-      if (
-        data[data.length - 1] !== undefined &&
-        data[data.length - 1]?.pounds !== undefined
-      ) {
-        const count = data[data.length - 1]?.pounds;
-        if (count == 0)
-          setTrend(<MdTrendingFlat fontSize={24} className="text-gray-500" />);
-        else if (count != undefined && count > 0)
-          setTrend(<MdTrendingUp fontSize={24} className="text-green-600" />);
-        else
-          setTrend(<MdTrendingDown fontSize={24} className="text-red-600" />);
-      }
-    }
-  }, [data]);
+    if (!prevVal || !curVal) return;
+    if (curVal - prevVal == 0)
+      setTrend(<MdTrendingFlat fontSize={24} className="text-gray-500" />);
+    else if (curVal - prevVal > 0)
+      setTrend(<MdTrendingUp fontSize={24} className="text-green-600" />);
+    else setTrend(<MdTrendingDown fontSize={24} className="text-red-600" />);
+  }, [prevVal, curVal]);
 
   return (
     <div className="flex h-64 w-full flex-col gap-3 rounded-2xl bg-white p-4 shadow">

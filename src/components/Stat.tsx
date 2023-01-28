@@ -13,7 +13,7 @@ const Stat = ({ data }: { data: StatData }) => {
     if (data.trend == 0) setTrendColor("bg-gray-300");
     else if (data.trend > 0) setTrendColor("bg-green-300");
     else setTrendColor("bg-red-300");
-  }, [data]);
+  }, [data.trend]);
 
   return (
     <div className="flex h-full w-full flex-col items-center justify-center rounded-2xl bg-white p-4 shadow">

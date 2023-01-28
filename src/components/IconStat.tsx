@@ -26,7 +26,7 @@ const IconStat = ({ data }: { data: IconStatData }) => {
       setTrendIcon(<MdArrowDownward fontSize={19} />);
       setTrendColor("text-red-600");
     }
-  }, [data]);
+  }, [data.trend]);
 
   return (
     <div className="flex h-full w-full items-center justify-center gap-2 rounded-2xl bg-white p-4 shadow">

@@ -100,7 +100,11 @@ const Home: NextPage = () => {
               </div>
             ))}
             <div className="col-span-7">
-              <TrendLineGraph data={tempTrendData} />
+              <TrendLineGraph
+                data={tempTrendData}
+                prevVal={tempTrendData[0]?.pounds}
+                curVal={tempTrendData[tempTrendData.length - 1]?.pounds}
+              />
             </div>
             <div className="col-span-5 grid grid-cols-6 gap-2">
               {tempOtherData.map((stat, index) => (
