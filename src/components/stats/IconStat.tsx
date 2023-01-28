@@ -1,13 +1,6 @@
 import { useEffect, useState } from "react";
 import { MdArrowDownward, MdArrowUpward, MdTrendingFlat } from "react-icons/md";
 
-type IconStatData = {
-  name: string;
-  value: number;
-  trend: number;
-  icon: JSX.Element;
-};
-
 const IconStat = ({ data }: { data: IconStatData }) => {
   const [trendIcon, setTrendIcon] = useState<JSX.Element>(
     <MdTrendingFlat fontSize={19} />

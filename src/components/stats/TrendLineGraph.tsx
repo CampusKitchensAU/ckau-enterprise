@@ -10,8 +10,6 @@ import {
   YAxis,
 } from "recharts";
 
-type trendData = { week: string; pounds: number };
-
 const TrendLineGraph = ({
   data,
   prevVal,

@@ -1,11 +1,5 @@
 import { useEffect, useState } from "react";
 
-type StatData = {
-  name: string;
-  value: number;
-  trend: number;
-};
-
 const Stat = ({ data }: { data: StatData }) => {
   const [trendColor, setTrendColor] = useState<string>("bg-gray-500");
 

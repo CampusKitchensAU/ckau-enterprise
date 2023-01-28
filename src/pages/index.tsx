@@ -5,10 +5,10 @@ import { MdCalendarToday, MdNotificationsNone } from "react-icons/md";
 import { FaTruck, FaWeight } from "react-icons/fa";
 import { ImSpoonKnife } from "react-icons/im";
 import PageHeader from "../components/PageHeader";
-import TrendLineGraph from "../components/TrendLineGraph";
-import IconStat from "../components/IconStat";
-import Stat from "../components/Stat";
-import AvatarStat from "../components/AvatarStat";
+import TrendLineGraph from "../components/stats/TrendLineGraph";
+import IconStat from "../components/stats/IconStat";
+import Stat from "../components/stats/Stat";
+import AvatarStat from "../components/stats/AvatarStat";
 
 //TODO: Get all of this data from db
 const tempTrendData = [

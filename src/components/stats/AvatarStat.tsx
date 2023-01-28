@@ -1,9 +1,3 @@
-type AvatarStatData = {
-  name: string;
-  avatar: JSX.Element;
-  frame: string;
-};
-
 const AvatarStat = ({ data }: { data: AvatarStatData }) => {
   return (
     <div className="flex h-full w-full flex-col items-center justify-center gap-1 rounded-2xl bg-white shadow">
