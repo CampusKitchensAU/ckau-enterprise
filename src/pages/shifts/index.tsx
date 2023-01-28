@@ -1,7 +1,7 @@
 import { type NextPage } from "next";
 import Head from "next/head";
 import PageHeader from "../../components/PageHeader";
-import ShiftsList from "../../components/ShiftsList";
+import ShiftsList from "../../components/shifts/ShiftsList";
 
 const Shifts: NextPage = () => {
   return (

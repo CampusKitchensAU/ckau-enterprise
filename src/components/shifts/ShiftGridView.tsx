@@ -1,13 +1,5 @@
 import ShiftCard from "./ShiftCard";
 
-type shiftData = {
-  id: number;
-  name: string;
-  type: number;
-  day: string;
-  time: string;
-};
-
 const ShiftGridView = ({ data }: { data: shiftData[] }) => {
   return (
     <div className="grid grid-cols-25 gap-6">

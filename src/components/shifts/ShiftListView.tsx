@@ -1,13 +1,5 @@
 import ShiftRow from "./ShiftRow";
-import TableFooter from "./TableFooter";
-
-type shiftData = {
-  id: number;
-  name: string;
-  type: number;
-  day: string;
-  time: string;
-};
+import TableFooter from "../TableFooter";
 
 const ShiftListView = ({ data }: { data: shiftData[] }) => {
   return (

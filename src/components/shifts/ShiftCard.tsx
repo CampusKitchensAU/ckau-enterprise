@@ -2,14 +2,6 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { MdAccessTime, MdCalendarToday } from "react-icons/md";
 
-type shiftData = {
-  id: number;
-  name: string;
-  type: number;
-  day: string;
-  time: string;
-};
-
 const ShiftCard = ({ data }: { data: shiftData }) => {
   const [shiftBg, setShiftBg] = useState<string>(
     "bg-alt-packageGreen bg-package-logo"
@@ -33,7 +25,7 @@ const ShiftCard = ({ data }: { data: shiftData }) => {
         setShiftType("delivery");
         break;
     }
-  }, [data]);
+  }, [data.type]);
 
   return (
     <div

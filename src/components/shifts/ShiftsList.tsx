@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { MdFormatAlignLeft, MdGridView } from "react-icons/md";
-import Days from "../constants/shifts/Days";
-import ShiftFilterTabs from "../constants/shifts/ShiftFilterTabs";
-import SortOptions from "../constants/shifts/SortOptions";
-import Search from "./Search";
-import Select from "./Select";
+import Days from "../../constants/shifts/Days";
+import ShiftFilterTabs from "../../constants/shifts/ShiftFilterTabs";
+import SortOptions from "../../constants/shifts/SortOptions";
+import Search from "../Search";
+import Select from "../Select";
 import ShiftGridView from "./ShiftGridView";
 import ShiftListView from "./ShiftListView";
-import Tab from "./Tab";
+import Tab from "../Tab";
 
 const tempShiftData = [
   {

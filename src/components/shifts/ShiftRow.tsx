@@ -4,14 +4,6 @@ import { MdMoreVert } from "react-icons/md";
 import { BsBoxSeam, BsTruck } from "react-icons/bs";
 import { GiMeal } from "react-icons/gi";
 
-type shiftData = {
-  id: number;
-  name: string;
-  type: number;
-  day: string;
-  time: string;
-};
-
 const ShiftRow = ({ data }: { data: shiftData }) => {
   const [shiftBg, setShiftBg] = useState<string>(
     "bg-alt-packageGreen bg-package-logo"
@@ -39,7 +31,7 @@ const ShiftRow = ({ data }: { data: shiftData }) => {
         setShiftIcon(<BsTruck fontSize={24} />);
         break;
     }
-  }, [data]);
+  }, [data.type]);
 
   return (
     <div className="flex items-center gap-4 p-4">
