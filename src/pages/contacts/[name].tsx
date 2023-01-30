@@ -29,9 +29,9 @@ const ContactPerson = () => {
           <Link
             id="back-button"
             href="/contacts"
-            className="flex cursor-pointer items-center gap-2 font-medium text-gray-600 transition-all duration-200 hover:text-primary-800 "
+            className="flex cursor-pointer items-center gap-1 font-medium text-gray-600 transition-all duration-200 hover:text-primary-800 "
           >
-            <MdArrowBack fontSize={20} className="mt-[2px]" />
+            <MdArrowBack fontSize={24} className="py-[2px]" />
             <span>Contacts</span>
           </Link>
 
