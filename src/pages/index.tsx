@@ -2,7 +2,7 @@ import { type NextPage } from "next";
 import Head from "next/head";
 import { useEffect, useState } from "react";
 import PageHeader from "../components/PageHeader";
-import { trpc } from "../utils/trpc";
+import { api } from "../utils/trpc";
 
 const getData = async () => {
   const res = await fetch("/api/graphql", {
@@ -18,7 +18,7 @@ const getData = async () => {
 
 const Home: NextPage = () => {
   const [data, setData] = useState(null);
-  const hello = trpc.hello.useQuery({ text: "from trpc" });
+  const hello = api.example.hello.useQuery({ text: "Hello from tRPC" });
   useEffect(() => {
     getData().then((data) => setData(data));
   }, []);
