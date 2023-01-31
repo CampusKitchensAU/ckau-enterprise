@@ -2,7 +2,7 @@ table user {
    id int [PK]
    name string
    email string
-   phone varchar(10)
+   phone int
    year int
    major string
    birthday date
@@ -17,21 +17,36 @@ table user {
 
 table user_shift_mapping {
   id int [PK]
-  user_id int [ref: < user.id]
-  shift_id int [ref: - shift.id]
+  user_id int [ref: > user.id]
+  shift_id int [ref: > shift.id]
 }
 
 table shift {
   id int [PK]
-  name string
-  type int
-  location string
+  info_id int [ref: > shift_info.id]
+  type_id int [ref: > shift_type.id]
+  contact_id int [ref: > shift_contact.id]
   slots int
   day_of_week day
-  start_time datetime
+  start_time time
+  notes string
+}
+
+table shift_type{
+  id int [PK]
+  name string
+}
+
+table shift_info {
+  id int [PK]
+  name string
   description string
-  primary_contact string
-  primar_phone varchar(10)
+  location string
+}
+table shift_contact{
+  id int [PK]
+  contact_name string
+  phone int
 }
 
 table role {
@@ -43,15 +58,16 @@ table availabilities {
   id int [PK]
   user_id int [ref: > user.id]
   day day
-  start_time datetime
-  end_time datetime
+  start_time time
+  end_time time
 }
 
 table shift_log {
   id int [PK]
+  shift_id int [ref: > shift.id]
+  user_id int
   description string
   type int
-  shift_id int [ref: > shift.id]
 }
 
 enum day {
@@ -63,3 +79,5 @@ enum day {
   Friday
   Saturday
 }
+
+
