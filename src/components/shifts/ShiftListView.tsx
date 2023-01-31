@@ -1,5 +1,6 @@
 import ShiftRow from "./ShiftRow";
 import TableFooter from "../TableFooter";
+import type { shiftData } from "./shiftTypes";
 
 const ShiftListView = ({ data }: { data: shiftData[] }) => {
   return (
@@ -16,8 +17,8 @@ const ShiftListView = ({ data }: { data: shiftData[] }) => {
         <div className="min-w-[304px] grow">Time</div>
       </div>
       <div id="rows" className="h-auto">
-        {data.map((shift, index) => (
-          <ShiftRow key={index} data={shift} />
+        {data.map((shift) => (
+          <ShiftRow key={shift.id} data={shift} />
         ))}
       </div>
       <div

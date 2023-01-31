@@ -43,7 +43,7 @@ const ShiftsList = () => {
         <div className="flex h-12 items-center gap-4 rounded-t-lg bg-surface-main px-4">
           {ShiftFilterTabs.map((tab, index) => (
             <Tab
-              key={index}
+              key={tab.title}
               title={tab.title}
               selected={selectedTab == index}
               index={index}
