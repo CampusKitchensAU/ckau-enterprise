@@ -1,7 +1,7 @@
 import { type NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MdArrowBack } from "react-icons/md";
 import PageHeader from "../../components/PageHeader";
 import ShiftInfo from "../../components/shifts/ShiftInfo";
@@ -24,16 +24,30 @@ const tempData: fullShiftData = {
     "For this delivery shift, New Birth Ministry will come to Lupton Hall to pick up the food. Since this shift occurs at the end of the week, we will give them all of our leftover food that would otherwise have to be thrown away.\n\nThis includes pickups from Starbucks, Panera Bread, and ABP. Any of this food should be given to them. Also, any extra food from any of the freezers or refrigerators should be given to them. This food is not resourced directly for them, but if we are extremely short on food, and none of these above items are available, please give them 3-4 pans each of proteins, carbs, and vegetables.\n\nThey should also be given any leftover vegetables from the Community Garden. They should be given approximately 2 pans each of proteins, carbs, and vegetables in addition to the fresh food they are given.",
 };
 
-const secondaryValues = [
-  { label: "Shift Type", value: "type" },
-  { label: "Location", value: "location" },
-  { label: "Required People", value: "slots" },
-  { label: "Contact Name", value: "contactName" },
-  { label: "Contact Phone", value: "contactPhone" },
-];
-
 const Shift: NextPage = () => {
   const [selectedTab, setSelectedTab] = useState<number>(0);
+  const [shiftType, setShiftType] = useState<string>("Pickup");
+  const secondaryValues = [
+    { label: "Shift Type", value: shiftType },
+    { label: "Location", value: tempData.location },
+    { label: "Required People", value: tempData.slots + " Shift Leaders" },
+    { label: "Contact Name", value: tempData.contactName },
+    { label: "Contact Phone", value: tempData.contactPhone },
+  ];
+
+  useEffect(() => {
+    switch (tempData.type) {
+      case 0:
+        setShiftType("Pickup");
+        break;
+      case 1:
+        setShiftType("Packaging");
+        break;
+      case 2 || 3:
+        setShiftType("Delivery");
+        break;
+    }
+  }, []);
 
   return (
     <>
@@ -111,9 +125,7 @@ const Shift: NextPage = () => {
                 {secondaryValues.map((value) => (
                   <div key={value.label} className="flex flex-col gap-1">
                     <span>{value.label}</span>
-                    <span className="text-text-secondary">
-                      {tempData[value.value as keyof typeof tempData]}
-                    </span>
+                    <span className="text-text-secondary">{value.value}</span>
                   </div>
                 ))}
                 <hr />
