@@ -8,7 +8,7 @@ type Day =
   | "Saturday"
   | "Sunday";
 
-const Days: Day[] = [
+const days: Day[] = [
   "All",
   "Monday",
   "Tuesday",
@@ -19,4 +19,4 @@ const Days: Day[] = [
   "Sunday",
 ];
 
-export default Days;
+export default days;

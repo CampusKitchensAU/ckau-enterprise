@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { MdArrowUpward } from "react-icons/md";
-import FilterTabs from "../constants/contacts/FilterTabs";
-import Roles from "../constants/contacts/Roles";
+import FilterTabs from "../constants/contacts/filterTabs";
+import Roles from "../constants/contacts/roles";
 import ContactRow from "./ContactRow";
 import Search from "./Search";
 import Select from "./Select";

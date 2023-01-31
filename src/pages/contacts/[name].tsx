@@ -6,7 +6,7 @@ import PageHeader from "../../components/PageHeader";
 import PersonInfo from "../../components/PersonInfo";
 import RoleChip from "../../components/RoleChip";
 import Tab from "../../components/Tab";
-import PersonTabs from "../../constants/contacts/PersonTabs";
+import PersonTabs from "../../constants/contacts/personTabs";
 
 const ContactPerson = () => {
   const [selectedTab, setSelectedTab] = useState<number>(0);

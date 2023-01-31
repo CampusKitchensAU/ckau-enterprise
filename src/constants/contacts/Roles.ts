@@ -1,5 +1,5 @@
 type Role = "All" | "Executive Team" | "Shift Leader" | "Advisor";
 
-const Roles: Role[] = ["All", "Executive Team", "Shift Leader", "Advisor"];
+const roles: Role[] = ["All", "Executive Team", "Shift Leader", "Advisor"];
 
-export default Roles;
+export default roles;

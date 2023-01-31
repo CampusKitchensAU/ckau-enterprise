@@ -1,4 +1,4 @@
-type shiftData = {
+export type shiftData = {
   id: number;
   name: string;
   type: number;
@@ -6,7 +6,7 @@ type shiftData = {
   time: string;
 };
 
-type fullShiftData = {
+export type fullShiftData = {
   id: number;
   name: string;
   day: string;

@@ -1,3 +1,5 @@
+import type { fullShiftData } from "./shiftTypes";
+
 const ShiftInfo = ({ tab, data }: { tab: number; data: fullShiftData }) => {
   switch (tab) {
     case 0:

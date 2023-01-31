@@ -5,8 +5,9 @@ import { useEffect, useState } from "react";
 import { MdArrowBack } from "react-icons/md";
 import PageHeader from "../../components/PageHeader";
 import ShiftInfo from "../../components/shifts/ShiftInfo";
+import type { fullShiftData } from "../../components/shifts/shiftTypes";
 import Tab from "../../components/Tab";
-import ShiftTabs from "../../constants/shifts/ShiftTabs";
+import ShiftTabs from "../../constants/shifts/shiftTabs";
 
 //TODO: Fetch data for shift with id from URL
 const tempData: fullShiftData = {

@@ -2,7 +2,7 @@ interface ShiftTab {
   title: string;
 }
 
-const ShiftTabs: ShiftTab[] = [
+const shiftTabs: ShiftTab[] = [
   {
     title: "Overview",
   },
@@ -14,4 +14,4 @@ const ShiftTabs: ShiftTab[] = [
   },
 ];
 
-export default ShiftTabs;
+export default shiftTabs;
