@@ -25,7 +25,7 @@ const PersonInfo = ({ tab }: { tab: number }) => {
             </div>
             {personalFields.map((field, index) => (
               <div
-                key={index}
+                key={field.title}
                 className={`grid w-full grid-cols-12 px-8 py-4 ${
                   index != personalFields.length - 1 &&
                   "border-b-[1px] border-solid border-alt-divider"
@@ -42,9 +42,9 @@ const PersonInfo = ({ tab }: { tab: number }) => {
             <div className="border-b-[1px] border-solid border-alt-divider px-8 py-6 text-xl font-medium">
               Organization Details
             </div>
-            {organizationFields.map((field, index) => (
+            {organizationFields.map((field) => (
               <div
-                key={index}
+                key={field.title}
                 className={`grid w-full grid-cols-12 border-b-[1px] border-solid border-alt-divider px-8 py-4`}
               >
                 <div className="col-span-5">{field.title}</div>

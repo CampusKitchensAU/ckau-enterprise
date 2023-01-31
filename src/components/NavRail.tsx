@@ -19,7 +19,7 @@ const NavRail = () => {
       <h1 className="h-16 text-base font-bold">CKAU</h1>
       {NavPages.map((page, index) => (
         <NavButton
-          key={index}
+          key={page.title}
           title={page.title}
           path={page.path}
           icon={page.icon}

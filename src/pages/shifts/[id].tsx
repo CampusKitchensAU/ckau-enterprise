@@ -7,7 +7,7 @@ import PageHeader from "../../components/PageHeader";
 import ShiftInfo from "../../components/shifts/ShiftInfo";
 import type { fullShiftData } from "../../components/shifts/shiftTypes";
 import Tab from "../../components/Tab";
-import ShiftTabs from "../../constants/shifts/shiftTabs";
+import shiftTabs from "../../constants/shifts/shiftTabs";
 
 //TODO: Fetch data for shift with id from URL
 const tempData: fullShiftData = {
@@ -44,7 +44,8 @@ const Shift: NextPage = () => {
       case 1:
         setShiftType("Packaging");
         break;
-      case 2 || 3:
+      case 2:
+      case 3:
         setShiftType("Delivery");
         break;
     }
@@ -98,7 +99,7 @@ const Shift: NextPage = () => {
                 id="shift-tabs"
                 className="flex h-12 gap-3 border-b border-solid border-alt-divider px-8"
               >
-                {ShiftTabs.map((tab, index) => (
+                {shiftTabs.map((tab, index) => (
                   <Tab
                     key={tab.title}
                     title={tab.title}

@@ -52,7 +52,7 @@ const ContactPerson = () => {
           >
             {PersonTabs.map((tab, index) => (
               <Tab
-                key={index}
+                key={tab.title}
                 title={tab.title}
                 selected={selectedTab == index}
                 index={index}
