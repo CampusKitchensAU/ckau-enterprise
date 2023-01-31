@@ -8,6 +8,15 @@ module.exports = {
       fontFamily: {
         sans: ["Lato", ...defaultTheme.fontFamily.sans],
       },
+      backgroundImage: {
+        "pickup-logo": "url('/svg/Pickup-Logo.svg')",
+        "package-logo": "url('/svg/Package-Logo.svg')",
+        "delivery-logo": "url('/svg/Delivery-Logo.svg')",
+      },
+      gridTemplateColumns: {
+        16: "repeat(16, minmax(0, 1fr))",
+        25: "repeat(25, minmax(0, 1fr))",
+      },
       colors: {
         primary: {
           contrast: "#FFFFFF",
@@ -49,6 +58,12 @@ module.exports = {
           deliveryBlue: "#407BFF",
           packageGreen: "#92E3A9",
           pickupYellow: "#FFC100",
+          divider: "#e0e0e0",
+        },
+        text: {
+          primary: "#000000",
+          secondary: "#626466",
+          contrast: "#FFFFFF",
         },
       },
     },
