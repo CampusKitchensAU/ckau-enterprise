@@ -1,8 +1,11 @@
 import { type NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
+import { useState } from "react";
 import { MdArrowBack } from "react-icons/md";
 import PageHeader from "../../components/PageHeader";
+import Tab from "../../components/Tab";
+import ShiftTabs from "../../constants/shifts/ShiftTabs";
 
 //TODO: Fetch data for shift with id from URL
 const tempData: fullShiftData = {
@@ -28,6 +31,8 @@ const secondaryValues = [
 ];
 
 const Shift: NextPage = () => {
+  const [selectedTab, setSelectedTab] = useState<number>(0);
+
   return (
     <>
       <Head>
@@ -54,7 +59,7 @@ const Shift: NextPage = () => {
           <div className="flex gap-6">
             <div
               id="shift-container"
-              className="grow rounded-lg bg-white shadow"
+              className="h-max grow rounded-lg bg-white shadow"
             >
               <div
                 id="shift-header"
@@ -71,6 +76,20 @@ const Shift: NextPage = () => {
                     {tempData.day}&apos;s at {tempData.time}
                   </h4>
                 </div>
+              </div>
+              <div
+                id="shift-tabs"
+                className="flex h-12 gap-3 border-b border-solid border-alt-divider px-8"
+              >
+                {ShiftTabs.map((tab, index) => (
+                  <Tab
+                    key={tab.title}
+                    title={tab.title}
+                    selected={selectedTab === index}
+                    index={index}
+                    callback={setSelectedTab}
+                  />
+                ))}
               </div>
             </div>
             <div
