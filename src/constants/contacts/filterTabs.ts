@@ -3,7 +3,7 @@ interface FilterTab {
   searchFn: () => void;
 }
 
-const FilterTabs: FilterTab[] = [
+const filterTabs: FilterTab[] = [
   {
     title: "All",
     searchFn: () => {
@@ -30,4 +30,4 @@ const FilterTabs: FilterTab[] = [
   },
 ];
 
-export default FilterTabs;
+export default filterTabs;

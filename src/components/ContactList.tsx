@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { MdArrowUpward } from "react-icons/md";
-import FilterTabs from "../constants/contacts/FilterTabs";
-import Roles from "../constants/contacts/Roles";
+import filterTabs from "../constants/contacts/filterTabs";
+import roles from "../constants/contacts/roles";
 import ContactRow from "./ContactRow";
 import Search from "./Search";
 import Select from "./Select";
@@ -19,9 +19,9 @@ const ContactList = () => {
           id="filter-tabs"
           className="flex h-12 items-end gap-4 rounded-t-[20px] bg-surface-main px-4"
         >
-          {FilterTabs.map((tab, index) => (
+          {filterTabs.map((tab, index) => (
             <Tab
-              key={index}
+              key={tab.title}
               title={tab.title}
               selected={selectedTab == index}
               index={index}
@@ -34,7 +34,7 @@ const ContactList = () => {
           className="grid grid-cols-12 gap-4 border-t border-solid border-alt-divider p-4"
         >
           <div className="col-span-3">
-            <Select title="Roles" options={Roles} />
+            <Select title="Roles" options={roles} />
           </div>
           <div className="col-span-9">
             <Search />

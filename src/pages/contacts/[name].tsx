@@ -6,7 +6,7 @@ import PageHeader from "../../components/PageHeader";
 import PersonInfo from "../../components/PersonInfo";
 import RoleChip from "../../components/RoleChip";
 import Tab from "../../components/Tab";
-import PersonTabs from "../../constants/contacts/PersonTabs";
+import PersonTabs from "../../constants/contacts/personTabs";
 
 const ContactPerson = () => {
   const [selectedTab, setSelectedTab] = useState<number>(0);
@@ -29,9 +29,9 @@ const ContactPerson = () => {
           <Link
             id="back-button"
             href="/contacts"
-            className="flex cursor-pointer items-center gap-2 font-medium text-gray-600 transition-all duration-200 hover:text-primary-800 "
+            className="flex cursor-pointer items-center gap-1 font-medium text-gray-600 transition-all duration-200 hover:text-primary-800 "
           >
-            <MdArrowBack fontSize={20} className="mt-[2px]" />
+            <MdArrowBack fontSize={24} className="py-[2px]" />
             <span>Contacts</span>
           </Link>
 
@@ -52,7 +52,7 @@ const ContactPerson = () => {
           >
             {PersonTabs.map((tab, index) => (
               <Tab
-                key={index}
+                key={tab.title}
                 title={tab.title}
                 selected={selectedTab == index}
                 index={index}

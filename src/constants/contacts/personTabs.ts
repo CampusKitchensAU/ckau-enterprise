@@ -2,7 +2,7 @@ interface PersonTab {
   title: string;
 }
 
-const PersonTabs: PersonTab[] = [
+const personTabs: PersonTab[] = [
   {
     title: "Details",
   },
@@ -11,4 +11,4 @@ const PersonTabs: PersonTab[] = [
   },
 ];
 
-export default PersonTabs;
+export default personTabs;

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { MdAccessTime, MdCalendarToday } from "react-icons/md";
+import type { shiftData } from "./shiftTypes";
 
 const ShiftCard = ({ data }: { data: shiftData }) => {
   const [shiftBg, setShiftBg] = useState<string>(

@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { MdFormatAlignLeft, MdGridView } from "react-icons/md";
-import Days from "../../constants/shifts/Days";
+import days from "../../constants/shifts/days";
 import ShiftFilterTabs from "../../constants/shifts/ShiftFilterTabs";
-import SortOptions from "../../constants/shifts/SortOptions";
+import sortOptions from "../../constants/shifts/sortOptions";
 import Search from "../Search";
 import Select from "../Select";
 import ShiftGridView from "./ShiftGridView";
@@ -43,7 +43,7 @@ const ShiftsList = () => {
         <div className="flex h-12 items-center gap-4 rounded-t-lg bg-surface-main px-4">
           {ShiftFilterTabs.map((tab, index) => (
             <Tab
-              key={index}
+              key={tab.title}
               title={tab.title}
               selected={selectedTab == index}
               index={index}
@@ -78,10 +78,10 @@ const ShiftsList = () => {
             <Search />
           </div>
           <div className="col-span-2">
-            <Select title="Day" options={Days} />
+            <Select title="Day" options={days} />
           </div>
           <div className="col-span-2">
-            <Select title="Sort By" options={SortOptions} />
+            <Select title="Sort By" options={sortOptions} />
           </div>
         </div>
         {!gridView && <ShiftListView data={tempShiftData} />}

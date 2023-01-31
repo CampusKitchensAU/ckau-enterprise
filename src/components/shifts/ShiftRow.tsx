@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { MdMoreVert } from "react-icons/md";
 import { BsBoxSeam, BsTruck } from "react-icons/bs";
 import { GiMeal } from "react-icons/gi";
+import type { shiftData } from "./shiftTypes";
 
 const ShiftRow = ({ data }: { data: shiftData }) => {
   const [shiftBg, setShiftBg] = useState<string>(
