@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { MdArrowBack } from "react-icons/md";
 import PageHeader from "../../components/PageHeader";
+import ShiftInfo from "../../components/shifts/ShiftInfo";
 import Tab from "../../components/Tab";
 import ShiftTabs from "../../constants/shifts/ShiftTabs";
 
@@ -19,7 +20,8 @@ const tempData: fullShiftData = {
   contactName: "Mr. Antravoski Brown",
   contactPhone: "(334) 413-3778",
   assignedIds: [1],
-  summary: "Pick up food from New Birth Ministry and deliver to Lupton Hall.",
+  summary:
+    "For this delivery shift, New Birth Ministry will come to Lupton Hall to pick up the food. Since this shift occurs at the end of the week, we will give them all of our leftover food that would otherwise have to be thrown away.\n\nThis includes pickups from Starbucks, Panera Bread, and ABP. Any of this food should be given to them. Also, any extra food from any of the freezers or refrigerators should be given to them. This food is not resourced directly for them, but if we are extremely short on food, and none of these above items are available, please give them 3-4 pans each of proteins, carbs, and vegetables.\n\nThey should also be given any leftover vegetables from the Community Garden. They should be given approximately 2 pans each of proteins, carbs, and vegetables in addition to the fresh food they are given.",
 };
 
 const secondaryValues = [
@@ -91,10 +93,13 @@ const Shift: NextPage = () => {
                   />
                 ))}
               </div>
+              <div id="shift-info" className="px-8 pb-6 pt-4">
+                <ShiftInfo tab={selectedTab} data={tempData} />
+              </div>
             </div>
             <div
               id="shift-secondary"
-              className="flex h-max w-96 flex-col gap-2 rounded-lg bg-white shadow"
+              className=" flex h-max min-w-[320px] flex-col gap-2 rounded-lg bg-white shadow"
             >
               <div
                 id="about"
