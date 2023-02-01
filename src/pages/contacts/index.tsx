@@ -18,7 +18,7 @@ const Contacts: NextPage = () => {
           title="Organization Contacts"
           subtitle="Executive Team | Shift Leaders | Advisors"
         />
-        <div id="content" className="px-16">
+        <div id="content" className="lg:px-12 xl:px-16">
           <ContactList />
         </div>
       </div>

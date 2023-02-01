@@ -16,9 +16,9 @@ const MyApp: AppType<{ session: Session | null }> = ({
 
   return (
     <SessionProvider session={session}>
-      <div className="h-max bg-surface-background md:flex">
+      <div className="h-max w-screen bg-surface-background md:flex">
         {isMd ? <NavRail /> : <MobileNavBar />}
-        <main className="min-h-screen w-full px-4 pt-16 sm1:px-6 sm2:px-8 md:pt-8">
+        <main className="min-h-screen w-full px-4 pt-16 sm1:px-6 sm2:px-8 md:-ml-20 md:grow md:pt-8 md:pl-28">
           <Component {...pageProps} />
         </main>
       </div>
