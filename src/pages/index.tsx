@@ -65,7 +65,7 @@ const tempAvatarData = {
 };
 
 const Home: NextPage = () => {
-  const isMd = useMediaQuery("md");
+  const isLg = useMediaQuery("lg");
   const [greeting, setGreeting] = useState<string>("Good morning");
 
   useEffect(() => {
@@ -92,35 +92,35 @@ const Home: NextPage = () => {
             title={greeting + ", Trevor!"}
             subtitle={"VP of Technology"}
           />
-          <h3 className="w-full border-b-2 border-solid border-primary-900 text-xl font-semibold text-primary-900">
+          <h3 className="w-full border-b-2 border-solid border-primary-900 font-semibold text-primary-900 sm2:text-lg md:text-xl">
             Organization Statistics
           </h3>
           <div className="grid grid-cols-12 gap-2">
             {tempMainData.map((stat, index) => (
-              <div key={index} className="col-span-12 md:col-span-4">
+              <div key={index} className="col-span-12 xl:col-span-4">
                 <IconStat data={stat} />
               </div>
             ))}
-            <div className="col-span-12 md:col-span-7">
+            <div className="col-span-12 xl:col-span-7">
               <TrendLineGraph
                 data={tempTrendData}
                 prevVal={tempTrendData[0]?.pounds}
                 curVal={tempTrendData[tempTrendData.length - 1]?.pounds}
               />
             </div>
-            <div className="col-span-12 grid grid-cols-6 gap-2 md:col-span-5">
+            <div className="col-span-12 grid grid-cols-6 gap-2 xl:col-span-5">
               {tempOtherData.map((stat, index) => (
-                <div key={index} className="col-span-3">
+                <div key={index} className="col-span-6 sm1:col-span-3">
                   <Stat data={stat} />
                 </div>
               ))}
-              <div className="col-span-3">
+              <div className="col-span-6 sm1:col-span-3">
                 <AvatarStat data={tempAvatarData} />
               </div>
             </div>
           </div>
         </div>
-        {isMd && (
+        {isLg && (
           <div className="w-80 rounded-[20px] bg-surface-main px-8 py-4">
             <div className="flex items-center gap-4 text-gray-400">
               <div className="flex grow items-center gap-4">

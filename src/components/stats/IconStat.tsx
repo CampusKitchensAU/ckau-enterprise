@@ -22,8 +22,8 @@ const IconStat = ({ data }: { data: IconStatData }) => {
   }, [data.trend]);
 
   return (
-    <div className="flex h-full w-full items-center gap-2 rounded-2xl bg-white p-2 pl-16 shadow md:justify-center md:p-4">
-      <div className="h-max rounded-lg bg-primary-600 p-2 text-2xl text-primary-contrast md:text-[32px]">
+    <div className="flex h-full w-full items-center gap-2 rounded-2xl bg-white p-2 pl-6 shadow sm1:pl-12 sm2:pl-16 md:justify-center md:p-4">
+      <div className="h-max rounded-lg bg-primary-600 p-2 text-lg text-primary-contrast sm1:text-xl sm2:text-2xl md:text-[32px]">
         {data.icon}
       </div>
       <div>
