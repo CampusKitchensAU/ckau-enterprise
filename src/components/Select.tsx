@@ -35,18 +35,21 @@ const Select = ({ title, options }: { title: string; options: string[] }) => {
           isFocused ? "visible mt-1 opacity-100 duration-300" : "invisible"
         }`}
       >
-        <div className="py-1">
+        <div className="flex flex-col py-1">
           {options.map((option, index) => (
-            <div
+            <button
               key={index}
-              className={`cursor-pointer px-3 py-2 font-medium text-primary-900
+              className={`px-3 py-2 text-left font-medium text-primary-900
               transition-all hover:bg-gray-200 ${
                 index == selected && "bg-gray-200"
               }`}
-              onClick={() => setSelected(index)}
+              onClick={() => {
+                setSelected(index);
+                setIsFocused(false);
+              }}
             >
               {option}
-            </div>
+            </button>
           ))}
         </div>
       </div>
