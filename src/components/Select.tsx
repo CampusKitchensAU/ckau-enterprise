@@ -20,6 +20,7 @@ const Select = ({ title, options }: { title: string; options: string[] }) => {
       focus:border-primary-500"
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
+        onClick={() => setIsFocused(true)}
       >
         <div className="grow text-left">{options[selected]}</div>
         <MdKeyboardArrowDown
