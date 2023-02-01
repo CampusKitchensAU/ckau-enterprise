@@ -6,18 +6,19 @@ import { SessionProvider } from "next-auth/react";
 import "../styles/globals.css";
 import NavRail from "../components/NavRail";
 import { useMediaQuery } from "../utils/useMediaQuery";
+import MobileNavBar from "../components/MobileNavBar";
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
   pageProps: { session, ...pageProps },
 }) => {
-  const isMobile = useMediaQuery("sm");
+  const isMd = useMediaQuery("md");
 
   return (
     <SessionProvider session={session}>
-      <div className="flex h-max bg-surface-background">
-        <NavRail />
-        <main className="min-h-screen w-full px-8 pt-8">
+      <div className="h-max bg-surface-background md:flex">
+        {isMd ? <NavRail /> : <MobileNavBar />}
+        <main className="min-h-screen w-full px-8 pt-16">
           <Component {...pageProps} />
         </main>
       </div>
