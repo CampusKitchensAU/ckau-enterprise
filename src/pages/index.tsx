@@ -9,6 +9,7 @@ import TrendLineGraph from "../components/stats/TrendLineGraph";
 import IconStat from "../components/stats/IconStat";
 import Stat from "../components/stats/Stat";
 import AvatarStat from "../components/stats/AvatarStat";
+import { signIn, signOut, useSession } from "next-auth/react";
 
 //TODO: Get all of this data from db
 const tempTrendData = [
@@ -64,6 +65,7 @@ const tempAvatarData = {
 };
 
 const Home: NextPage = () => {
+  const { data: session, status } = useSession();
   const [greeting, setGreeting] = useState<string>("Good morning");
 
   useEffect(() => {
@@ -72,6 +74,10 @@ const Home: NextPage = () => {
     else if (time.getHours() < 18) setGreeting("Good afternoon");
     else setGreeting("Good evening");
   }, []);
+
+  if (status == "loading") {
+    return <div>Loading...</div>;
+  }
 
   return (
     <>
@@ -87,7 +93,7 @@ const Home: NextPage = () => {
         <div className="flex grow flex-col gap-6">
           <PageHeader
             //TODO: Add a way to get the user's name and position
-            title={greeting + ", Trevor!"}
+            title={greeting + ", " + (session ? session?.user?.name : "Guest")}
             subtitle={"VP of Technology"}
           />
           <h3 className="w-full border-b-2 border-solid border-primary-900 text-xl font-semibold text-primary-900">

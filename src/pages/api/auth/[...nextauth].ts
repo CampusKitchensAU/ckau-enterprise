@@ -1,5 +1,6 @@
 import NextAuth, { type NextAuthOptions } from "next-auth";
-import DiscordProvider from "next-auth/providers/discord";
+import GoogleProvider from "next-auth/providers/google";
+import AzureADProvider from "next-auth/providers/azure-ad";
 // Prisma adapter for NextAuth, optional and can be removed
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 
@@ -7,8 +8,26 @@ import { env } from "../../../env/server.mjs";
 import { prisma } from "../../../server/db";
 
 export const authOptions: NextAuthOptions = {
-  // Include user.id on session
   callbacks: {
+    async signIn({ user, profile }) {
+      console.log(profile);
+      //update user data to match changes in profile
+      if (user.id && profile) {
+        if (user.name !== profile.name || user.image !== profile.image) {
+          // await prisma.user.update({
+          //   where: {
+          //     id: user.id,
+          //   },
+          //   data: {
+          //     name: profile?.name,
+          //     image: profile?.image,
+          //   },
+          // });
+        }
+      }
+      return true;
+    },
+    // Include user.id on session
     session({ session, user }) {
       if (session.user) {
         session.user.id = user.id;
@@ -19,9 +38,23 @@ export const authOptions: NextAuthOptions = {
   // Configure one or more authentication providers
   adapter: PrismaAdapter(prisma),
   providers: [
-    DiscordProvider({
-      clientId: env.DISCORD_CLIENT_ID,
-      clientSecret: env.DISCORD_CLIENT_SECRET,
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID!,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+      profile(profile, tokens) {
+        return {
+          id: profile.sub,
+          name: profile.name,
+          email: profile.email,
+          image: profile.picture,
+        };
+      },
+    }),
+    AzureADProvider({
+      clientId: process.env.AZURE_AD_CLIENT_ID,
+      clientSecret: process.env.AZURE_AD_CLIENT_SECRET,
+      tenantId: process.env.AZURE_AD_TENANT_ID,
+      // authorization: { params: { scope: "openid profile user.Read email" } },
     }),
     /**
      * ...add more providers here
