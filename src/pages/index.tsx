@@ -9,6 +9,7 @@ import TrendLineGraph from "../components/stats/TrendLineGraph";
 import IconStat from "../components/stats/IconStat";
 import Stat from "../components/stats/Stat";
 import AvatarStat from "../components/stats/AvatarStat";
+import { useMediaQuery } from "../utils/useMediaQuery";
 
 //TODO: Get all of this data from db
 const tempTrendData = [
@@ -23,19 +24,19 @@ const tempMainData = [
     name: "Total Pounds Recovered",
     value: 14302,
     trend: 254,
-    icon: <FaWeight fontSize={32} />,
+    icon: <FaWeight />,
   },
   {
     name: "Total Meals Packaged",
     value: 11700,
     trend: 120,
-    icon: <ImSpoonKnife fontSize={32} />,
+    icon: <ImSpoonKnife />,
   },
   {
     name: "Total Pounds Recovered",
     value: 14302,
     trend: -254,
-    icon: <FaTruck fontSize={32} />,
+    icon: <FaTruck />,
   },
 ];
 
@@ -64,6 +65,7 @@ const tempAvatarData = {
 };
 
 const Home: NextPage = () => {
+  const isMd = useMediaQuery("md");
   const [greeting, setGreeting] = useState<string>("Good morning");
 
   useEffect(() => {
@@ -83,8 +85,8 @@ const Home: NextPage = () => {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="flex h-full gap-6">
-        <div className="flex grow flex-col gap-6">
+      <div className="flex h-full flex-col gap-6 pb-6 md:flex-row">
+        <div className="flex grow flex-col gap-4 md:gap-6">
           <PageHeader
             //TODO: Add a way to get the user's name and position
             title={greeting + ", Trevor!"}
@@ -95,18 +97,18 @@ const Home: NextPage = () => {
           </h3>
           <div className="grid grid-cols-12 gap-2">
             {tempMainData.map((stat, index) => (
-              <div key={index} className="col-span-4">
+              <div key={index} className="col-span-12 md:col-span-4">
                 <IconStat data={stat} />
               </div>
             ))}
-            <div className="col-span-7">
+            <div className="col-span-12 md:col-span-7">
               <TrendLineGraph
                 data={tempTrendData}
                 prevVal={tempTrendData[0]?.pounds}
                 curVal={tempTrendData[tempTrendData.length - 1]?.pounds}
               />
             </div>
-            <div className="col-span-5 grid grid-cols-6 gap-2">
+            <div className="col-span-12 grid grid-cols-6 gap-2 md:col-span-5">
               {tempOtherData.map((stat, index) => (
                 <div key={index} className="col-span-3">
                   <Stat data={stat} />
@@ -118,23 +120,25 @@ const Home: NextPage = () => {
             </div>
           </div>
         </div>
-        <div className="w-80 rounded-[20px] bg-surface-main px-8 py-4">
-          <div className="flex items-center gap-4 text-gray-400">
-            <div className="flex grow items-center gap-4">
-              <button className="cursor-default">
-                <MdCalendarToday fontSize={32} />
-              </button>
-              <button className="cursor-default">
-                <MdNotificationsNone fontSize={32} />
-              </button>
+        {isMd && (
+          <div className="w-80 rounded-[20px] bg-surface-main px-8 py-4">
+            <div className="flex items-center gap-4 text-gray-400">
+              <div className="flex grow items-center gap-4">
+                <button className="cursor-default">
+                  <MdCalendarToday fontSize={32} />
+                </button>
+                <button className="cursor-default">
+                  <MdNotificationsNone fontSize={32} />
+                </button>
+              </div>
+              {/*TODO: Get user photo or avatar */}
+              <button
+                id="avatar"
+                className="h-10 w-10 rounded-full bg-primary-500"
+              ></button>
             </div>
-            {/*TODO: Get user photo or avatar */}
-            <button
-              id="avatar"
-              className="h-10 w-10 rounded-full bg-primary-500"
-            ></button>
           </div>
-        </div>
+        )}
       </div>
     </>
   );

@@ -7,7 +7,7 @@ const MobileNavBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
   return (
-    <div className="fixed z-[1000] flex h-full w-full flex-col">
+    <div className={`fixed flex w-full flex-col ${isMenuOpen && "z-[1000]"}`}>
       <nav
         className={`flex h-12 w-full items-center bg-primary-500 text-white ${
           isMenuOpen && "border-b border-white"

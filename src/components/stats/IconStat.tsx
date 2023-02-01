@@ -22,14 +22,16 @@ const IconStat = ({ data }: { data: IconStatData }) => {
   }, [data.trend]);
 
   return (
-    <div className="flex h-full w-full items-center justify-center gap-2 rounded-2xl bg-white p-4 shadow">
-      <div className="h-max rounded-lg bg-primary-600 p-2 text-primary-contrast">
+    <div className="flex h-full w-full items-center gap-2 rounded-2xl bg-white p-2 pl-16 shadow md:justify-center md:p-4">
+      <div className="h-max rounded-lg bg-primary-600 p-2 text-2xl text-primary-contrast md:text-[32px]">
         {data.icon}
       </div>
       <div>
-        <div className="text-lg text-text-secondary">{data.name}</div>
+        <div className="text-md text-text-secondary md:text-lg">
+          {data.name}
+        </div>
         <div className="flex items-end gap-2">
-          <div className="text-3xl font-bold">
+          <div className="text-xl font-bold md:text-3xl">
             {data.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
           </div>
           <div className={`flex ${trendColor} items-center`}>
