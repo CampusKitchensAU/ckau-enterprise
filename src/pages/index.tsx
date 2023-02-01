@@ -64,14 +64,12 @@ const tempAvatarData = {
 };
 
 const Home: NextPage = () => {
-  const [greeting, setGreeting] = useState<string>("Good morning");
-
-  useEffect(() => {
-    const time = new Date();
-    if (time.getHours() < 12) setGreeting("Good morning");
-    else if (time.getHours() < 18) setGreeting("Good afternoon");
-    else setGreeting("Good evening");
-  }, []);
+  const greeting =
+    new Date().getHours() < 12
+      ? "Good morning"
+      : new Date().getHours() < 18
+      ? "Good afternoon"
+      : "Good evening";
 
   return (
     <>
