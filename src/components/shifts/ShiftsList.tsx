@@ -40,31 +40,33 @@ const ShiftsList = () => {
   return (
     <div className="flex flex-col gap-6">
       <div className="rounded-lg bg-white shadow">
-        <div className="flex h-12 items-center gap-4 rounded-t-lg bg-surface-main px-4">
-          {ShiftFilterTabs.map((tab, index) => (
-            <Tab
-              key={tab.title}
-              title={tab.title}
-              selected={selectedTab == index}
-              index={index}
-              callback={setSelectedTab}
-            />
-          ))}
-          <div className="flex grow justify-end">
+        <div className="flex flex-col rounded-t-lg md:flex-row md:bg-surface-main">
+          <div className="flex items-center gap-4 overflow-x-auto rounded-t-lg bg-surface-main px-4">
+            {ShiftFilterTabs.map((tab, index) => (
+              <Tab
+                key={tab.title}
+                title={tab.title}
+                selected={selectedTab == index}
+                index={index}
+                callback={setSelectedTab}
+              />
+            ))}
+          </div>
+          <div className="flex md:grow md:justify-end md:py-2 md:pr-4">
             <button
-              className={`rounded-l-lg transition-all duration-200 ${
+              className={`transition-all duration-300 md:rounded-l-lg ${
                 gridView
                   ? "bg-primary-500 text-primary-contrast"
-                  : "bg-white text-gray-300 hover:text-gray-400"
+                  : "grow bg-white text-gray-300 hover:text-gray-400 md:grow-0"
               } p-[6px]`}
               onClick={() => setGridView(true)}
             >
               <MdGridView fontSize={24} />
             </button>
             <button
-              className={`rounded-r-lg transition-all duration-200 ${
+              className={`text-center transition-all duration-300 md:rounded-r-lg ${
                 gridView
-                  ? "bg-white text-gray-300 hover:text-gray-400"
+                  ? "grow bg-white text-gray-300 hover:text-gray-400 md:grow-0"
                   : "bg-primary-500 text-primary-contrast"
               } p-[6px]`}
               onClick={() => setGridView(false)}
@@ -74,13 +76,13 @@ const ShiftsList = () => {
           </div>
         </div>
         <div className="grid grid-cols-12 gap-4 border-t border-solid border-alt-divider p-4">
-          <div className="col-span-8">
+          <div className="col-span-12 lg:col-span-6 xl:col-span-8">
             <Search />
           </div>
-          <div className="col-span-2">
+          <div className="col-span-12 md:col-span-6 lg:col-span-3 xl:col-span-2">
             <Select title="Day" options={days} />
           </div>
-          <div className="col-span-2">
+          <div className="col-span-12 md:col-span-6 lg:col-span-3 xl:col-span-2">
             <Select title="Sort By" options={sortOptions} />
           </div>
         </div>
