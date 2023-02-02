@@ -26,7 +26,9 @@ const RoleChip = ({ role }: { role: Role }) => {
   }, [role]);
 
   return (
-    <div className={`${color} w-fit rounded-2xl px-4 text-base`}>{role}</div>
+    <div className={`${color} w-fit rounded-2xl px-4 text-sm md:text-base`}>
+      {role}
+    </div>
   );
 };
 
