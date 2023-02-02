@@ -18,7 +18,7 @@ const Shifts: NextPage = () => {
           title="Organization Shifts"
           subtitle="Pickups | Packaging | Delivery"
         />
-        <div id="content" className="md:px-12 lg:px-16">
+        <div id="content" className="pb-6 md:px-12 lg:px-16">
           <ShiftsList />
         </div>
       </div>
