@@ -70,7 +70,7 @@ module.exports = {
         xs: "320px",
         sm1: "375px",
         sm2: "425px",
-      }
+      },
     },
   },
   plugins: [],
