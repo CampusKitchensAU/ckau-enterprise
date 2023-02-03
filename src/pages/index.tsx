@@ -9,7 +9,6 @@ import TrendLineGraph from "../components/stats/TrendLineGraph";
 import IconStat from "../components/stats/IconStat";
 import Stat from "../components/stats/Stat";
 import AvatarStat from "../components/stats/AvatarStat";
-import { useMediaQuery } from "../utils/useMediaQuery";
 
 //TODO: Get all of this data from db
 const tempTrendData = [
@@ -65,7 +64,6 @@ const tempAvatarData = {
 };
 
 const Home: NextPage = () => {
-  const isLg = useMediaQuery("lg");
   const [greeting, setGreeting] = useState<string>("Good morning");
 
   useEffect(() => {
@@ -120,25 +118,23 @@ const Home: NextPage = () => {
             </div>
           </div>
         </div>
-        {isLg && (
-          <div className="w-80 rounded-[20px] bg-surface-main px-8 py-4">
-            <div className="flex items-center gap-4 text-gray-400">
-              <div className="flex grow items-center gap-4">
-                <button className="cursor-default">
-                  <MdCalendarToday fontSize={32} />
-                </button>
-                <button className="cursor-default">
-                  <MdNotificationsNone fontSize={32} />
-                </button>
-              </div>
-              {/*TODO: Get user photo or avatar */}
-              <button
-                id="avatar"
-                className="h-10 w-10 rounded-full bg-primary-500"
-              ></button>
+        <div className="hidden w-80 rounded-[20px] bg-surface-main px-8 py-4 lg:block">
+          <div className="flex items-center gap-4 text-gray-400">
+            <div className="flex grow items-center gap-4">
+              <button className="cursor-default">
+                <MdCalendarToday fontSize={32} />
+              </button>
+              <button className="cursor-default">
+                <MdNotificationsNone fontSize={32} />
+              </button>
             </div>
+            {/*TODO: Get user photo or avatar */}
+            <button
+              id="avatar"
+              className="h-10 w-10 rounded-full bg-primary-500"
+            ></button>
           </div>
-        )}
+        </div>
       </div>
     </>
   );

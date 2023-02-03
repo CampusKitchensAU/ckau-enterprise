@@ -9,7 +9,7 @@ const MobileNavBar = () => {
   return (
     <div className="fixed z-[1000] flex w-full flex-col">
       <nav
-        className={`flex h-12 w-full items-center bg-primary-500 text-white ${
+        className={`flex h-12 w-full items-center bg-primary-500 text-white md:hidden ${
           isMenuOpen && "border-b border-white"
         }"}`}
       >

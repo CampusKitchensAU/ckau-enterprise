@@ -8,7 +8,6 @@ import ShiftInfo from "../../components/shifts/ShiftInfo";
 import type { fullShiftData } from "../../components/shifts/shiftTypes";
 import Tab from "../../components/Tab";
 import shiftTabs from "../../constants/shifts/shiftTabs";
-import { useMediaQuery } from "../../utils/useMediaQuery";
 
 //TODO: Fetch data for shift with id from URL
 const tempData: fullShiftData = {
@@ -27,7 +26,6 @@ const tempData: fullShiftData = {
 };
 
 const Shift: NextPage = () => {
-  const isMd = useMediaQuery("md");
   const [selectedTab, setSelectedTab] = useState<number>(0);
   const [shiftType, setShiftType] = useState<string>("Pickup");
   const secondaryValues = [
@@ -94,7 +92,7 @@ const Shift: NextPage = () => {
                   className="flex flex-col items-start md:flex-row md:items-end md:gap-2"
                 >
                   <h3 className="text-xl font-semibold">{tempData.name}</h3>
-                  {isMd && <span className="text-xl font-medium">|</span>}
+                  <span className="hidden text-xl font-medium md:block">|</span>
                   <h4 className="text-text-secondary">
                     {tempData.day}&apos;s at {tempData.time}
                   </h4>
