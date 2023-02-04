@@ -31,29 +31,31 @@ const TrendLineGraph = ({
   }, [prevVal, curVal]);
 
   return (
-    <div className="flex h-64 w-full flex-col gap-3 rounded-2xl bg-white p-4 shadow">
-      <div className="flex items-center">
+    <div className="flex h-64 w-full flex-col gap-3 rounded-2xl bg-white pt-4 shadow">
+      <div className="flex items-center px-4">
         <div className="flex grow items-center gap-2">
           <h6 className="text-2xl font-semibold">Pickups</h6>
           {trend}
         </div>
         <div className="text-base text-text-secondary">4 Week Trend</div>
       </div>
-      <ResponsiveContainer width="100%" height="100%">
-        <LineChart data={data}>
-          <CartesianGrid vertical={false} />
-          <XAxis dataKey="week" />
-          <YAxis />
-          <Tooltip />
-          <Line
-            type="monotone"
-            dataKey="pounds"
-            stroke="#F36416"
-            dot={false}
-            strokeWidth={3}
-          />
-        </LineChart>
-      </ResponsiveContainer>
+      <div className="h-full w-full pr-4">
+        <ResponsiveContainer width="100%" height="100%">
+          <LineChart data={data}>
+            <CartesianGrid vertical={false} />
+            <XAxis dataKey="week" />
+            <YAxis />
+            <Tooltip />
+            <Line
+              type="monotone"
+              dataKey="pounds"
+              stroke="#F36416"
+              dot={false}
+              strokeWidth={3}
+            />
+          </LineChart>
+        </ResponsiveContainer>
+      </div>
     </div>
   );
 };

@@ -5,6 +5,7 @@ import { SessionProvider } from "next-auth/react";
 
 import "../styles/globals.css";
 import NavRail from "../components/NavRail";
+import MobileNavBar from "../components/MobileNavBar";
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
@@ -12,9 +13,10 @@ const MyApp: AppType<{ session: Session | null }> = ({
 }) => {
   return (
     <SessionProvider session={session}>
-      <div className="flex h-max bg-surface-background">
+      <div className="h-max w-screen bg-surface-background md:flex">
         <NavRail />
-        <main className="min-h-screen w-full px-8 pt-8">
+        <MobileNavBar />
+        <main className="min-h-screen w-full px-4 pt-16 sm1:px-6 sm2:px-8 md:-ml-20 md:grow md:pt-8 md:pl-28">
           <Component {...pageProps} />
         </main>
       </div>

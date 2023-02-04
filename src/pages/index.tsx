@@ -23,19 +23,19 @@ const tempMainData = [
     name: "Total Pounds Recovered",
     value: 14302,
     trend: 254,
-    icon: <FaWeight fontSize={32} />,
+    icon: <FaWeight />,
   },
   {
     name: "Total Meals Packaged",
     value: 11700,
     trend: 120,
-    icon: <ImSpoonKnife fontSize={32} />,
+    icon: <ImSpoonKnife />,
   },
   {
     name: "Total Pounds Recovered",
     value: 14302,
     trend: -254,
-    icon: <FaTruck fontSize={32} />,
+    icon: <FaTruck />,
   },
 ];
 
@@ -83,42 +83,42 @@ const Home: NextPage = () => {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="flex h-full gap-6">
-        <div className="flex grow flex-col gap-6">
+      <div className="flex h-full flex-col gap-6 pb-6 md:flex-row">
+        <div className="flex grow flex-col gap-4 md:gap-6">
           <PageHeader
             //TODO: Add a way to get the user's name and position
             title={greeting + ", Trevor!"}
             subtitle={"VP of Technology"}
           />
-          <h3 className="w-full border-b-2 border-solid border-primary-900 text-xl font-semibold text-primary-900">
+          <h3 className="w-full border-b-2 border-solid border-primary-900 font-semibold text-primary-900 sm2:text-lg md:text-xl">
             Organization Statistics
           </h3>
           <div className="grid grid-cols-12 gap-2">
             {tempMainData.map((stat, index) => (
-              <div key={index} className="col-span-4">
+              <div key={index} className="col-span-12 xl:col-span-4">
                 <IconStat data={stat} />
               </div>
             ))}
-            <div className="col-span-7">
+            <div className="col-span-12 xl:col-span-7">
               <TrendLineGraph
                 data={tempTrendData}
                 prevVal={tempTrendData[0]?.pounds}
                 curVal={tempTrendData[tempTrendData.length - 1]?.pounds}
               />
             </div>
-            <div className="col-span-5 grid grid-cols-6 gap-2">
+            <div className="col-span-12 grid grid-cols-6 gap-2 xl:col-span-5">
               {tempOtherData.map((stat, index) => (
-                <div key={index} className="col-span-3">
+                <div key={index} className="col-span-6 sm1:col-span-3">
                   <Stat data={stat} />
                 </div>
               ))}
-              <div className="col-span-3">
+              <div className="col-span-6 sm1:col-span-3">
                 <AvatarStat data={tempAvatarData} />
               </div>
             </div>
           </div>
         </div>
-        <div className="w-80 rounded-[20px] bg-surface-main px-8 py-4">
+        <div className="hidden w-80 rounded-[20px] bg-surface-main px-8 py-4 lg:block">
           <div className="flex items-center gap-4 text-gray-400">
             <div className="flex grow items-center gap-4">
               <button className="cursor-default">

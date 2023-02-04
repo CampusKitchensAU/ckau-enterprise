@@ -19,7 +19,7 @@ const PersonInfo = ({ tab }: { tab: number }) => {
     case 0:
       return (
         <>
-          <div className="col-span-6 rounded-lg shadow">
+          <div className="col-span-12 rounded-lg shadow lg:col-span-6">
             <div className="border-b-[1px] border-solid border-alt-divider px-8 py-6 text-xl font-medium">
               Personal Details
             </div>
@@ -31,14 +31,16 @@ const PersonInfo = ({ tab }: { tab: number }) => {
                   "border-b-[1px] border-solid border-alt-divider"
                 }`}
               >
-                <div className="col-span-3">{field.title}</div>
-                <div className="col-span-9 text-text-secondary">
+                <div className="col-span-12 md:col-span-3 lg:col-span-12 xl:col-span-3">
+                  {field.title}
+                </div>
+                <div className="col-span-12 text-text-secondary md:col-span-9 lg:col-span-12 xl:col-span-9">
                   {field.value}
                 </div>
               </div>
             ))}
           </div>
-          <div className="col-span-6 rounded-lg shadow">
+          <div className="col-span-12 rounded-lg shadow lg:col-span-6">
             <div className="border-b-[1px] border-solid border-alt-divider px-8 py-6 text-xl font-medium">
               Organization Details
             </div>
@@ -47,8 +49,10 @@ const PersonInfo = ({ tab }: { tab: number }) => {
                 key={field.title}
                 className={`grid w-full grid-cols-12 border-b-[1px] border-solid border-alt-divider px-8 py-4`}
               >
-                <div className="col-span-5">{field.title}</div>
-                <div className="col-span-7 text-text-secondary">
+                <div className="col-span-12 md:col-span-3 lg:col-span-12 xl:col-span-5">
+                  {field.title}
+                </div>
+                <div className="col-span-12 text-text-secondary md:col-span-9 lg:col-span-12 xl:col-span-7">
                   {field.value}
                 </div>
               </div>

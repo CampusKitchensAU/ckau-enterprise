@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { MdMoreVert } from "react-icons/md";
 
 //TODO: These should come from database
@@ -25,35 +26,31 @@ const ContactRow = ({
   shiftName: string;
 }) => {
   return (
-    <div className="flex items-center gap-4 p-4">
-      <div id="name" className="flex w-[240px] items-center gap-3 font-medium">
+    <tr>
+      <td id="name" className="flex items-center gap-3 py-3 px-4 font-medium">
         {/*TODO: Get user photo or avatar */}
         <div
           id="avatar"
           className="h-10 w-10 rounded-full bg-primary-500"
         ></div>
         {/*TODO: link name to contact/name onClick */}
-        <div className="cursor-pointer underline-offset-2 hover:underline">
+        <Link
+          href="/contacts/trevor-aupperle"
+          className="underline-offset-2 hover:underline"
+        >
           {name}
-        </div>
-      </div>
-      <div id="role" className="w-[240px]">
-        {role}
-      </div>
-      <div id="position" className="w-[240px]">
-        {position}
-      </div>
-      <div id="shift" className="min-w-[304px] grow">
-        {shiftName}
-      </div>
+        </Link>
+      </td>
+      <td id="role">{role}</td>
+      <td id="position">{position}</td>
+      <td id="shift">{shiftName}</td>
       {/*TODO: Create menu for onClick of actions button */}
-      <div
-        id="actions"
-        className="cursor-pointer rounded-full p-2 text-text-secondary transition-all duration-200 hover:bg-gray-100"
-      >
-        <MdMoreVert fontSize={24} />
-      </div>
-    </div>
+      <td id="actions" className="px-4">
+        <button className="rounded-full p-2 text-text-secondary transition-all duration-200 hover:bg-gray-100">
+          <MdMoreVert fontSize={24} />
+        </button>
+      </td>
+    </tr>
   );
 };
 
