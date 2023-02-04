@@ -86,9 +86,9 @@ export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
   providers: [
     GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID!,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-      profile(profile, tokens) {
+      clientId: env.GOOGLE_CLIENT_ID,
+      clientSecret: env.GOOGLE_CLIENT_SECRET,
+      profile(profile) {
         return {
           id: profile.sub,
           name: profile.name,
@@ -98,9 +98,9 @@ export const authOptions: NextAuthOptions = {
       },
     }),
     AzureADProvider({
-      clientId: process.env.AZURE_AD_CLIENT_ID!,
-      clientSecret: process.env.AZURE_AD_CLIENT_SECRET!,
-      tenantId: process.env.AZURE_AD_TENANT_ID,
+      clientId: env.AZURE_AD_CLIENT_ID,
+      clientSecret: env.AZURE_AD_CLIENT_SECRET,
+      tenantId: env.AZURE_AD_TENANT_ID,
       // authorization: { params: { scope: "openid profile user.Read email" } },
     }),
     /**

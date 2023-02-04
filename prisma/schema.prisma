@@ -2,67 +2,144 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-    provider = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 datasource db {
-    provider = "mysql"
-    // NOTE: When using postgresql, mysql or sqlserver, uncomment the @db.Text annotations in model Account below
-    // Further reading:
-    // https://next-auth.js.org/adapters/prisma#create-the-prisma-schema
-    // https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference#string
-    url      = env("DATABASE_URL")
-    relationMode = "prisma"
+  provider     = "mysql"
+  // NOTE: When using postgresql, mysql or sqlserver, uncomment the @db.Text annotations in model Account below
+  // Further reading:
+  // https://next-auth.js.org/adapters/prisma#create-the-prisma-schema
+  // https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference#string
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
 }
 
-model Example {
-    id        String   @id @default(cuid())
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+enum Day {
+  SUNDAY
+  MONDAY
+  TUESDAY
+  WEDNESDAY
+  THURSDAY
+  FRIDAY
+  SATURDAY
+}
+
+model Availability {
+  id     Int      @id @default(autoincrement())
+  userId String
+  day    Day
+  start  DateTime
+  end    DateTime
+  user   User     @relation(fields: [userId], references: [id])
+}
+
+model Role {
+  id    Int    @id @default(autoincrement())
+  name  String
+  users User[]
+}
+
+model UserShiftMapping {
+  id      Int    @id @default(autoincrement())
+  userId  String
+  shiftId Int
+  user    User   @relation(fields: [userId], references: [id])
+  shift   Shift  @relation(fields: [shiftId], references: [id])
+}
+
+model ShiftLog {
+  id      Int      @id @default(autoincrement())
+  userId  String
+  shiftId Int
+  start   DateTime
+  end     DateTime
+  user    User     @relation(fields: [userId], references: [id])
+  shift   Shift    @relation(fields: [shiftId], references: [id])
+}
+
+model ShiftInfo {
+  id          Int    @id @default(autoincrement())
+  name        String
+  description String
+  location    String
+}
+
+model ShiftType {
+  id   Int    @id @default(autoincrement())
+  name String
+}
+
+model ShiftContact {
+  id    Int    @id @default(autoincrement())
+  name  String
+  phone String
+}
+
+model Shift {
+  id       Int                @id @default(autoincrement())
+  name     String
+  start    DateTime
+  end      DateTime
+  users    UserShiftMapping[]
+  ShiftLog ShiftLog[]
 }
 
 // Necessary for Next auth
 model Account {
-    id                String  @id @default(cuid())
-    userId            String
-    type              String
-    provider          String
-    providerAccountId String
-    refresh_token     String? @db.Text
-    access_token      String? @db.Text
-    expires_at        Int?
-    ext_expires_in    Int?
-    token_type        String?
-    scope             String?
-    id_token          String? @db.Text
-    session_state     String?
-    user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  ext_expires_in    Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-    @@unique([provider, providerAccountId])
+  @@unique([provider, providerAccountId])
 }
 
 model Session {
-    id           String   @id @default(cuid())
-    sessionToken String   @unique
-    userId       String
-    expires      DateTime
-    user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model User {
-    id            String    @id @default(cuid())
-    name          String? @db.Text
-    email         String?   @unique
-    emailVerified DateTime?
-    image         String? @db.Text
-    accounts      Account[]
-    sessions      Session[]
+  id                String             @id @default(cuid())
+  name              String?            @db.Text
+  email             String?            @unique
+  phone             String?            @unique
+  year              Int                @default(-1)
+  major             String?
+  birthday          DateTime?
+  experience        Int                @default(0)
+  completedShifts   Int                @default(0)
+  shiftLeaderOfWeek Int                @default(0)
+  role_id           Int                @default(0)
+  emailVerified     DateTime?
+  image             String?            @db.Text
+  accounts          Account[]
+  sessions          Session[]
+  Availability      Availability[]
+  Role              Role?              @relation(fields: [roleId], references: [id])
+  roleId            Int?
+  UserShiftMapping  UserShiftMapping[]
+  ShiftLog          ShiftLog[]
 }
 
 model VerificationToken {
-    identifier String
-    token      String   @unique
-    expires    DateTime
+  identifier String
+  token      String   @unique
+  expires    DateTime
 
-    @@unique([identifier, token])
+  @@unique([identifier, token])
 }
