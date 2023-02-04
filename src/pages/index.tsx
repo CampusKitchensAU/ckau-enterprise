@@ -9,7 +9,7 @@ import TrendLineGraph from "../components/stats/TrendLineGraph";
 import IconStat from "../components/stats/IconStat";
 import Stat from "../components/stats/Stat";
 import AvatarStat from "../components/stats/AvatarStat";
-import { signIn, signOut, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 
 //TODO: Get all of this data from db
 const tempTrendData = [
