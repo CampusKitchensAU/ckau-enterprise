@@ -11,9 +11,9 @@ const Stat = ({ data }: { data: StatData }) => {
 
   return (
     <div className="flex h-full w-full flex-col items-center justify-center rounded-2xl bg-white p-4 shadow">
-      <div className="text-xl text-text-secondary">{data.name}</div>
+      <div className="text-text-secondary md:text-xl">{data.name}</div>
       <div className="flex items-center gap-2">
-        <div className="text-3xl font-bold">
+        <div className="text-xl font-bold md:text-3xl">
           {data.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
         </div>
         <div className={`rounded-md px-3 ${trendColor}`}>

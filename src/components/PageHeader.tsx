@@ -7,8 +7,12 @@ const PageHeader = ({
 }) => {
   return (
     <header className="flex flex-col items-start">
-      <h1 className="text-[40px] font-semibold">{title}</h1>
-      <h2 className="text-xl text-text-secondary">{subtitle}</h2>
+      <h1 className="text-xl font-semibold sm1:text-2xl sm2:text-3xl lg:text-[40px]">
+        {title}
+      </h1>
+      <h2 className="text-base text-text-secondary sm2:text-lg md:text-xl">
+        {subtitle}
+      </h2>
     </header>
   );
 };

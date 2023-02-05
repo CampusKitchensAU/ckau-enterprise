@@ -25,7 +25,7 @@ const ContactPerson = () => {
           title="Organization Contacts"
           subtitle="Executive Team | Shift Leaders | Advisors"
         />
-        <div id="content" className="flex flex-col gap-6 px-16">
+        <div id="content" className="flex flex-col gap-6 lg:px-12 xl:px-16">
           <Link
             id="back-button"
             href="/contacts"
@@ -35,13 +35,15 @@ const ContactPerson = () => {
             <span>Contacts</span>
           </Link>
 
-          <div id="contact-header" className="flex gap-4">
+          <div id="contact-header" className="flex items-center gap-2">
             <div
               id="avatar"
-              className="h-16 w-16 rounded-full bg-primary-500"
+              className="h-12 w-12 rounded-full bg-primary-500 md:h-14 md:w-14 lg:h-16 lg:w-16"
             ></div>
             <div className="flex flex-col gap-1">
-              <h3 className="text-3xl font-medium">Trevor Aupperle</h3>
+              <h3 className="text-lg font-medium sm2:text-xl md:text-2xl lg:text-3xl">
+                Trevor Aupperle
+              </h3>
               <RoleChip role="VP of Technology" />
             </div>
           </div>
@@ -61,7 +63,7 @@ const ContactPerson = () => {
             ))}
           </div>
 
-          <div id="person-info" className="grid w-full grid-cols-12 gap-6">
+          <div id="person-info" className="grid w-full grid-cols-12 gap-6 pb-6">
             <PersonInfo tab={selectedTab} />
           </div>
         </div>

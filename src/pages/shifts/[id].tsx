@@ -65,7 +65,7 @@ const Shift: NextPage = () => {
           title="Organization Shifts"
           subtitle="Pickups | Packaging | Delivery"
         />
-        <div id="content" className="flex flex-col gap-6 px-16">
+        <div id="content" className="flex flex-col gap-6 md:px-12 lg:px-16">
           <Link
             id="back-button"
             href="/shifts"
@@ -74,22 +74,25 @@ const Shift: NextPage = () => {
             <MdArrowBack fontSize={24} className="py-[2px]" />
             <span>Shifts</span>
           </Link>
-          <div className="flex gap-6">
+          <div className="flex flex-col gap-6 lg:flex-row">
             <div
               id="shift-container"
               className="h-max grow rounded-lg bg-white shadow"
             >
               <div
                 id="shift-header"
-                className="flex items-center gap-3 border-b border-solid border-alt-divider px-8 py-6"
+                className="flex items-center gap-3 border-b border-solid border-alt-divider px-4 py-6 sm1:px-8"
               >
                 <div
                   id="shift-icon"
                   className="h-10 w-10 rounded bg-alt-deliveryBlue"
                 ></div>
-                <div id="title-day-time" className="flex items-end gap-2">
+                <div
+                  id="title-day-time"
+                  className="flex flex-col items-start md:flex-row md:items-end md:gap-2"
+                >
                   <h3 className="text-xl font-semibold">{tempData.name}</h3>
-                  <span className="text-xl font-medium">|</span>
+                  <span className="hidden text-xl font-medium md:block">|</span>
                   <h4 className="text-text-secondary">
                     {tempData.day}&apos;s at {tempData.time}
                   </h4>
@@ -97,7 +100,7 @@ const Shift: NextPage = () => {
               </div>
               <div
                 id="shift-tabs"
-                className="flex h-12 gap-3 border-b border-solid border-alt-divider px-8"
+                className="flex h-12 gap-3 border-b border-solid border-alt-divider px-4 sm1:px-8"
               >
                 {shiftTabs.map((tab, index) => (
                   <Tab
@@ -115,7 +118,7 @@ const Shift: NextPage = () => {
             </div>
             <div
               id="shift-secondary"
-              className=" flex h-max min-w-[320px] flex-col gap-2 rounded-lg bg-white shadow"
+              className=" flex h-max flex-col gap-2 rounded-lg bg-white shadow xl:min-w-[320px]"
             >
               <div
                 id="about"
@@ -145,7 +148,10 @@ const Shift: NextPage = () => {
                     id="user-avatar"
                     className="h-10 w-10 rounded-full bg-primary-500"
                   ></div>
-                  <div id="name-title" className="flex flex-col gap-1">
+                  <div
+                    id="name-title"
+                    className="flex flex-col gap-1 lg:min-w-[144px]"
+                  >
                     <Link
                       href="/contacts/trevor-aupperle"
                       className="font-semibold underline-offset-2 hover:underline"
