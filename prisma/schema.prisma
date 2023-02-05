@@ -49,40 +49,49 @@ model UserShiftMapping {
 }
 
 model ShiftLog {
-  id      Int      @id @default(autoincrement())
-  userId  String
-  shiftId Int
-  start   DateTime
-  end     DateTime
-  user    User     @relation(fields: [userId], references: [id])
-  shift   Shift    @relation(fields: [shiftId], references: [id])
+  id          Int    @id @default(autoincrement())
+  userId      String
+  shiftId     Int
+  description String @db.Text
+  user        User   @relation(fields: [userId], references: [id])
+  shift       Shift  @relation(fields: [shiftId], references: [id])
 }
 
 model ShiftInfo {
-  id          Int    @id @default(autoincrement())
+  id          Int     @id @default(autoincrement())
   name        String
   description String
   location    String
+  Shift       Shift[]
 }
 
 model ShiftType {
-  id   Int    @id @default(autoincrement())
-  name String
+  id    Int     @id @default(autoincrement())
+  name  String
+  Shift Shift[]
 }
 
 model ShiftContact {
-  id    Int    @id @default(autoincrement())
+  id    Int     @id @default(autoincrement())
   name  String
   phone String
+  Shift Shift[]
 }
 
 model Shift {
-  id       Int                @id @default(autoincrement())
-  name     String
-  start    DateTime
-  end      DateTime
-  users    UserShiftMapping[]
-  ShiftLog ShiftLog[]
+  id               Int                @id @default(autoincrement())
+  infoId           Int
+  typeId           Int
+  contactId        Int
+  slots            Int
+  dayOfWeek        Day
+  startTime        DateTime
+  notes            String             @db.Text
+  info             ShiftInfo          @relation(fields: [infoId], references: [id])
+  type             ShiftType          @relation(fields: [typeId], references: [id])
+  contact          ShiftContact       @relation(fields: [contactId], references: [id])
+  logs             ShiftLog[]
+  UserShiftMapping UserShiftMapping[]
 }
 
 // Necessary for Next auth
@@ -118,20 +127,19 @@ model User {
   name              String?            @db.Text
   email             String?            @unique
   phone             String?            @unique
-  year              Int                @default(-1)
+  year              Int?
   major             String?
   birthday          DateTime?
-  experience        Int                @default(0)
-  completedShifts   Int                @default(0)
-  shiftLeaderOfWeek Int                @default(0)
-  role_id           Int                @default(0)
+  experience        Int                @default(1)
+  completedShifts   Int                @default(1)
+  shiftLeaderOfWeek Int                @default(1)
+  roleId            Int?               @default(1)
   emailVerified     DateTime?
   image             String?            @db.Text
   accounts          Account[]
   sessions          Session[]
   Availability      Availability[]
   Role              Role?              @relation(fields: [roleId], references: [id])
-  roleId            Int?
   UserShiftMapping  UserShiftMapping[]
   ShiftLog          ShiftLog[]
 }
