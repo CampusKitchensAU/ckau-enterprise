@@ -35,8 +35,11 @@ const ShiftRow = ({ data }: { data: shiftData }) => {
   }, [data.type]);
 
   return (
-    <div className="flex items-center gap-4 p-4">
-      <div id="name" className="flex w-[368px] items-center gap-3 font-medium">
+    <tr>
+      <td
+        id="name"
+        className="flex min-w-[368px] items-center gap-3 py-3 px-4 font-medium"
+      >
         {/*TODO: Get user photo or avatar */}
         <div id="avatar" className={`rounded-full p-2 ${shiftBg} shadow-inner`}>
           {shiftIcon}
@@ -48,24 +51,23 @@ const ShiftRow = ({ data }: { data: shiftData }) => {
         >
           {data.name}
         </Link>
-      </div>
-      <div id="type" className="w-[240px]">
+      </td>
+      <td id="type" className="min-w-[240px]">
         {shiftType}
-      </div>
-      <div id="day" className="w-[240px]">
+      </td>
+      <td id="day" className="min-w-[240px]">
         {data.day}
-      </div>
-      <div id="time" className="min-w-[304px] grow">
+      </td>
+      <td id="time" className="min-w-[304px] grow">
         {data.time}
-      </div>
+      </td>
       {/*TODO: Create menu for onClick of actions button */}
-      <div
-        id="actions"
-        className="cursor-pointer rounded-full p-2 text-text-secondary transition-all duration-200 hover:bg-gray-100"
-      >
-        <MdMoreVert fontSize={24} />
-      </div>
-    </div>
+      <td id="actions" className="px-4">
+        <button className="cursor-pointer rounded-full p-2 text-text-secondary transition-all duration-200 hover:bg-gray-100">
+          <MdMoreVert fontSize={24} />
+        </button>
+      </td>
+    </tr>
   );
 };
 
