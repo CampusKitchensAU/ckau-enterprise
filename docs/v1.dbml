@@ -1,0 +1,83 @@
+table user {
+   id int [PK]
+   name string
+   email string
+   phone int
+   year int
+   major string
+   birthday date
+   experience int
+   completed_shifts int
+   sl_of_week int
+   role_id int [ref: - role.id]
+   username string
+   password string
+   picture image
+}
+
+table user_shift_mapping {
+  id int [PK]
+  user_id int [ref: > user.id]
+  shift_id int [ref: > shift.id]
+}
+
+table shift {
+  id int [PK]
+  info_id int [ref: > shift_info.id]
+  type_id int [ref: > shift_type.id]
+  contact_id int [ref: > shift_contact.id]
+  slots int
+  day_of_week day
+  start_time time
+  notes string
+}
+
+table shift_type{
+  id int [PK]
+  name string
+}
+
+table shift_info {
+  id int [PK]
+  name string
+  description string
+  location string
+}
+table shift_contact{
+  id int [PK]
+  contact_name string
+  phone int
+}
+
+table role {
+  id int [PK]
+  name string
+}
+
+table availabilities {
+  id int [PK]
+  user_id int [ref: > user.id]
+  day day
+  start_time time
+  end_time time
+}
+
+table shift_log {
+  id int [PK]
+  shift_id int [ref: > shift.id]
+  user_id int
+  description string
+  type int
+}
+
+enum day {
+  Sunday
+  Monday
+  Tuesday
+  Wednesday
+  Thursday
+  Friday
+  Saturday
+}
+
+

@@ -1,5 +1,6 @@
 import NextAuth, { type NextAuthOptions } from "next-auth";
-import DiscordProvider from "next-auth/providers/discord";
+import GoogleProvider from "next-auth/providers/google";
+import AzureADProvider from "next-auth/providers/azure-ad";
 // Prisma adapter for NextAuth, optional and can be removed
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 
@@ -7,8 +8,73 @@ import { env } from "../../../env/server.mjs";
 import { prisma } from "../../../server/db";
 
 export const authOptions: NextAuthOptions = {
-  // Include user.id on session
   callbacks: {
+    async signIn({ user, profile, account }) {
+      //update user data to match changes in profile
+      if (user.id && profile) {
+        const databaseUser = await prisma.user.findUnique({
+          where: {
+            id: user.id,
+          },
+        });
+        if (databaseUser) {
+          switch (account?.provider) {
+            case "google":
+              if (
+                profile.name != databaseUser.name ||
+                profile.picture != databaseUser.image ||
+                profile.email != databaseUser.email
+              ) {
+                await prisma.user.update({
+                  where: {
+                    id: user.id,
+                  },
+                  data: {
+                    name: profile.name,
+                    email: profile.email,
+                    image: profile.picture,
+                  },
+                });
+              }
+              break;
+            case "azure-ad":
+              const profilePhotoSize = 48;
+              const profilePicture = await fetch(
+                `https://graph.microsoft.com/v1.0/me/photos/${profilePhotoSize}x${profilePhotoSize}/$value`,
+                {
+                  headers: {
+                    Authorization: `Bearer ${account.access_token}`,
+                  },
+                }
+              );
+              const pictureBuffer = await profilePicture.arrayBuffer();
+              const pictureBase64 =
+                Buffer.from(pictureBuffer).toString("base64");
+              const pictureData = `data:image/png;base64,${pictureBase64}`;
+
+              if (
+                profile.name != databaseUser.name ||
+                pictureData != databaseUser.image ||
+                profile.email != databaseUser.email
+              ) {
+                await prisma.user.update({
+                  where: {
+                    id: user.id,
+                  },
+                  data: {
+                    name: profile.name,
+                    email: profile.email,
+                    image: pictureData,
+                  },
+                });
+              }
+              break;
+          }
+        }
+      }
+      return true;
+    },
+    // Include user.id on session
     session({ session, user }) {
       if (session.user) {
         session.user.id = user.id;
@@ -19,9 +85,23 @@ export const authOptions: NextAuthOptions = {
   // Configure one or more authentication providers
   adapter: PrismaAdapter(prisma),
   providers: [
-    DiscordProvider({
-      clientId: env.DISCORD_CLIENT_ID,
-      clientSecret: env.DISCORD_CLIENT_SECRET,
+    GoogleProvider({
+      clientId: env.GOOGLE_CLIENT_ID,
+      clientSecret: env.GOOGLE_CLIENT_SECRET,
+      profile(profile) {
+        return {
+          id: profile.sub,
+          name: profile.name,
+          email: profile.email,
+          image: profile.picture,
+        };
+      },
+    }),
+    AzureADProvider({
+      clientId: env.AZURE_AD_CLIENT_ID,
+      clientSecret: env.AZURE_AD_CLIENT_SECRET,
+      tenantId: env.AZURE_AD_TENANT_ID,
+      // authorization: { params: { scope: "openid profile user.Read email" } },
     }),
     /**
      * ...add more providers here
