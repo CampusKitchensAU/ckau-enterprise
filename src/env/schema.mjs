@@ -24,6 +24,7 @@ export const serverSchema = z.object({
   AZURE_AD_CLIENT_SECRET: z.string(),
   AZURE_AD_TENANT_ID: z.string(),
   DATABASE_URL: z.string(),
+  SMARTSHEET_KEY: z.string(),
 });
 
 /**
