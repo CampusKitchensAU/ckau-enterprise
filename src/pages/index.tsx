@@ -33,7 +33,7 @@ const tempMainData = [
     icon: <ImSpoonKnife />,
   },
   {
-    name: "Total Pounds Recovered",
+    name: "Total Meals Delivered",
     value: 14302,
     trend: -254,
     icon: <FaTruck />,
