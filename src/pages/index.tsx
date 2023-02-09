@@ -10,6 +10,7 @@ import IconStat from "../components/stats/IconStat";
 import Stat from "../components/stats/Stat";
 import AvatarStat from "../components/stats/AvatarStat";
 import { useSession } from "next-auth/react";
+import { api } from "../utils/trpc";
 
 //TODO: Get all of this data from db
 const tempTrendData = [
@@ -66,6 +67,8 @@ const tempAvatarData = {
 
 const Home: NextPage = () => {
   const { data: session, status } = useSession();
+  const { isLoading, data } =
+    api.smartsheet.sheets.getSheets.useQuery(634710310315908);
   const greeting =
     new Date().getHours() < 12
       ? "Good morning"
@@ -73,10 +76,9 @@ const Home: NextPage = () => {
       ? "Good afternoon"
       : "Good evening";
 
-  if (status == "loading") {
+  if (status == "loading" || isLoading) {
     return <div>Loading...</div>;
   }
-
   return (
     <>
       <Head>
