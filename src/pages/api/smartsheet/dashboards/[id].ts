@@ -12,6 +12,7 @@ const smartsheet = async (req: NextApiRequest, res: NextApiResponse) => {
     logLevel: "info",
   });
   const { method } = req;
+  const id = req.query.id;
 
   try {
     const options: AllDashboardQueryParams = {
@@ -22,11 +23,9 @@ const smartsheet = async (req: NextApiRequest, res: NextApiResponse) => {
 
     switch (method) {
       case "GET":
-        smartsheet.sights
-          .listSights(options)
-          .then(function (result: SightList) {
-            res.status(200).json(result);
-          });
+        smartsheet.sights.getSight(options).then(function (result: SightList) {
+          res.status(200).json(result);
+        });
         break;
       default:
         res.setHeader("Allow", ["GET"]);
