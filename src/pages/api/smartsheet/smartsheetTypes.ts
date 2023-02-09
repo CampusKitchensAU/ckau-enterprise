@@ -1130,6 +1130,37 @@ export type Workspace = {
 /* ## END WORKSPACES ## */
 /* ############################## */
 /* ## QUERIES ## */
+export type AllSheetsQueryParams = {
+  queryParameters: {
+    accessApiLevel?: number;
+    include: string;
+    includeAll?: boolean;
+    modifiedSince?: string | number;
+    numericDates?: boolean;
+    page?: number;
+    pageSize?: number;
+  };
+};
+
+export type SingleSheetQueryParams = {
+  id: number;
+  queryParameters?: {
+    accessApiLevel?: number;
+    include?: string;
+    exclude?: string;
+    columnIds?: string;
+    filterId?: string;
+    ifVersionAfter?: number;
+    level?: number;
+    pageSize?: number;
+    page?: number;
+    paperSize?: string;
+    rowIds?: string;
+    rowNumbers?: string;
+    rowsModifiedSince?: string;
+  };
+};
+
 export type SheetList = {
   pageNumber: number;
   pageSize: number;
@@ -1150,8 +1181,8 @@ export type AllDashboardQueryParams = {
 };
 
 export type SingleDashboardQueryParams = {
-  queryParameters: {
-    sightId: number;
+  sightId: number;
+  queryParameters?: {
     accessApiLevel?: number;
     include?: string;
     level?: number;

@@ -1,5 +1,5 @@
-import { env } from "../../../env/server.mjs";
-import type { SheetList } from "./smartsheetTypes.js";
+import { env } from "../../../../env/server.mjs";
+import type { AllSheetsQueryParams, SheetList } from "../smartsheetTypes.js";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 const smartsheet = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -11,7 +11,7 @@ const smartsheet = async (req: NextApiRequest, res: NextApiResponse) => {
   const { method } = req;
 
   try {
-    const options = {
+    const options: AllSheetsQueryParams = {
       queryParameters: {
         include: "attachments",
         includeAll: true,
@@ -20,7 +20,6 @@ const smartsheet = async (req: NextApiRequest, res: NextApiResponse) => {
 
     switch (method) {
       case "GET":
-        // List all sheets
         smartsheet.sheets
           .listSheets(options)
           .then(function (result: SheetList) {

@@ -1,8 +1,5 @@
 import { env } from "../../../../env/server.mjs";
-import type {
-  SightList,
-  SingleDashboardQueryParams,
-} from ".././smartsheetTypes.js";
+import type { Sheet, SingleSheetQueryParams } from "../smartsheetTypes.js";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 const smartsheet = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -15,13 +12,13 @@ const smartsheet = async (req: NextApiRequest, res: NextApiResponse) => {
   const id = parseInt(typeof req.query.id === "string" ? req.query.id : "-1");
 
   try {
-    const options: SingleDashboardQueryParams = {
-      sightId: id,
+    const options: SingleSheetQueryParams = {
+      id: id,
     };
 
     switch (method) {
       case "GET":
-        smartsheet.sights.getSight(options).then(function (result: SightList) {
+        smartsheet.sheets.getSheet(options).then(function (result: Sheet) {
           res.status(200).json(result);
         });
         break;
