@@ -11,6 +11,7 @@ import Stat from "../components/stats/Stat";
 import AvatarStat from "../components/stats/AvatarStat";
 import { useSession } from "next-auth/react";
 import { api } from "../utils/trpc";
+import { calculateSmartsheetStats } from "../utils/calculateSmartsheetStats";
 
 //TODO: Get all of this data from db
 const tempTrendData = [
@@ -68,13 +69,15 @@ const tempAvatarData = {
 const Home: NextPage = () => {
   const { data: session, status } = useSession();
   const { isLoading, data } =
-    api.smartsheet.sheets.getSheets.useQuery();
+    api.smartsheet.sheets.getSheet.useQuery(634710310315908);
   const greeting =
     new Date().getHours() < 12
       ? "Good morning"
       : new Date().getHours() < 18
       ? "Good afternoon"
       : "Good evening";
+
+  const mainStatData = data ? calculateSmartsheetStats(data) : [];
 
   if (status == "loading" || isLoading) {
     return <div>Loading...</div>;
@@ -100,7 +103,7 @@ const Home: NextPage = () => {
             Organization Statistics
           </h3>
           <div className="grid grid-cols-12 gap-2">
-            {tempMainData.map((stat, index) => (
+            {mainStatData.map((stat, index) => (
               <div key={index} className="col-span-12 xl:col-span-4">
                 <IconStat data={stat} />
               </div>

@@ -1,5 +1,5 @@
 import { z } from "zod";
-import type { Sheet } from "../../../../../pages/api/smartsheet/smartsheetTypes";
+import type { Sheet } from "../smartsheetTypes";
 import { createTRPCRouter, publicProcedure } from "../../../trpc";
 
 const sheetRouter = createTRPCRouter({
