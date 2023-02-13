@@ -20,7 +20,7 @@ import { type CreateNextContextOptions } from "@trpc/server/adapters/next";
 import { type Session } from "next-auth";
 
 import { getServerAuthSession } from "../auth";
-import { prisma } from "../db";
+import { prisma, smartsheet } from "../db";
 
 type CreateContextOptions = {
   session: Session | null;
@@ -39,8 +39,11 @@ const createInnerTRPCContext = (opts: CreateContextOptions) => {
   return {
     session: opts.session,
     prisma,
+    smartsheet,
   };
 };
+
+
 
 /**
  * This is the actual context you'll use in your router. It will be used to

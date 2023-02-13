@@ -68,7 +68,7 @@ const tempAvatarData = {
 const Home: NextPage = () => {
   const { data: session, status } = useSession();
   const { isLoading, data } =
-    api.smartsheet.sheets.getSheets.useQuery(634710310315908);
+    api.smartsheet.sheets.getSheets.useQuery();
   const greeting =
     new Date().getHours() < 12
       ? "Good morning"

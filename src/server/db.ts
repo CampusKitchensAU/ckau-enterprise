@@ -17,3 +17,14 @@ export const prisma =
 if (env.NODE_ENV !== "production") {
   global.prisma = prisma;
 }
+
+/**
+ * Smartsheet client used to access the Smartsheet API. This can be removed
+ * when we migrate away from Smartsheet.
+ */
+const client = require("smartsheet");
+
+export const smartsheet = client.createClient({
+  accessToken: env.SMARTSHEET_KEY,
+  logLevel: "info",
+});
