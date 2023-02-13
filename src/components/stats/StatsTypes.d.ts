@@ -1,9 +1,9 @@
-type trendData = { week: string; pounds: number };
+type trendData = { week?: string; pounds?: number };
 
 type StatData = {
-  name: string;
-  value: number;
-  trend: number;
+  name?: string;
+  value?: number;
+  trend?: number;
 };
 
 type IconStatData = {

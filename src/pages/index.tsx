@@ -1,9 +1,6 @@
 import { type NextPage } from "next";
 import Head from "next/head";
-import { useEffect, useState } from "react";
 import { MdCalendarToday, MdNotificationsNone } from "react-icons/md";
-import { FaTruck, FaWeight } from "react-icons/fa";
-import { ImSpoonKnife } from "react-icons/im";
 import PageHeader from "../components/PageHeader";
 import TrendLineGraph from "../components/stats/TrendLineGraph";
 import IconStat from "../components/stats/IconStat";
@@ -12,53 +9,6 @@ import AvatarStat from "../components/stats/AvatarStat";
 import { useSession } from "next-auth/react";
 import { api } from "../utils/trpc";
 import { calculateSmartsheetStats } from "../utils/calculateSmartsheetStats";
-
-//TODO: Get all of this data from db
-const tempTrendData = [
-  { week: "Nov 11", pounds: 1200 },
-  { week: "Nov 18", pounds: 1054.58 },
-  { week: "Nov 25", pounds: 0 },
-  { week: "Dec 02", pounds: 603.35 },
-];
-
-const tempMainData = [
-  {
-    name: "Total Pounds Recovered",
-    value: 14302,
-    trend: 254,
-    icon: <FaWeight />,
-  },
-  {
-    name: "Total Meals Packaged",
-    value: 11700,
-    trend: 120,
-    icon: <ImSpoonKnife />,
-  },
-  {
-    name: "Total Meals Delivered",
-    value: 14302,
-    trend: -254,
-    icon: <FaTruck />,
-  },
-];
-
-const tempOtherData = [
-  {
-    name: "Shifts Completed",
-    value: 630,
-    trend: 20,
-  },
-  {
-    name: "Partners",
-    value: 20,
-    trend: 0,
-  },
-  {
-    name: "Total Volunteers",
-    value: 228,
-    trend: 4,
-  },
-];
 
 const tempAvatarData = {
   name: "Most Shifts",
@@ -77,7 +27,9 @@ const Home: NextPage = () => {
       ? "Good afternoon"
       : "Good evening";
 
-  const mainStatData = data ? calculateSmartsheetStats(data) : [];
+  const statisticData = data
+    ? calculateSmartsheetStats(data)
+    : { mainStats: [], fourWeekPickupTrend: [], altStats: [] };
 
   if (status == "loading" || isLoading) {
     return <div>Loading...</div>;
@@ -103,20 +55,20 @@ const Home: NextPage = () => {
             Organization Statistics
           </h3>
           <div className="grid grid-cols-12 gap-2">
-            {mainStatData.map((stat, index) => (
+            {statisticData.mainStats.map((stat, index) => (
               <div key={index} className="col-span-12 xl:col-span-4">
                 <IconStat data={stat} />
               </div>
             ))}
             <div className="col-span-12 xl:col-span-7">
               <TrendLineGraph
-                data={tempTrendData}
-                prevVal={tempTrendData[0]?.pounds}
-                curVal={tempTrendData[tempTrendData.length - 1]?.pounds}
+                data={statisticData.fourWeekPickupTrend}
+                prevVal={statisticData.fourWeekPickupTrend[0]?.pounds}
+                curVal={statisticData.fourWeekPickupTrend[3]?.pounds}
               />
             </div>
             <div className="col-span-12 grid grid-cols-6 gap-2 xl:col-span-5">
-              {tempOtherData.map((stat, index) => (
+              {statisticData.altStats.map((stat, index) => (
                 <div key={index} className="col-span-6 sm1:col-span-3">
                   <Stat data={stat} />
                 </div>
