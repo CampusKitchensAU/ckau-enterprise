@@ -1,19 +1,19 @@
-type trendData = { week?: string; pounds?: number };
+export type trendData = { week?: string; pounds?: number };
 
-type StatData = {
+export type StatData = {
   name?: string;
   value?: number;
   trend?: number;
 };
 
-type IconStatData = {
+export type IconStatData = {
   name: string;
   value: number;
   trend: number;
   icon: JSX.Element;
 };
 
-type AvatarStatData = {
+export type AvatarStatData = {
   name: string;
   avatar: JSX.Element;
   frame: string;

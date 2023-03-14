@@ -9,6 +9,7 @@ import AvatarStat from "../components/stats/AvatarStat";
 import { useSession } from "next-auth/react";
 import { api } from "../utils/trpc";
 import { calculateSmartsheetStats } from "../utils/calculateSmartsheetStats";
+import { useMemo } from "react";
 
 const tempAvatarData = {
   name: "Most Shifts",
@@ -27,9 +28,7 @@ const Home: NextPage = () => {
       ? "Good afternoon"
       : "Good evening";
 
-  const statisticData = data
-    ? calculateSmartsheetStats(data)
-    : { mainStats: [], fourWeekPickupTrend: [], altStats: [] };
+  const statisticData = useMemo(() => calculateSmartsheetStats(data), [data]);
 
   if (status == "loading" || isLoading) {
     return <div>Loading...</div>;

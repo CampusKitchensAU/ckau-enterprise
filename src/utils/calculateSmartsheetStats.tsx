@@ -23,7 +23,15 @@ export type ShiftLeaderData = {
  * @param data - Sheet data fetched from Smartsheet API.
  * @returns object containing necessary data for the stats section of the dashboard.
  */
-export const calculateSmartsheetStats = (data: Sheet) => {
+export const calculateSmartsheetStats = (data?: Sheet) => {
+  if (data == null) {
+    return {
+      mainStats: [],
+      fourWeekPickupTrend: [],
+      altStats: [],
+    };
+  }
+
   const weeklyData = getWeeklyData(data);
   const totalSums = getTotalSums(weeklyData);
   const mostActiveShiftLeader = getMostShiftsThisWeek(weeklyData);
