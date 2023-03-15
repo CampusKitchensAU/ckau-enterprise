@@ -1,16 +1,18 @@
 import { useEffect, useState } from "react";
-import { MdArrowDownward, MdArrowUpward, MdTrendingFlat } from "react-icons/md";
+import { MdArrowDownward, MdArrowUpward } from "react-icons/md";
+import { AiOutlineLine } from "react-icons/ai";
+import type { IconStatData } from "./StatsTypes";
 
 const IconStat = ({ data }: { data: IconStatData }) => {
   const [trendIcon, setTrendIcon] = useState<JSX.Element>(
-    <MdTrendingFlat fontSize={19} />
+    <AiOutlineLine fontSize={19} />
   );
 
   const [trendColor, setTrendColor] = useState<string>("text-gray-500");
 
   useEffect(() => {
     if (data.trend == 0) {
-      setTrendIcon(<MdTrendingFlat fontSize={19} />);
+      setTrendIcon(<AiOutlineLine fontSize={19} />);
       setTrendColor("text-gray-500");
     } else if (data.trend > 0) {
       setTrendIcon(<MdArrowUpward fontSize={19} />);
@@ -37,7 +39,8 @@ const IconStat = ({ data }: { data: IconStatData }) => {
           <div className={`flex ${trendColor} items-center`}>
             <div>{trendIcon}</div>
             <div>
-              {data.trend.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+              {data.trend != 0 &&
+                data.trend.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
             </div>
           </div>
         </div>

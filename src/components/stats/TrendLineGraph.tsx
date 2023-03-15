@@ -9,6 +9,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
+import type { trendData } from "./StatsTypes";
 
 const TrendLineGraph = ({
   data,

@@ -33,6 +33,7 @@
     "react-dom": "18.2.0",
     "react-icons": "^4.7.1",
     "recharts": "^2.3.2",
+    "smartsheet": "^3.0.0",
     "superjson": "^1.12.2",
     "zod": "^3.20.2"
   },
