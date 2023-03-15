@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { MdEdit } from "react-icons/md";
 
 //TODO: fix this when we get db data
 const personalFields = [
@@ -18,20 +19,12 @@ const organizationFields = [
 
 const PersonInfo = ({ tab }: { tab: number }) => {
   const container = useRef<HTMLDivElement>(null);
-  const containerNav = useRef<HTMLDivElement>(null);
-  const containerOffset = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const currentMinute = new Date().getHours() * 60;
-    if (container.current && containerNav.current && containerOffset.current) {
-      container.current.scrollTop =
-        ((container.current.scrollHeight -
-          containerNav.current.offsetHeight -
-          containerOffset.current.offsetHeight) *
-          currentMinute) /
-        1440;
+    if (container.current) {
+      container.current.scrollTop = 885;
     }
-  }, []);
+  }, [tab]);
 
   switch (tab) {
     case 0:
@@ -80,8 +73,19 @@ const PersonInfo = ({ tab }: { tab: number }) => {
       );
     case 1:
       return (
-        <div className="col-span-12 flex h-full flex-col rounded-lg bg-white shadow overflow-auto">
-          <header className="flex flex-none items-center justify-between border-b border-gray-200 py-4 px-6"></header>
+        <div className="col-span-12 flex h-full flex-col overflow-auto rounded-lg bg-white shadow">
+          <header className="flex flex-none items-center justify-between border-b border-gray-200 py-4 px-6">
+            <h1 className="text-base font-semibold leading-6 text-gray-900">
+              <time dateTime="2022-01">Weekly Availability</time>
+            </h1>
+            <button
+              type="button"
+              className="ml-6 flex items-center gap-2 rounded-md  bg-primary-500 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-primary-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500"
+            >
+              <MdEdit />
+              Edit
+            </button>
+          </header>
           <div
             ref={container}
             className="isolate flex flex-auto flex-col overflow-auto bg-white"
@@ -91,10 +95,7 @@ const PersonInfo = ({ tab }: { tab: number }) => {
               className="flex max-w-full flex-none flex-col sm:max-w-none lg:max-w-full"
             >
               {/** START DAYS HEADER */}
-              <div
-                ref={containerNav}
-                className="sticky top-0 z-30 flex-none bg-white shadow ring-1 ring-black ring-opacity-5 sm:pr-8"
-              >
+              <div className="sticky top-0 z-30 flex-none bg-white shadow ring-1 ring-black ring-opacity-5 sm:pr-8">
                 {/** START MOBILE DAYS HEADER */}
                 <div className="grid grid-cols-7 text-sm leading-6 text-gray-500 sm:hidden">
                   <button
@@ -180,7 +181,7 @@ const PersonInfo = ({ tab }: { tab: number }) => {
                       gridTemplateRows: "repeat(48, minmax(3.5rem, 1fr))",
                     }}
                   >
-                    <div ref={containerOffset} className="row-end-1 h-7"></div>
+                    <div className="row-end-1 h-7"></div>
                     <div>
                       <div className="sticky left-0 z-20 -mt-2.5 -ml-14 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
                         12AM
@@ -338,6 +339,45 @@ const PersonInfo = ({ tab }: { tab: number }) => {
                     <div className="col-start-7 row-span-full" />
                     <div className="col-start-8 row-span-full w-8" />
                   </div>
+                  <ol
+                    className="col-start-1 col-end-2 row-start-1 grid grid-cols-1 sm:grid-cols-7 sm:pr-8"
+                    style={{
+                      gridTemplateRows:
+                        "1.75rem repeat(288, minmax(0, 1fr)) auto",
+                    }}
+                  >
+                    <li
+                      className="relative mt-px flex sm:col-start-3"
+                      // starts at 2, every 12 is 1 hour: start/length
+                      style={{ gridRow: "110 / span 48" }}
+                    >
+                      <div className="group absolute inset-1 flex flex-col overflow-y-auto rounded-lg bg-blue-50 p-2 text-xs leading-5 hover:bg-blue-100">
+                        <p className="order-1 font-semibold text-blue-700">
+                          Available
+                        </p>
+                        <p className="text-blue-500 group-hover:text-blue-700">
+                          <time dateTime="2022-01-12T06:00">9:00 AM</time>
+                        </p>
+                      </div>
+                    </li>
+                    <li
+                      className="relative mt-px flex sm:col-start-5"
+                      // starts at 2, every 12 is 1 hour: start/length
+                      style={{ gridRow: "218 / span 12" }}
+                    >
+                      <div className="group absolute inset-1 flex flex-col overflow-y-auto rounded-lg bg-orange-50 p-2 text-xs leading-5 hover:bg-orange-100">
+                        <p className="order-1 font-semibold text-orange-700">
+                          New Birth Ministry
+                        </p>
+                        <p className="order-1 text-orange-500 group-hover:text-orange-700">
+                          Lupton Hall
+                        </p>
+                        <p className="text-orange-500 group-hover:text-orange-700">
+                          <time dateTime="2022-01-12T06:00">6:00 PM</time>
+                        </p>
+                      </div>
+                    </li>
+                  </ol>
                 </div>
               </div>
             </div>

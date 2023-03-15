@@ -20,13 +20,16 @@ const ContactPerson = () => {
           content="Enterprise application for The Campus Kitchen at Auburn University"
         />
       </Head>
-      <div className="flex h-[calc(100vh_-_32px)] flex-col gap-6">
+      <div className="flex h-[calc(100vh_-_80px)] flex-col gap-6 sm:h-[calc(100vh_-_32px)]">
         <PageHeader
           title="Organization Contacts"
           subtitle="Executive Team | Shift Leaders | Advisors"
         />
         <div className="grow overflow-auto">
-          <div id="content" className="h-full flex flex-col gap-6 pb-4 lg:px-12 xl:px-16">
+          <div
+            id="content"
+            className="flex h-full flex-col gap-6 pb-4 lg:px-12 xl:px-16"
+          >
             <Link
               id="back-button"
               href="/contacts"
@@ -66,7 +69,7 @@ const ContactPerson = () => {
 
             <div
               id="person-info"
-              className="grid w-full grid-cols-12 gap-6 pb-6 overflow-auto"
+              className="grid w-full grid-cols-12 gap-6 overflow-auto pb-1 sm:pb-4"
             >
               <PersonInfo tab={selectedTab} />
             </div>
