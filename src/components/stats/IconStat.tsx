@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { MdArrowDownward, MdArrowUpward } from "react-icons/md";
 import { AiOutlineLine } from "react-icons/ai";
+import type { IconStatData } from "./StatsTypes";
 
 const IconStat = ({ data }: { data: IconStatData }) => {
   const [trendIcon, setTrendIcon] = useState<JSX.Element>(

@@ -1,3 +1,5 @@
+import type { AvatarStatData } from "./StatsTypes";
+
 const AvatarStat = ({ data }: { data: AvatarStatData }) => {
   return (
     <div className="flex h-full w-full flex-col items-center justify-center gap-1 rounded-2xl bg-white py-2 shadow sm1:p-0">
