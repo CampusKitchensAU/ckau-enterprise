@@ -1,5 +1,4 @@
 import { useEffect, useRef } from "react";
-import { MdEdit } from "react-icons/md";
 import AvailabilityCalendar from "./AvailabilityCalendar";
 
 //TODO: fix this when we get db data

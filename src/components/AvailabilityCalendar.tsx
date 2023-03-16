@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import { MdEdit } from "react-icons/md";
+import AvailabilityCalendarEvent from "./AvailabilityCalendarEvent";
 
 const Days = [
   { name: "Monday", abbr: "M" },
@@ -43,6 +44,7 @@ const AvailabilityCalendar = () => {
 
   useEffect(() => {
     if (container.current) {
+      //Scroll to 7:30AM
       container.current.scrollTop = 885;
     }
   }, []);
@@ -91,7 +93,7 @@ const AvailabilityCalendar = () => {
                   key={day.name}
                   className="flex items-center justify-center py-3"
                 >
-                  <span>{day.name}&apos;s</span>
+                  <span>{day.name}</span>
                 </div>
               ))}
             </div>
@@ -137,36 +139,20 @@ const AvailabilityCalendar = () => {
                   gridTemplateRows: "1.75rem repeat(288, minmax(0, 1fr)) auto",
                 }}
               >
-                <li
-                  className="relative row-[110_/_span_48] mt-px flex sm:col-start-3"
-                  // starts at 2, every 12 is 1 hour: start/length
-                >
-                  <div className="group absolute inset-1 flex flex-col overflow-y-auto rounded-lg bg-blue-50 p-2 text-xs leading-5 hover:bg-blue-100">
-                    <p className="order-1 font-semibold text-blue-700">
-                      Available
-                    </p>
-                    <p className="text-blue-500 group-hover:text-blue-700">
-                      <time dateTime="2022-01-12T06:00">9:00 AM</time>
-                    </p>
-                  </div>
-                </li>
-                <li
-                  className="relative mt-px flex sm:col-start-5"
-                  // starts at 2, every 12 is 1 hour: start/length
-                  style={{ gridRow: "218 / span 12" }}
-                >
-                  <div className="group absolute inset-1 flex flex-col overflow-y-auto rounded-lg bg-orange-50 p-2 text-xs leading-5 hover:bg-orange-100">
-                    <p className="order-1 font-semibold text-orange-700">
-                      New Birth Ministry
-                    </p>
-                    <p className="order-1 text-orange-500 group-hover:text-orange-700">
-                      Lupton Hall
-                    </p>
-                    <p className="text-orange-500 group-hover:text-orange-700">
-                      <time dateTime="2022-01-12T06:00">6:00 PM</time>
-                    </p>
-                  </div>
-                </li>
+                <AvailabilityCalendarEvent
+                  type="SHIFT"
+                  day={1}
+                  start={600}
+                  end={660}
+                  name="Test Shift"
+                  location="Test Location"
+                />
+                <AvailabilityCalendarEvent
+                  type="AVAILABILITY"
+                  day={1}
+                  start={480}
+                  end={1050}
+                />
               </ol>
             </div>
           </div>
