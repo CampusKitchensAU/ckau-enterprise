@@ -1,6 +1,52 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { MdEdit } from "react-icons/md";
+import useMediaQuery from "../utils/useMediaQuery";
 import AvailabilityCalendarEvent from "./AvailabilityCalendarEvent";
+
+//TODO: Get data from db when available to
+type testDataType = {
+  id: number;
+  type: "SHIFT" | "AVAILABILITY";
+  day: number;
+  start: number;
+  end: number;
+  name?: string;
+  location?: string;
+};
+const testData: testDataType[] = [
+  {
+    id: 1,
+    type: "SHIFT",
+    day: 1,
+    start: 600,
+    end: 660,
+    name: "Test Shift",
+    location: "Test Location",
+  },
+  {
+    id: 2,
+    type: "AVAILABILITY",
+    day: 1,
+    start: 480,
+    end: 1050,
+  },
+  {
+    id: 3,
+    type: "SHIFT",
+    day: 3,
+    start: 900,
+    end: 960,
+    name: "Test Shift",
+    location: "Test Location",
+  },
+  {
+    id: 4,
+    type: "AVAILABILITY",
+    day: 3,
+    start: 720,
+    end: 1050,
+  },
+];
 
 const Days = [
   { name: "Monday", abbr: "M" },
@@ -41,6 +87,8 @@ const Times = [
 
 const AvailabilityCalendar = () => {
   const container = useRef<HTMLDivElement>(null);
+  const [selectedDay, setSelectedDay] = useState(0);
+  const isMobile = useMediaQuery("(max-width: 640px)");
 
   useEffect(() => {
     if (container.current) {
@@ -75,13 +123,21 @@ const AvailabilityCalendar = () => {
           <div className="sticky top-0 z-30 flex-none bg-white shadow ring-1 ring-black ring-opacity-5 sm:pr-8">
             {/** Mobile Days */}
             <div className="grid grid-cols-7 text-sm leading-6 text-gray-500 sm:hidden">
-              {Days.map((day) => (
+              {Days.map((day, i) => (
                 <button
                   type="button"
                   className="flex flex-col items-center pt-2 pb-3"
                   key={day.name}
+                  onClick={() => setSelectedDay(i)}
                 >
-                  {day.abbr}
+                  <span
+                    className={`mt-1 flex h-8 w-8 items-center justify-center rounded-full ${
+                      selectedDay === i &&
+                      "bg-primary-600 font-semibold text-white"
+                    }`}
+                  >
+                    {day.abbr}
+                  </span>
                 </button>
               ))}
             </div>
@@ -139,20 +195,20 @@ const AvailabilityCalendar = () => {
                   gridTemplateRows: "1.75rem repeat(288, minmax(0, 1fr)) auto",
                 }}
               >
-                <AvailabilityCalendarEvent
-                  type="SHIFT"
-                  day={1}
-                  start={600}
-                  end={660}
-                  name="Test Shift"
-                  location="Test Location"
-                />
-                <AvailabilityCalendarEvent
-                  type="AVAILABILITY"
-                  day={1}
-                  start={480}
-                  end={1050}
-                />
+                {testData.map((event) => {
+                  if (isMobile && event.day !== selectedDay + 1) return null;
+                  return (
+                    <AvailabilityCalendarEvent
+                      key={event.id}
+                      type={event.type}
+                      day={event.day}
+                      start={event.start}
+                      end={event.end}
+                      name={event.name}
+                      location={event.location}
+                    />
+                  );
+                })}
               </ol>
             </div>
           </div>

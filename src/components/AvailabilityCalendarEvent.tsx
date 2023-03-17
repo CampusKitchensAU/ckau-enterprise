@@ -1,6 +1,8 @@
 //ex 840 - 1050, 2pm - 5:30pm
 //ex 168 - 210, 14 - 17.5
 
+import useMediaQuery from "../utils/useMediaQuery";
+
 const AvailabilityCalendarEvent = ({
   type,
   day,
@@ -18,12 +20,15 @@ const AvailabilityCalendarEvent = ({
 }) => {
   const startRow = (start / 60) * 12 + 2;
   const length = (end / 60) * 12 + 2 - startRow;
+  const isMobile = useMediaQuery("(max-width: 640px)");
 
   switch (type) {
     case "SHIFT":
       return (
         <li
-          className={`z-[5] relative mt-px flex col-start-${day}`}
+          className={`relative z-[5] mt-px flex col-start-${
+            isMobile ? 1 : day
+          }`}
           style={{ gridRow: startRow + " / span " + length }}
         >
           <div className="group absolute inset-1 m-1 flex flex-col overflow-y-auto rounded-lg bg-orange-50 p-2 text-xs leading-5 hover:bg-orange-100">
@@ -42,7 +47,9 @@ const AvailabilityCalendarEvent = ({
     case "AVAILABILITY":
       return (
         <li
-          className={`hover:z-[6] relative mt-px flex col-start-${day}`}
+          className={`relative mt-px flex hover:z-[6] col-start-${
+            isMobile ? 1 : day
+          }`}
           style={{ gridRow: startRow + " / span " + length }}
         >
           <div className="group absolute inset-1 flex flex-col overflow-y-auto rounded-lg bg-blue-50 p-2 text-xs leading-5 hover:bg-blue-100">
@@ -65,7 +72,7 @@ function ConvertTo12Hour(time: number) {
   const min = time % 60;
   const hour12 = Math.floor(hour % 12);
   const AMPM = hour >= 12 ? "PM" : "AM";
-  if (min === 0) return `${hour12}:${min}0 ${AMPM}`;
-  if (min < 10) return `${hour12}:0${min} ${AMPM}`;
-  return `${hour12}:${min} ${AMPM}`;
+  if (min === 0) return `${hour12 == 0 ? 12 : hour12}:${min}0 ${AMPM}`;
+  if (min < 10) return `${hour12 == 0 ? 12 : hour12}:0${min} ${AMPM}`;
+  return `${hour12 == 0 ? 12 : hour12}:${min} ${AMPM}`;
 }
