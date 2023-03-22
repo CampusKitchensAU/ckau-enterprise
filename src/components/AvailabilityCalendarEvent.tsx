@@ -1,6 +1,7 @@
 //ex 840 - 1050, 2pm - 5:30pm
 //ex 168 - 210, 14 - 17.5
 
+import convertTo12Hour from "../utils/convertTo12Hour";
 import useMediaQuery from "../utils/useMediaQuery";
 
 const AvailabilityCalendarEvent = ({
@@ -38,7 +39,7 @@ const AvailabilityCalendarEvent = ({
             </p>
             <p className="text-orange-500 group-hover:text-orange-700">
               <time>
-                {ConvertTo12Hour(start)} - {ConvertTo12Hour(end)}
+                {convertTo12Hour(start)} - {convertTo12Hour(end)}
               </time>
             </p>
           </div>
@@ -56,7 +57,7 @@ const AvailabilityCalendarEvent = ({
             <p className="order-1 font-semibold text-blue-700">Available</p>
             <p className="text-blue-500 group-hover:text-blue-700">
               <time>
-                {ConvertTo12Hour(start)} - {ConvertTo12Hour(end)}
+                {convertTo12Hour(start)} - {convertTo12Hour(end)}
               </time>
             </p>
           </div>
@@ -66,13 +67,3 @@ const AvailabilityCalendarEvent = ({
 };
 
 export default AvailabilityCalendarEvent;
-
-function ConvertTo12Hour(time: number) {
-  const hour = time / 60;
-  const min = time % 60;
-  const hour12 = Math.floor(hour % 12);
-  const AMPM = hour >= 12 ? "PM" : "AM";
-  if (min === 0) return `${hour12 == 0 ? 12 : hour12}:${min}0 ${AMPM}`;
-  if (min < 10) return `${hour12 == 0 ? 12 : hour12}:0${min} ${AMPM}`;
-  return `${hour12 == 0 ? 12 : hour12}:${min} ${AMPM}`;
-}

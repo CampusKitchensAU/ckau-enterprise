@@ -69,7 +69,7 @@ const ContactPerson = () => {
 
             <div
               id="person-info"
-              className="grid w-full grid-cols-12 gap-6 overflow-auto pb-1 sm:pb-4"
+              className="grid h-full w-full grid-cols-12 gap-6 overflow-auto pb-1 sm:pb-4"
             >
               <PersonInfo tab={selectedTab} />
             </div>
