@@ -21,10 +21,12 @@ const ContactPerson = () => {
         />
       </Head>
       <div className="flex h-[calc(100vh_-_80px)] flex-col gap-6 sm:h-[calc(100vh_-_32px)]">
-        <PageHeader
-          title="Organization Contacts"
-          subtitle="Executive Team | Shift Leaders | Advisors"
-        />
+        <div className="hidden sm2:block">
+          <PageHeader
+            title="Organization Contacts"
+            subtitle="Executive Team | Shift Leaders | Advisors"
+          />
+        </div>
         <div className="grow overflow-auto">
           <div
             id="content"

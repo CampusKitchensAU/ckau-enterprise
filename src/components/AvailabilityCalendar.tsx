@@ -198,6 +198,7 @@ const AvailabilityCalendar = () => {
             }`}
             onClick={() => {
               setNewAvailability(availability);
+              if (container.current) container.current.scrollTop = 885;
               setIsEditing(false);
             }}
           >
@@ -216,6 +217,7 @@ const AvailabilityCalendar = () => {
                 setIsEditing(false);
                 save();
               } else {
+                if (container.current) container.current.scrollTop = 0;
                 setIsEditing(true);
               }
             }}
