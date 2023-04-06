@@ -1,3 +1,6 @@
+import { useEffect, useRef } from "react";
+import AvailabilityCalendar from "./AvailabilityCalendar";
+
 //TODO: fix this when we get db data
 const personalFields = [
   { title: "Email", value: "tza0038@auburn.edu" },
@@ -15,11 +18,19 @@ const organizationFields = [
 ];
 
 const PersonInfo = ({ tab }: { tab: number }) => {
+  const container = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (container.current) {
+      container.current.scrollTop = 885;
+    }
+  }, [tab]);
+
   switch (tab) {
     case 0:
       return (
         <>
-          <div className="col-span-12 rounded-lg shadow lg:col-span-6">
+          <div className="col-span-12 rounded-lg bg-white shadow lg:col-span-6">
             <div className="border-b-[1px] border-solid border-alt-divider px-8 py-6 text-xl font-medium">
               Personal Details
             </div>
@@ -40,7 +51,7 @@ const PersonInfo = ({ tab }: { tab: number }) => {
               </div>
             ))}
           </div>
-          <div className="col-span-12 rounded-lg shadow lg:col-span-6">
+          <div className="col-span-12 rounded-lg bg-white shadow lg:col-span-6">
             <div className="border-b-[1px] border-solid border-alt-divider px-8 py-6 text-xl font-medium">
               Organization Details
             </div>
@@ -61,7 +72,11 @@ const PersonInfo = ({ tab }: { tab: number }) => {
         </>
       );
     case 1:
-      return <div></div>;
+      return (
+        <div className="col-span-12  overflow-auto rounded-lg bg-white shadow">
+          <AvailabilityCalendar />
+        </div>
+      );
     default:
       return <div>Error</div>;
   }

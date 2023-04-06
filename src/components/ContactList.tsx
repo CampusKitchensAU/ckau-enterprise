@@ -17,7 +17,7 @@ const ContactList = () => {
       <div id="contact-list" className="w-full rounded-[20px] bg-white shadow">
         <div
           id="filter-tabs"
-          className="flex h-12 items-end gap-4 overflow-x-scroll rounded-t-[20px] bg-surface-main px-4"
+          className="flex h-12 items-end gap-4 overflow-x-scroll rounded-t-[20px] bg-surface-main px-4 sm2:overflow-auto"
         >
           {filterTabs.map((tab, index) => (
             <Tab
