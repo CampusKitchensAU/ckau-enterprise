@@ -10,6 +10,7 @@ import { api } from "../utils/trpc";
 import { calculateSmartsheetStats } from "../utils/calculateSmartsheetStats";
 import { useMemo } from "react";
 import { SignOutButton, useUser } from "@clerk/nextjs";
+import { array } from "zod";
 
 const tempAvatarData = {
   name: "Most Shifts",
@@ -25,7 +26,8 @@ const Home: NextPage = () => {
 
   console.log(whitelist);
 
-  const { data } = api.smartsheet.sheets.getSheet.useQuery(634710310315908);
+  const { data, isLoading } =
+    api.smartsheet.sheets.getSheet.useQuery(634710310315908);
   const greeting =
     new Date().getHours() < 12
       ? "Good morning"
@@ -61,11 +63,33 @@ const Home: NextPage = () => {
             Organization Statistics
           </h3>
           <div className="grid grid-cols-12 gap-2">
-            {statisticData.mainStats.map((stat, index) => (
-              <div key={index} className="col-span-12 xl:col-span-4">
-                <IconStat data={stat} />
-              </div>
-            ))}
+            <div className="col-span-12">
+              <h3 className="text-base font-semibold leading-6 text-gray-900">
+                2022 - 2023
+              </h3>
+              <dl className="mt-5 grid grid-cols-1 divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow md:grid-cols-3 md:divide-x md:divide-y-0">
+                {!isLoading ? (
+                  statisticData.mainStats.map((stat) => (
+                    <div key={stat.name} className="bg-white px-4 py-5 sm:p-6">
+                      <IconStat data={stat} />
+                    </div>
+                  ))
+                ) : (
+                  <>
+                    <div className="bg-white px-4 py-5 sm:p-6">
+                      <IconStat skeleton={true} />
+                    </div>
+                    <div className="bg-white px-4 py-5 sm:p-6">
+                      <IconStat skeleton={true} />
+                    </div>
+                    <div className="bg-white px-4 py-5 sm:p-6">
+                      <IconStat skeleton={true} />
+                    </div>
+                  </>
+                )}
+              </dl>
+            </div>
+
             <div className="col-span-12 xl:col-span-7">
               <TrendLineGraph
                 data={statisticData.fourWeekPickupTrend}
@@ -85,7 +109,7 @@ const Home: NextPage = () => {
             </div>
           </div>
         </div>
-        <div className="hidden w-80 rounded-[20px] bg-surface-main px-8 py-4 lg:block">
+        {/* <div className="hidden w-80 rounded-[20px] bg-surface-main px-8 py-4 lg:block">
           <div className="flex items-center gap-4 text-gray-400">
             <div className="flex grow items-center gap-4">
               <button className="cursor-default">
@@ -95,13 +119,13 @@ const Home: NextPage = () => {
                 <MdNotificationsNone fontSize={32} />
               </button>
             </div>
-            {/*TODO: Get user photo or avatar */}
+            
             <button
               id="avatar"
               className="h-10 w-10 rounded-full bg-primary-500"
             ></button>
           </div>
-        </div>
+        </div> */}
       </div>
     </>
   );

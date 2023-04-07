@@ -1,51 +1,81 @@
-import { useEffect, useState } from "react";
 import { MdArrowDownward, MdArrowUpward } from "react-icons/md";
-import { AiOutlineLine } from "react-icons/ai";
 import type { IconStatData } from "./StatsTypes";
 
-const IconStat = ({ data }: { data: IconStatData }) => {
-  const [trendIcon, setTrendIcon] = useState<JSX.Element>(
-    <AiOutlineLine fontSize={19} />
-  );
-
-  const [trendColor, setTrendColor] = useState<string>("text-gray-500");
-
-  useEffect(() => {
-    if (data.trend == 0) {
-      setTrendIcon(<AiOutlineLine fontSize={19} />);
-      setTrendColor("text-gray-500");
-    } else if (data.trend > 0) {
-      setTrendIcon(<MdArrowUpward fontSize={19} />);
-      setTrendColor("text-green-600");
-    } else {
-      setTrendIcon(<MdArrowDownward fontSize={19} />);
-      setTrendColor("text-red-600");
-    }
-  }, [data.trend]);
+const IconStat = ({
+  data = {
+    name: "",
+    value: -1,
+    trend: -1,
+    icon: <MdArrowUpward />,
+  },
+  skeleton = false,
+}: {
+  data?: IconStatData;
+  skeleton?: boolean;
+}) => {
+  const previousStat = data.value - data.trend;
+  const changeType = data.trend > 0 ? "increase" : "decrease";
 
   return (
-    <div className="flex h-full w-full items-center gap-2 rounded-2xl bg-white p-2 pl-6 shadow sm1:pl-12 sm2:pl-16 md:justify-center md:p-4">
-      <div className="h-max rounded-lg bg-primary-600 p-2 text-lg text-primary-contrast sm1:text-xl sm2:text-2xl md:text-[32px]">
-        {data.icon}
-      </div>
-      <div>
-        <div className="text-md text-text-secondary md:text-lg">
-          {data.name}
-        </div>
-        <div className="flex items-end gap-2">
-          <div className="text-xl font-bold md:text-3xl">
-            {data.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+    <>
+      <dt className="text-base font-semibold text-gray-900">
+        {skeleton ? (
+          <div className="h-4 animate-pulse rounded bg-slate-200" />
+        ) : (
+          data.name
+        )}
+      </dt>
+      <dd className="mt-1 flex items-baseline justify-between md:block xl:flex">
+        <div className="flex items-baseline text-2xl font-semibold text-secondary-500 sm:block lg:flex">
+          {skeleton ? (
+            <div className="mt-1 h-8 w-32 animate-pulse rounded bg-slate-200 lg:w-48" />
+          ) : (
+            data.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+          )}
+          <div className="ml-2 flex items-center gap-1 text-sm font-medium text-gray-500 sm:ml-0 lg:ml-2">
+            from{" "}
+            {skeleton ? (
+              <div className="h-3 w-20 animate-pulse rounded bg-slate-200" />
+            ) : (
+              previousStat.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+            )}
           </div>
-          <div className={`flex ${trendColor} items-center`}>
-            <div>{trendIcon}</div>
-            <div>
-              {data.trend != 0 &&
-                data.trend.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-            </div>
-          </div>
         </div>
-      </div>
-    </div>
+
+        {skeleton ? (
+          <div className="h-4 w-8 animate-pulse rounded bg-slate-200" />
+        ) : (
+          <div
+            className={`
+            ${
+              changeType === "increase"
+                ? "bg-green-100 text-green-800"
+                : "bg-red-100 text-red-800"
+            }
+             inline-flex items-baseline rounded-full px-2.5 py-0.5 text-sm font-medium md:mt-2 lg:mt-0
+          `}
+          >
+            {changeType === "increase" ? (
+              <MdArrowUpward
+                className="-ml-1 mr-0.5 h-5 w-5 flex-shrink-0 self-center text-green-500"
+                aria-hidden="true"
+              />
+            ) : (
+              <MdArrowDownward
+                className="-ml-1 mr-0.5 h-5 w-5 flex-shrink-0 self-center text-red-500"
+                aria-hidden="true"
+              />
+            )}
+
+            <span className="sr-only">
+              {" "}
+              {changeType === "increase" ? "Increased" : "Decreased"} by{" "}
+            </span>
+            {data.trend}
+          </div>
+        )}
+      </dd>
+    </>
   );
 };
 
