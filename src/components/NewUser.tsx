@@ -1,7 +1,9 @@
-import { useUser } from "@clerk/nextjs";
+import { SignOutButton, useUser } from "@clerk/nextjs";
 import { useState } from "react";
 import { api } from "../utils/trpc";
 import { useRouter } from "next/router";
+import { CgSpinnerTwo } from "react-icons/cg";
+import Image from "next/image";
 
 //write a function that takes in a string and validates it as a phone number
 const validatePhone = (phone: string) => {
@@ -28,7 +30,8 @@ const NewUser = () => {
     year: "1",
     major: "",
   });
-  const { mutate } = api.auth.createNewUser.useMutation();
+  const { mutate, isSuccess, isLoading, isError } =
+    api.auth.createNewUser.useMutation();
 
   const [invalids, setInvalids] = useState({
     name: "",
@@ -61,7 +64,57 @@ const NewUser = () => {
       router.push("/");
     }
   };
-
+  if (isLoading)
+    return (
+      <main className="grid min-h-full place-items-center bg-white px-6 py-24 sm:py-32 lg:px-8">
+        <div className="text-center">
+          <Image
+            src="/logos/ckau-logo-rect-nobg.png"
+            alt="CKAU Logo"
+            width={200}
+            height={200}
+            className="mx-auto pb-4"
+          />
+          <h1 className="mt-4 flex items-center gap-2 text-lg font-bold tracking-tight text-gray-900 sm:text-xl">
+            <CgSpinnerTwo className="text-secondary-500" />
+            Getting everything setup...
+          </h1>
+        </div>
+      </main>
+    );
+  if (isSuccess) router.reload();
+  if (isError)
+    return (
+      <main className="grid min-h-full place-items-center bg-white px-6 py-24 sm:py-32 lg:px-8">
+        <div className="text-center">
+          <Image
+            src="/logos/ckau-logo-rect-nobg.png"
+            alt="CKAU Logo"
+            width={200}
+            height={200}
+            className="mx-auto pb-4"
+          />
+          <h1 className="mt-4 text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl">
+            Error :(
+          </h1>
+          <p className="mt-6 max-w-2xl text-base leading-7 text-gray-600">
+            Sorry, there has been an error setting up your account. Please reach
+            out to the leadership team for help.
+          </p>
+          <div className="mt-10 flex items-center justify-center gap-x-6">
+            <div className="rounded-md bg-secondary-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-secondary-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary-500">
+              <SignOutButton />
+            </div>
+            <a
+              href="mailto:theckau@gmail.com"
+              className="text-sm font-semibold text-gray-900"
+            >
+              Email team <span aria-hidden="true">&rarr;</span>
+            </a>
+          </div>
+        </div>
+      </main>
+    );
   return (
     <>
       <main>
