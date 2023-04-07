@@ -2,6 +2,7 @@ import { SignOutButton } from "@clerk/nextjs";
 import { api } from "../../utils/trpc";
 import NewUser from "../NewUser";
 import Image from "next/image";
+import { CgSpinnerTwo } from "react-icons/cg";
 
 const CustomAuthChecks = ({ children }: { children: React.ReactNode }) => {
   const whitelist = api.auth.checkWhitelist.useQuery();
@@ -17,8 +18,9 @@ const CustomAuthChecks = ({ children }: { children: React.ReactNode }) => {
             height={200}
             className="mx-auto pb-4"
           />
-          <h1 className="mt-4 text-xl font-bold tracking-tight text-gray-900 sm:text-2xl">
-            Loading user info...
+          <h1 className="mt-4 flex items-center gap-2 text-lg font-bold tracking-tight text-gray-900 sm:text-xl">
+            <CgSpinnerTwo className="animate-spin text-secondary-500" />
+            Getting everything setup...
           </h1>
         </div>
       </main>
