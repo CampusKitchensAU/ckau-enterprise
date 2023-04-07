@@ -390,7 +390,13 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
             </div>
           )}
 
-          <main className="py-10">
+          <main
+            className={`bg-gray-100 py-10 ${
+              router.pathname == "/"
+                ? "min-h-[calc(100vh_-_177px)]"
+                : "min-h-[calc(100vh_-_64px)]"
+            }`}
+          >
             <div className="px-4 sm:px-6 lg:px-8">{children}</div>
           </main>
         </div>

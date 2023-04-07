@@ -44,7 +44,7 @@ export const calculateSmartsheetStats = (data?: Sheet) => {
         trend: Number(
           weeklyData[weeklyData.length - 1]?.poundsPickedUp.toFixed(2)
         ),
-        icon: <FaWeight />,
+        icon: <FaWeight className="h-6 w-6 text-white" aria-hidden="true" />,
       },
       {
         name: "Total Meals Packaged",
@@ -52,7 +52,9 @@ export const calculateSmartsheetStats = (data?: Sheet) => {
         trend: Number(
           weeklyData[weeklyData.length - 1]?.mealsPackaged.toFixed(2)
         ),
-        icon: <ImSpoonKnife />,
+        icon: (
+          <ImSpoonKnife className="h-6 w-6 text-white" aria-hidden="true" />
+        ),
       },
       {
         name: "Total Meals Delivered",
@@ -60,7 +62,7 @@ export const calculateSmartsheetStats = (data?: Sheet) => {
         trend: Number(
           weeklyData[weeklyData.length - 1]?.mealsDelivered.toFixed(2)
         ),
-        icon: <FaTruck />,
+        icon: <FaTruck className="h-6 w-6 text-white" aria-hidden="true" />,
       },
     ],
     fourWeekPickupTrend: [
@@ -85,7 +87,9 @@ export const calculateSmartsheetStats = (data?: Sheet) => {
       {
         name: "Shifts Completed",
         value: totalSums.shiftsCompleted,
-        trend: weeklyData[weeklyData.length - 1]?.shiftsCompleted,
+        trend: Number(
+          weeklyData[weeklyData.length - 1]?.shiftsCompleted.toFixed(2)
+        ),
       },
       {
         name: "Partners",
@@ -95,7 +99,9 @@ export const calculateSmartsheetStats = (data?: Sheet) => {
       {
         name: "Total Volunteers",
         value: totalSums.uniqueVolunteers,
-        trend: weeklyData[weeklyData.length - 1]?.uniqueVolunteers,
+        trend: Number(
+          weeklyData[weeklyData.length - 1]?.uniqueVolunteers.toFixed(2)
+        ),
       },
     ],
     mostActiveShiftLeader,

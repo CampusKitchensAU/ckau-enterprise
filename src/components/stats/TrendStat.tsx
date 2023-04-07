@@ -1,16 +1,15 @@
-import { MdArrowDownward, MdArrowUpward } from "react-icons/md";
-import type { IconStatData } from "./StatsTypes";
+import { MdArrowDownward, MdArrowUpward, MdRemove } from "react-icons/md";
+import type { StatData } from "./StatsTypes";
 
-const IconStat = ({
+const TrendStat = ({
   data = {
     name: "",
     value: -1,
     trend: -1,
-    icon: <MdArrowUpward />,
   },
   skeleton = false,
 }: {
-  data?: IconStatData;
+  data?: StatData;
   skeleton?: boolean;
 }) => {
   const previousStat = data.value - data.trend;
@@ -26,7 +25,7 @@ const IconStat = ({
         )}
       </dt>
       <dd className="mt-1 flex items-baseline justify-between md:block xl:flex">
-        <div className="flex items-baseline text-2xl font-semibold text-secondary-500 sm:block lg:flex">
+        <div className="flex items-baseline text-2xl font-semibold text-secondary sm:block lg:flex">
           {skeleton ? (
             <div className="mt-1 h-8 w-32 animate-pulse rounded bg-slate-200 lg:w-48" />
           ) : (
@@ -48,14 +47,21 @@ const IconStat = ({
           <div
             className={`
             ${
-              changeType === "increase"
+              data.trend == 0
+                ? "bg-gray-100 text-gray-800"
+                : changeType === "increase"
                 ? "bg-green-100 text-green-800"
                 : "bg-red-100 text-red-800"
             }
              inline-flex items-baseline rounded-full px-2.5 py-0.5 text-sm font-medium md:mt-2 lg:mt-0
           `}
           >
-            {changeType === "increase" ? (
+            {data.trend == 0 ? (
+              <MdRemove
+                className="-ml-1 mr-0.5 h-5 w-5 flex-shrink-0 self-center text-gray-500"
+                aria-hidden="true"
+              />
+            ) : changeType === "increase" ? (
               <MdArrowUpward
                 className="-ml-1 mr-0.5 h-5 w-5 flex-shrink-0 self-center text-green-500"
                 aria-hidden="true"
@@ -79,4 +85,4 @@ const IconStat = ({
   );
 };
 
-export default IconStat;
+export default TrendStat;

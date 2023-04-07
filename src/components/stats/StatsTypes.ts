@@ -1,9 +1,9 @@
 export type trendData = { week?: string; pounds?: number };
 
 export type StatData = {
-  name?: string;
-  value?: number;
-  trend?: number;
+  name: string;
+  value: number;
+  trend: number;
 };
 
 export type IconStatData = {
