@@ -1,6 +1,5 @@
 import { type NextPage } from "next";
 import Head from "next/head";
-import { MdCalendarToday, MdNotificationsNone } from "react-icons/md";
 import PageHeader from "../components/PageHeader";
 import TrendLineGraph from "../components/stats/TrendLineGraph";
 import IconStat from "../components/stats/IconStat";
@@ -9,8 +8,6 @@ import AvatarStat from "../components/stats/AvatarStat";
 import { api } from "../utils/trpc";
 import { calculateSmartsheetStats } from "../utils/calculateSmartsheetStats";
 import { useMemo } from "react";
-import { SignOutButton, useUser } from "@clerk/nextjs";
-import { array } from "zod";
 
 const tempAvatarData = {
   name: "Most Shifts",
@@ -19,13 +16,7 @@ const tempAvatarData = {
 };
 
 const Home: NextPage = () => {
-  const { user } = useUser();
-  console.log(user && user.emailAddresses.map((email) => email.emailAddress));
-
   const whitelist = api.auth.checkWhitelist.useQuery();
-
-  console.log(whitelist);
-
   const { data, isLoading } =
     api.smartsheet.sheets.getSheet.useQuery(634710310315908);
   const greeting =
@@ -56,9 +47,6 @@ const Home: NextPage = () => {
             title={greeting + ", Guest"}
             subtitle={"VP of Technology"}
           />
-          <div className="w-48 rounded-lg bg-primary-500 p-4 text-white">
-            <SignOutButton />
-          </div>
           <h3 className="w-full border-b-2 border-solid border-primary-900 font-semibold text-primary-900 sm2:text-lg md:text-xl">
             Organization Statistics
           </h3>

@@ -1,26 +1,30 @@
 import { MdAssignment, MdHome, MdPerson } from "react-icons/md";
 
 interface NavPage {
-  title: string;
-  path: string;
+  name: string;
+  href: string;
   icon: JSX.Element;
+  current: boolean;
 }
 
 const NavPages: NavPage[] = [
   {
-    title: "Dashboard",
-    path: "/",
-    icon: <MdHome fontSize={24} />,
+    name: "Dashboard",
+    href: "/",
+    icon: <MdHome />,
+    current: true,
   },
   {
-    title: "Shifts",
-    path: "/shifts",
-    icon: <MdAssignment fontSize={24} />,
+    name: "Shifts",
+    href: "/shifts",
+    icon: <MdAssignment />,
+    current: false,
   },
   {
-    title: "Contacts",
-    path: "/contacts",
-    icon: <MdPerson fontSize={24} />,
+    name: "Contacts",
+    href: "/contacts",
+    icon: <MdPerson />,
+    current: false,
   },
 ];
 
