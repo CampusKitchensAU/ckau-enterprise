@@ -1,6 +1,5 @@
 import { type NextPage } from "next";
 import Head from "next/head";
-import PageHeader from "../components/PageHeader";
 import TrendLineGraph from "../components/stats/TrendLineGraph";
 import IconStat from "../components/stats/IconStat";
 import Stat from "../components/stats/Stat";
@@ -19,12 +18,6 @@ const Home: NextPage = () => {
   const whitelist = api.auth.checkWhitelist.useQuery();
   const { data, isLoading } =
     api.smartsheet.sheets.getSheet.useQuery(634710310315908);
-  const greeting =
-    new Date().getHours() < 12
-      ? "Good morning"
-      : new Date().getHours() < 18
-      ? "Good afternoon"
-      : "Good evening";
 
   const statisticData = useMemo(() => calculateSmartsheetStats(data), [data]);
   if (!whitelist.data || whitelist.data?.length == 0) {
@@ -42,17 +35,9 @@ const Home: NextPage = () => {
       </Head>
       <div className="flex h-full flex-col gap-6 pb-6 md:flex-row">
         <div className="flex grow flex-col gap-4 md:gap-6">
-          <PageHeader
-            //TODO: Add a way to get the user's name and position
-            title={greeting + ", Guest"}
-            subtitle={"VP of Technology"}
-          />
-          <h3 className="w-full border-b-2 border-solid border-primary-900 font-semibold text-primary-900 sm2:text-lg md:text-xl">
-            Organization Statistics
-          </h3>
           <div className="grid grid-cols-12 gap-2">
             <div className="col-span-12">
-              <h3 className="text-base font-semibold leading-6 text-gray-900">
+              <h3 className="text-lg font-medium leading-6 text-gray-900">
                 2022 - 2023
               </h3>
               <dl className="mt-5 grid grid-cols-1 divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow md:grid-cols-3 md:divide-x md:divide-y-0">

@@ -102,6 +102,7 @@ model User {
   year              Int?
   major             String?
   birthday          DateTime?
+  title             String?            @default("Shift Leader")
   experience        Int                @default(0)
   completedShifts   Int                @default(0)
   shiftLeaderOfWeek Int                @default(0)

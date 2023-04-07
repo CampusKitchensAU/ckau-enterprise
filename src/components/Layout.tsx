@@ -14,6 +14,8 @@ import {
 import { useRouter } from "next/router";
 import Image from "next/image";
 import { useClerk, useUser } from "@clerk/nextjs";
+import { FaIdBadge } from "react-icons/fa";
+import { api } from "../utils/trpc";
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
@@ -23,6 +25,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
   const { signOut } = useClerk();
   const { user } = useUser();
+  const dbUser = api.users.getUser.useQuery();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [navigation, setNavigation] = useState([
     {
@@ -44,6 +47,12 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       current: false,
     },
   ]);
+  const greeting =
+    new Date().getHours() < 12
+      ? "Good morning"
+      : new Date().getHours() < 18
+      ? "Good afternoon"
+      : "Good evening";
 
   useEffect(() => {
     setNavigation((navigation) =>
@@ -232,7 +241,13 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
         </div>
 
         <div className="lg:pl-60 xl:pl-72">
-          <div className="sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-4 border-b border-gray-200 bg-white px-4 shadow-sm sm:gap-x-6 sm:px-6 lg:px-8">
+          <div
+            className={`sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-4 ${
+              router.pathname == "/"
+                ? "border-0 shadow-none"
+                : "border-b shadow-sm"
+            } border-gray-200 bg-white px-4 sm:gap-x-6 sm:px-6 lg:px-8`}
+          >
             <button
               type="button"
               className="-m-2.5 p-2.5 text-gray-700 lg:hidden"
@@ -313,6 +328,67 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
               </div>
             </div>
           </div>
+
+          {router.pathname === "/" && (
+            <div className="bg-white shadow">
+              <div className="px-4 sm:px-6 lg:px-8">
+                <div className="py-6 md:flex md:items-center md:justify-between lg:border-t lg:border-gray-200">
+                  <div className="min-w-0 flex-1">
+                    {/* Profile */}
+                    <div className="flex items-center">
+                      {dbUser.data?.image ? (
+                        <Image
+                          src={dbUser.data.image}
+                          alt={"Profile picture of " + dbUser.data?.name}
+                          className="hidden h-16 w-16 rounded-full sm:block"
+                          width={64}
+                          height={64}
+                        />
+                      ) : (
+                        <MdAccountCircle className="hidden h-16 w-16 rounded-full text-primary sm:block" />
+                      )}
+                      <div>
+                        <div className="flex items-center">
+                          {dbUser.data?.image ? (
+                            <Image
+                              src={dbUser.data.image}
+                              alt={"Profile picture of " + dbUser.data?.name}
+                              className="h-16 w-16 rounded-full sm:hidden"
+                              width={64}
+                              height={64}
+                            />
+                          ) : (
+                            <MdAccountCircle className="h-16 w-16 rounded-full text-primary sm:hidden" />
+                          )}
+                          {dbUser.data?.name ? (
+                            <h1 className="ml-3 text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:leading-9">
+                              {greeting + ", " + dbUser.data?.name}
+                            </h1>
+                          ) : (
+                            <div className="ml-3 h-6 w-48 animate-pulse rounded bg-slate-200" />
+                          )}
+                        </div>
+                        <dl className="mt-6 flex flex-col sm:ml-3 sm:mt-1 sm:flex-row sm:flex-wrap">
+                          <dt className="sr-only">Position</dt>
+                          {dbUser.data?.title ? (
+                            <dd className="flex items-center text-sm font-medium capitalize text-gray-500 sm:mr-6">
+                              <FaIdBadge
+                                className="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
+                                aria-hidden="true"
+                              />
+                              {dbUser.data?.title}
+                            </dd>
+                          ) : (
+                            <div className="mt-1 h-4 w-32 animate-pulse rounded bg-slate-200" />
+                          )}
+                        </dl>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
 
           <main className="py-10">
             <div className="px-4 sm:px-6 lg:px-8">{children}</div>
