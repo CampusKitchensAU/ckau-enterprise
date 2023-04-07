@@ -6,10 +6,10 @@ import TrendLineGraph from "../components/stats/TrendLineGraph";
 import IconStat from "../components/stats/IconStat";
 import Stat from "../components/stats/Stat";
 import AvatarStat from "../components/stats/AvatarStat";
-import { useSession } from "next-auth/react";
 import { api } from "../utils/trpc";
 import { calculateSmartsheetStats } from "../utils/calculateSmartsheetStats";
 import { useMemo } from "react";
+import { SignOutButton, useUser } from "@clerk/nextjs";
 
 const tempAvatarData = {
   name: "Most Shifts",
@@ -18,9 +18,14 @@ const tempAvatarData = {
 };
 
 const Home: NextPage = () => {
-  const { data: session, status } = useSession();
-  const { isLoading, data } =
-    api.smartsheet.sheets.getSheet.useQuery(634710310315908);
+  const { user } = useUser();
+  console.log(user && user.emailAddresses.map((email) => email.emailAddress));
+
+  const whitelist = api.auth.checkWhitelist.useQuery();
+
+  console.log(whitelist);
+
+  const { data } = api.smartsheet.sheets.getSheet.useQuery(634710310315908);
   const greeting =
     new Date().getHours() < 12
       ? "Good morning"
@@ -29,9 +34,8 @@ const Home: NextPage = () => {
       : "Good evening";
 
   const statisticData = useMemo(() => calculateSmartsheetStats(data), [data]);
-
-  if (status == "loading" || isLoading) {
-    return <div>Loading...</div>;
+  if (!whitelist.data || whitelist.data?.length == 0) {
+    return <div>Not whitelisted</div>;
   }
   return (
     <>
@@ -47,9 +51,12 @@ const Home: NextPage = () => {
         <div className="flex grow flex-col gap-4 md:gap-6">
           <PageHeader
             //TODO: Add a way to get the user's name and position
-            title={greeting + ", " + (session ? session?.user?.name : "Guest")}
+            title={greeting + ", Guest"}
             subtitle={"VP of Technology"}
           />
+          <div className="w-48 rounded-lg bg-primary-500 p-4 text-white">
+            <SignOutButton />
+          </div>
           <h3 className="w-full border-b-2 border-solid border-primary-900 font-semibold text-primary-900 sm2:text-lg md:text-xl">
             Organization Statistics
           </h3>
