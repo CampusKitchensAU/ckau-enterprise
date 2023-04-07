@@ -5,8 +5,16 @@ import { useRouter } from "next/router";
 
 //write a function that takes in a string and validates it as a phone number
 const validatePhone = (phone: string) => {
-  const regex = /^\d{3}-\d{3}-\d{4}$/;
-  return regex.test(phone);
+  phone = phone.replace(/\D/g, "");
+  if (
+    phone.match(/^(\d{3})[- ]?(\d{3})[- ]?(\d{4})$/) || // xxx-xxx-xxxx
+    phone.match(/^\d{10}$/) || // xxxxxxxxxx
+    phone.match(/^\(\d{3}\) \d{3}-\d{4}$/) // (xxx) xxx-xxxx
+  ) {
+    return true;
+  } else {
+    return false;
+  }
 };
 
 const NewUser = () => {
