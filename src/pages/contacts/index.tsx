@@ -17,7 +17,9 @@ const Contacts: NextPage = () => {
     contacts.data?.usersByLetter || []
   );
   const [searchInput, setSearchInput] = useState("");
-  const [contactOpen, setContactOpen] = useState(false);
+  const [contactOpen, setContactOpen] = useState(
+    router.query.name != "" ? true : false
+  );
 
   useEffect(() => {
     if (!contacts.isLoading && contacts.data?.usersByLetter)

@@ -66,9 +66,9 @@ const Contact = ({
   }, [personId]);
 
   return (
-    <article className="h-[calc(100%_-_44px)] overflow-hidden pb-6 xl:h-full">
+    <article className="min-h-[calc(100%_-_44px)] pb-6 xl:h-full">
       {/* Profile header */}
-      <div>
+      <div className="sticky inset-0 bg-white z-40">
         <div>
           {skeleton || isLoading ? (
             <div className="h-32 w-full animate-pulse bg-slate-200 lg:h-48" />
@@ -131,35 +131,35 @@ const Contact = ({
             </h1>
           </div>
         </div>
-      </div>
 
-      {/* Tabs */}
-      <div className="mt-6 sm:mt-2 2xl:mt-5">
-        <div className="border-b border-gray-200">
-          <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-            <nav className="-mb-px flex space-x-8" aria-label="Tabs">
-              {tabs.map((tab, i) => (
-                <button
-                  key={tab}
-                  onClick={() => setSelectedTab(i)}
-                  className={classNames(
-                    selectedTab === i
-                      ? "border-secondary text-gray-900"
-                      : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700",
-                    "whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium"
-                  )}
-                  aria-current={selectedTab === i ? "page" : undefined}
-                >
-                  {tab}
-                </button>
-              ))}
-            </nav>
+        {/* Tabs */}
+        <div className="mt-6 sm:mt-2 2xl:mt-5">
+          <div className="border-b border-gray-200">
+            <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+              <nav className="-mb-px flex space-x-8" aria-label="Tabs">
+                {tabs.map((tab, i) => (
+                  <button
+                    key={tab}
+                    onClick={() => setSelectedTab(i)}
+                    className={classNames(
+                      selectedTab === i
+                        ? "border-secondary text-gray-900"
+                        : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700",
+                      "whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium"
+                    )}
+                    aria-current={selectedTab === i ? "page" : undefined}
+                  >
+                    {tab}
+                  </button>
+                ))}
+              </nav>
+            </div>
           </div>
         </div>
       </div>
 
       {selectedTab === 0 && (
-        <div className="mx-auto mt-6 max-w-5xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto mt-6 max-w-5xl overflow-auto px-4 pb-4 sm:px-6 lg:px-8">
           <dl className="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
             {profileFields.map((field) => (
               <div key={field.name} className="sm:col-span-1">
