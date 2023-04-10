@@ -172,70 +172,9 @@ const AvailabilityCalendar = () => {
   }, [newAvailability]);
 
   return (
-    <div className="flex h-full flex-col overflow-auto">
-      <header
-        className={`${
-          isEditing ? "flex-col gap-2" : ""
-        } flex items-center justify-between border-b border-gray-200 py-4 px-6 sm2:flex-row`}
-      >
-        <div className="flex items-center justify-center gap-2">
-          <h1 className="text-base font-semibold leading-6 text-gray-900">
-            Weekly Availability
-          </h1>
-
-          <span
-            className={`text-sm text-gray-400 ${
-              isEditing ? "block" : "hidden"
-            }`}
-          >
-            (Editing)
-          </span>
-        </div>
-        <div className="flex items-center justify-center gap-1">
-          <button
-            className={`rounded-md py-2 px-3 text-sm font-semibold text-red-500 underline-offset-2 hover:text-red-400 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500 ${
-              isEditing ? "block" : "hidden"
-            }`}
-            onClick={() => {
-              setNewAvailability(availability);
-              if (container.current) container.current.scrollTop = 885;
-              setIsEditing(false);
-            }}
-          >
-            Cancel
-          </button>
-          <button
-            type="button"
-            className={`flex items-center gap-2 rounded-md py-2 px-3 text-sm font-semibold shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
-          ${
-            isEditing
-              ? "bg-gray-200  text-gray-600 hover:bg-gray-300 focus-visible:outline-gray-500 "
-              : "bg-primary-500 text-white hover:bg-primary-400 focus-visible:outline-primary-500"
-          }`}
-            onClick={() => {
-              if (isEditing) {
-                setIsEditing(false);
-                save();
-              } else {
-                if (container.current) container.current.scrollTop = 0;
-                setIsEditing(true);
-              }
-            }}
-          >
-            {isEditing ? (
-              <>
-                <MdSave /> Save
-              </>
-            ) : (
-              <>
-                <MdEdit /> Edit
-              </>
-            )}
-          </button>
-        </div>
-      </header>
+    <div className="flex max-h-[750px] flex-col overflow-auto">
       {isEditing ? (
-        <div className="flex h-full flex-auto flex-col gap-8 overflow-auto bg-white p-6 md:items-center xl:flex-row xl:items-start xl:justify-center">
+        <div className="flex h-full flex-auto flex-col gap-8 overflow-auto bg-white p-6 md:items-center">
           <div className="flex flex-col gap-3">
             <h2 className="text-base font-semibold text-primary-500">
               Add/Remove Availability
@@ -247,7 +186,7 @@ const AvailabilityCalendar = () => {
                     key={day.name}
                     className={`h-9 rounded-lg border-2 p-1 text-sm  hover:border-primary-300 hover:text-primary-400 ${
                       newSelectedDays.includes(i)
-                        ? "border-primary-500 text-primary-600"
+                        ? "border-primary-500 text-primary"
                         : "border-gray-300 text-gray-400"
                     }`}
                     onClick={() => {
@@ -298,7 +237,7 @@ const AvailabilityCalendar = () => {
               </button>
             </div>
           </div>
-          <div className="w-full min-w-[255px] border-t-2 border-gray-300 py-2 md:px-12 xl:border-l-2 xl:border-t-0 xl:px-8">
+          <div className="w-full min-w-[255px] border-t-2 border-gray-300 py-2 md:px-12">
             {Days.map((day, i) => (
               <div
                 key={day.name}
@@ -356,7 +295,7 @@ const AvailabilityCalendar = () => {
                     <span
                       className={`mt-1 flex h-8 w-8 items-center justify-center rounded-full ${
                         selectedDay === i &&
-                        "bg-primary-600 font-semibold text-white"
+                        "bg-primary font-semibold text-white"
                       }`}
                     >
                       {day.abbr}

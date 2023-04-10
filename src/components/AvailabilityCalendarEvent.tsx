@@ -32,7 +32,7 @@ const AvailabilityCalendarEvent = ({
           }`}
           style={{ gridRow: startRow + " / span " + length }}
         >
-          <div className="group absolute inset-1 m-1 flex flex-col overflow-y-auto rounded-lg bg-orange-50 p-2 text-xs leading-5 hover:bg-orange-100">
+          <div className="group absolute inset-1 m-1 flex flex-col overflow-hidden rounded-lg bg-orange-50 p-2 text-xs leading-5 hover:bg-orange-100">
             <p className="order-1 font-semibold text-orange-700">{name}</p>
             <p className="order-1 text-orange-500 group-hover:text-orange-700">
               {location}

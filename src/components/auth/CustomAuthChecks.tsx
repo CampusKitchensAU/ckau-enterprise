@@ -19,7 +19,7 @@ const CustomAuthChecks = ({ children }: { children: React.ReactNode }) => {
             className="mx-auto pb-4"
           />
           <h1 className="mt-4 flex items-center gap-2 text-lg font-bold tracking-tight text-gray-900 sm:text-xl">
-            <CgSpinnerTwo className="animate-spin text-secondary-500" />
+            <CgSpinnerTwo className="animate-spin text-secondary" />
             Getting everything setup...
           </h1>
         </div>
