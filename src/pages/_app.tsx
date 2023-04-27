@@ -8,21 +8,24 @@ import {
 } from "@clerk/nextjs";
 
 import "../styles/globals.css";
-import CustomAuthChecks from "../components/auth/CustomAuthChecks";
 import Layout from "../components/Layout";
+import { useRouter } from "next/router";
 
 const MyApp: AppType = ({ Component, pageProps }) => {
+  const router = useRouter();
   return (
     <ClerkProvider {...pageProps}>
       <SignedIn>
-        <CustomAuthChecks>
+        {router.pathname === "/setup" ? (
+          <Component {...pageProps} />
+        ) : (
           <Layout>
             <Component {...pageProps} />
           </Layout>
-        </CustomAuthChecks>
+        )}
       </SignedIn>
       <SignedOut>
-        <RedirectToSignIn />
+        <RedirectToSignIn redirectUrl="/setup" />
       </SignedOut>
     </ClerkProvider>
   );

@@ -1,8 +1,8 @@
 import { z } from "zod";
 import { createTRPCRouter, protectedProcedure } from "../../../trpc";
 
-const usersRouter = createTRPCRouter({
-  getUser: protectedProcedure.query(async ({ ctx }) => {
+const userRouter = createTRPCRouter({
+  getCurrentUser: protectedProcedure.query(async ({ ctx }) => {
     if (ctx.auth.userId) {
       return ctx.prisma.user.findUnique({
         where: {
@@ -34,4 +34,4 @@ const usersRouter = createTRPCRouter({
     }),
 });
 
-export default usersRouter;
+export default userRouter;

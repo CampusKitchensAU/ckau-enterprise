@@ -109,6 +109,7 @@ model User {
   roleId            Int?               @default(0)
   emailVerified     DateTime?
   image             String?            @db.Text
+  profileComplete   Boolean            @default(false)
   Availability      Availability[]
   Role              Role?              @relation(fields: [roleId], references: [id])
   UserShiftMapping  UserShiftMapping[]

@@ -1,12 +1,19 @@
-import { SignOutButton } from "@clerk/nextjs";
-import { api } from "../../utils/trpc";
-import NewUser from "../NewUser";
-import Image from "next/image";
+import { type NextPage } from "next";
+import { api } from "../utils/trpc";
 import { CgSpinnerTwo } from "react-icons/cg";
+import Image from "next/image";
+import NewUser from "../components/NewUser";
+import { useRouter } from "next/router";
+import { SignOutButton } from "@clerk/nextjs";
 
-const CustomAuthChecks = ({ children }: { children: React.ReactNode }) => {
-  const whitelist = api.auth.checkWhitelist.useQuery();
-  const newUser = api.auth.checkUserExits.useQuery();
+const Setup: NextPage = () => {
+  const router = useRouter();
+  const whitelist = api.auth.checkWhitelist.useQuery(undefined, {
+    refetchOnWindowFocus: false,
+  });
+  const newUser = api.auth.checkUserExits.useQuery(undefined, {
+    refetchOnWindowFocus: false,
+  });
   if (whitelist.isLoading || newUser.isLoading) {
     return (
       <main className="grid min-h-full place-items-center bg-white px-6 py-24 sm:py-32 lg:px-8">
@@ -46,7 +53,7 @@ const CustomAuthChecks = ({ children }: { children: React.ReactNode }) => {
             the organization&apos;s leadership team.
           </p>
           <div className="mt-10 flex items-center justify-center gap-x-6">
-            <div className="rounded-md bg-secondary-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-secondary-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary-500">
+            <div className="focus-visible:outline-secondary-500 rounded-md bg-secondary px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-secondary-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2">
               <SignOutButton />
             </div>
             <a
@@ -62,8 +69,10 @@ const CustomAuthChecks = ({ children }: { children: React.ReactNode }) => {
   }
   if (!newUser.data) {
     return <NewUser />;
+  } else {
+    router.push("/");
+    return null;
   }
-  return <>{children}</>;
 };
 
-export default CustomAuthChecks;
+export default Setup;

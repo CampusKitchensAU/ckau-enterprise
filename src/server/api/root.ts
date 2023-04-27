@@ -1,7 +1,7 @@
 import { createTRPCRouter } from "./trpc";
 import { smartsheetRouter } from "./routers/smartsheet";
 import authRouter from "./routers/prisma/auth";
-import usersRouter from "./routers/prisma/users";
+import userRouter from "./routers/prisma/users";
 
 /**
  * This is the primary router for your server.
@@ -11,7 +11,7 @@ import usersRouter from "./routers/prisma/users";
 export const appRouter = createTRPCRouter({
   smartsheet: smartsheetRouter,
   auth: authRouter,
-  users: usersRouter,
+  user: userRouter,
 });
 
 // export type definition of API

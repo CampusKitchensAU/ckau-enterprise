@@ -120,6 +120,13 @@ const NewUser = () => {
       <main>
         <div className="bg-white px-6 pt-24 pb-12 sm:pt-32 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
+          <Image
+            src="/logos/ckau-logo-rect-nobg.png"
+            alt="CKAU Logo"
+            width={200}
+            height={200}
+            className="mx-auto pb-8"
+          />
             <p className="text-base font-semibold leading-7 text-secondary-500">
               Forking hunger in a new way
             </p>

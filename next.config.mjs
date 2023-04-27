@@ -13,6 +13,14 @@ const config = {
     locales: ["en"],
     defaultLocale: "en",
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "www.gravatar.com",
+      },
+    ],
+  },
   webpack: (config) => {
     config.experiments = { ...config.experiments, topLevelAwait: true };
     return config;
