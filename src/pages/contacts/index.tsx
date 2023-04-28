@@ -9,7 +9,7 @@ import Contact from "../../components/Contact";
 
 const Contacts: NextPage = () => {
   const router = useRouter();
-  const contacts = api.users.getAllUsersByLetter.useQuery();
+  const contacts = api.user.getAllUsersByLetter.useQuery();
   const [selectedContact, setSelectedContact] = useState(
     contacts.data?.usersByLetter[0]?.users[0] || null
   );
