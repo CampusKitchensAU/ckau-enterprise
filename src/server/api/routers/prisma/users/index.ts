@@ -32,6 +32,39 @@ const userRouter = createTRPCRouter({
         },
       });
     }),
+  updateUserPersonalInfo: protectedProcedure
+    .input(
+      z.object({ name: z.string(), phone: z.string(), birthday: z.string() })
+    )
+    .mutation(async ({ ctx, input }) => {
+      if (ctx.auth.userId) {
+        return ctx.prisma.user.update({
+          where: {
+            id: ctx.auth.userId,
+          },
+          data: {
+            name: input.name,
+            phone: input.phone,
+            birthday: new Date(input.birthday),
+          },
+        });
+      }
+    }),
+  updateUserSchoolInfo: protectedProcedure
+    .input(z.object({ year: z.string(), major: z.string() }))
+    .mutation(async ({ ctx, input }) => {
+      if (ctx.auth.userId) {
+        return ctx.prisma.user.update({
+          where: {
+            id: ctx.auth.userId,
+          },
+          data: {
+            year: parseInt(input.year),
+            major: input.major,
+          },
+        });
+      }
+    }),
 });
 
 export default userRouter;
