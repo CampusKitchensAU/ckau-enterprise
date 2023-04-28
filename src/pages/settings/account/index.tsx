@@ -1,5 +1,5 @@
 import { type NextPage } from "next";
-import settingsNav from "../settingsNav";
+import settingsNav from "../../../constants/settings/settingsNav";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import { MdAccountCircle } from "react-icons/md";
