@@ -29,7 +29,7 @@ const Alert = ({
   switch (data.type) {
     case "SUCCESS":
       return (
-        <div className="fixed bottom-12 right-12 w-96 rounded-md bg-green-50 p-4 shadow transition-all">
+        <div className="fixed bottom-12 right-4 w-96 rounded-md bg-green-50 p-4 shadow transition-all md:right-12">
           <div className="flex">
             <div className="flex-shrink-0">
               <MdCheckCircle
@@ -59,7 +59,7 @@ const Alert = ({
       );
     case "ERROR":
       return (
-        <div className="fixed bottom-12 right-12 w-96 rounded-md bg-red-50 p-4 shadow transition-all">
+        <div className="fixed bottom-12 right-4 w-96 rounded-md bg-red-50 p-4 shadow transition-all md:right-12">
           <div className="flex">
             <div className="flex-shrink-0">
               <IoMdCloseCircle
@@ -87,7 +87,7 @@ const Alert = ({
       );
     case "WARNING":
       return (
-        <div className="fixed bottom-12 right-12 w-96 rounded-md bg-yellow-50 p-4 shadow transition-all">
+        <div className="fixed bottom-12 right-4 w-96 rounded-md bg-yellow-50 p-4 shadow transition-all md:right-12">
           <div className="flex">
             <div className="flex-shrink-0">
               <IoMdWarning
@@ -117,7 +117,7 @@ const Alert = ({
       );
     case "INFO":
       return (
-        <div className="fixed bottom-12 right-12 w-96 rounded-md bg-blue-50 p-4 shadow transition-all">
+        <div className="fixed bottom-12 right-4 w-96 rounded-md bg-blue-50 p-4 shadow transition-all md:right-12">
           <div className="flex">
             <div className="flex-shrink-0">
               <MdInfo className="h-5 w-5 text-blue-400" aria-hidden="true" />

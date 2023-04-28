@@ -50,7 +50,7 @@ const Contact = ({
   skeleton?: boolean;
 }) => {
   const currentuser = useUser();
-  const { data, isLoading } = api.users.getUserById.useQuery({ id: personId });
+  const { data, isLoading } = api.user.getUserById.useQuery({ id: personId });
   const profileFields = [
     { name: "Phone", value: convertPhoneNumber(data?.phone || "") },
     { name: "Email", value: data?.email },
