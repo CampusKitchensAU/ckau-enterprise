@@ -96,6 +96,7 @@ const MobileSidebar = ({
                                   : "text-primary-200 hover:bg-primary hover:text-white",
                                 "group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6"
                               )}
+                              onClick={() => setSidebarOpen(false)}
                             >
                               <item.icon
                                 className={classNames(

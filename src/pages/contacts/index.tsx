@@ -6,13 +6,22 @@ import { MdAccountCircle, MdChevronRight, MdSearch } from "react-icons/md";
 import { api } from "../../utils/trpc";
 import Link from "next/link";
 import Badge from "../../components/Badge";
+import Alert, { type AlertProps } from "../../components/Alert";
 
 const Contacts: NextPage = () => {
-  const contacts = api.user.getAllUsersByLetter.useQuery();
+  const contacts = api.user.getAllUsersByLetter.useQuery(undefined, {
+    staleTime: 1000 * 60,
+    refetchOnWindowFocus: false,
+  });
   const [contactList, setContactList] = useState(
     contacts.data?.usersByLetter || []
   );
   const [searchInput, setSearchInput] = useState("");
+  const [alert, setAlert] = useState<AlertProps>({
+    type: "ERROR",
+    message: "",
+    show: false,
+  });
 
   useEffect(() => {
     if (!contacts.isLoading && contacts.data?.usersByLetter)
@@ -37,6 +46,17 @@ const Contacts: NextPage = () => {
     }
   }, [searchInput, contacts.data?.usersByLetter]);
 
+  useEffect(() => {
+    if (contacts.isError) {
+      setAlert({
+        type: "ERROR",
+        message: "An error occurred while fetching contacts.",
+        show: true,
+        disappearTime: 10000,
+      });
+    }
+  }, [contacts.isError]);
+
   return (
     <>
       <Head>
@@ -46,6 +66,7 @@ const Contacts: NextPage = () => {
           content="Enterprise application for The Campus Kitchen at Auburn University"
         />
       </Head>
+      <Alert data={alert} setData={setAlert} />
       <div className="px-4 py-10 sm:px-6 lg:px-8">
         <div className="sm:flex sm:items-center">
           <div className="sm:flex-auto">
@@ -86,8 +107,18 @@ const Contacts: NextPage = () => {
         <div className="mt-8 bg-white sm:rounded-xl">
           <ul
             role="list"
-            className="min-h-[calc(100vh_-_228px)] divide-gray-100 overflow-auto bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl"
+            className="h-[calc(100vh_-_228px)] divide-gray-100 overflow-auto bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl"
           >
+            {(contacts.isLoading || !contacts.data) && (
+              <>
+                {Array.from(Array(10).keys()).map((i) => (
+                  <li
+                    key={i}
+                    className="h-20 animate-pulse border-b bg-gray-300"
+                  />
+                ))}
+              </>
+            )}
             {contactList.map(
               (l) =>
                 l.users.length > 0 && (
