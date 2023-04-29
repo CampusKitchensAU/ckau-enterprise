@@ -42,7 +42,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
     setNavigation((navigation) =>
       navigation.map((item) => ({
         ...item,
-        current: item.href === router.pathname,
+        current: item.href === "/" + router.pathname.split("/")[1],
       }))
     );
   }, [router.pathname]);
@@ -68,7 +68,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                 : "min-h-[calc(100vh_-_64px)]"
             }`}
           >
-            <div>{children}</div>
+            {children}
           </main>
         </div>
       </div>
