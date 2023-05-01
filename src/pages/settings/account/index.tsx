@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { api } from "../../../utils/trpc";
 import formatPhoneNumber from "../../../utils/formatPhoneNumber";
 import Alert, { type AlertProps } from "../../../components/Alert";
+import Head from "next/head";
 
 /**
  * Function to validate a phone number.
@@ -148,6 +149,14 @@ const Account: NextPage = () => {
 
   return (
     <>
+      <Head>
+        <title>Account Settings | CKAU Enterprise</title>
+        <meta
+          name="description"
+          content="Enterprise application for The Campus Kitchen at Auburn University"
+        />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <div className="rounded-lg bg-white shadow">
         <header className="sticky top-16 border-b border-black/5 bg-white">
           {/* Secondary navigation */}
@@ -156,20 +165,23 @@ const Account: NextPage = () => {
               role="list"
               className="flex min-w-full flex-none gap-x-6 px-4 text-sm font-semibold leading-6 text-gray-400 sm:px-6 lg:px-8"
             >
-              {settingsNav.map((item) => (
-                <li key={item.name}>
-                  <a
-                    href={item.href}
-                    className={
-                      item.href == router.pathname
-                        ? "font-bold text-primary"
-                        : ""
-                    }
-                  >
-                    {item.name}
-                  </a>
-                </li>
-              ))}
+              {settingsNav.map((item) => {
+                if (data?.roleId && data?.roleId >= item.role)
+                  return (
+                    <li key={item.name}>
+                      <a
+                        href={item.href}
+                        className={
+                          item.href == router.pathname
+                            ? "font-bold text-primary"
+                            : ""
+                        }
+                      >
+                        {item.name}
+                      </a>
+                    </li>
+                  );
+              })}
             </ul>
           </nav>
         </header>
