@@ -8,6 +8,7 @@ import SimpleSelect, {
   type SimpleSelectItem,
 } from "../../../components/Layout/SimpleSelect";
 import { fiveMinuteIntervals } from "../../../constants/timeIntervals";
+import { validateEmail } from "../../../utils/validations/validateEmail";
 
 const daysOfWeek = [
   { id: 0, label: "Sunday" },
@@ -40,6 +41,11 @@ const CreateShift = () => {
     id: -1,
     label: "",
   });
+
+  const [shiftPrimaryName, setShiftPrimaryName] = useState("");
+  const [shiftPrimaryEmail, setShiftPrimaryEmail] = useState("");
+  const [shiftPrimaryEmailError, setShiftPrimaryEmailError] = useState(false);
+  const [shiftPrimaryPhone, setShiftPrimaryPhone] = useState("");
 
   const [shiftDescription, setShiftDescription] = useState("");
 
@@ -166,6 +172,44 @@ const CreateShift = () => {
                   value={shiftTime}
                   setValue={setShiftTime}
                   label="Start time"
+                  className="sm:col-span-3 xl:col-span-2"
+                />
+              </div>
+            </div>
+
+            <div className="border-b border-gray-900/10 pb-12">
+              <h2 className="text-base font-semibold leading-7 text-gray-900">
+                Primary Contact
+              </h2>
+              <p className="mt-1 text-sm leading-6 text-gray-600">
+                Please provide information about the primary contact for this
+                shift.
+              </p>
+
+              <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                <TextInput
+                  label="Contact name"
+                  value={shiftPrimaryName}
+                  setValue={setShiftPrimaryName}
+                  id="contact-name"
+                  className="sm:col-span-3 xl:col-span-2"
+                />
+                <TextInput
+                  label="Contact email"
+                  value={shiftPrimaryEmail}
+                  setValue={setShiftPrimaryEmail}
+                  id="contact-email"
+                  className="sm:col-span-3 xl:col-span-2"
+                  validation={validateEmail}
+                  validationMessage="Please enter a valid email address."
+                  error={shiftPrimaryEmailError}
+                  setError={setShiftPrimaryEmailError}
+                />
+                <TextInput
+                  label="Contact phone"
+                  value={shiftPrimaryPhone}
+                  setValue={setShiftPrimaryPhone}
+                  id="contact-phone"
                   className="sm:col-span-3 xl:col-span-2"
                 />
               </div>

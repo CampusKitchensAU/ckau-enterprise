@@ -272,7 +272,7 @@ const Account: NextPage = () => {
                         autoComplete="email"
                         value={data?.email || ""}
                         disabled
-                        className="block w-full rounded-md border-0 bg-black/5 py-1.5 text-gray-500 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6"
+                        className="block w-full rounded-md border-0 bg-black/5 py-1.5 text-gray-700 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6"
                       />
                     )}
                   </div>
